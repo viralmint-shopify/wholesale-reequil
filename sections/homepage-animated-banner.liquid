@@ -1,0 +1,60 @@
+<div class="homepage_main_anoimayted_banner">
+  <div class="home_ani_inner_wrapp">
+    <a href="/collections/all">
+    <div class="image_anima_text">
+      {% if section.settings.desk_image != blank %}
+      <img src="{{ section.settings.desk_image | img_url:'master' }}" class="for-desktop">
+      {% else %}
+          {% if  section.settings.mob_image  != blank %}
+         <img src="{{ section.settings.mob_image | img_url:'master' }}" class="for-desktop">
+      {% endif %}
+      {% endif %}
+      {% if  section.settings.mob_image  != blank %}
+      <img src="{{ section.settings.mob_image | img_url:'master' }}" class="for-mobile">
+      {% else %}
+         {% if section.settings.desk_image != blank %}
+        <img src="{{ section.settings.desk_image | img_url:'master' }}" class="for-mobile">
+      {% endif %}
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <div class="ani_heading_wrapp">
+      <h2 class="animated_banner_heading">{{ section.settings.heading }}</h2>
+        </div>
+      {% endif %}
+    </div></a>
+  </div>
+  
+</div>
+{% schema %}
+  {
+    "name": "Homepage Animated Banner",
+    "settings": [
+              {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+              {
+          "type": "image_picker",
+          "id": "desk_image",
+          "label": "Desktop Image"
+        },
+              {
+          "type": "image_picker",
+          "id": "mob_image",
+          "label": "Mobile Image"
+        }
+    ],
+      "presets": [
+    {
+      "name": "Homepage Animated Banner"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

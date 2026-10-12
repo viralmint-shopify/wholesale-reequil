@@ -1,0 +1,33 @@
+{% schema %}
+{"name": "Main Listing Podcasts","class":"MainListingPodcastsBanner","tag":"div","settings": [
+    {"type":"header","content":"Main Podcast"},
+      {"type":"text","id":"sub_heading","label":"Sub heading"},
+      {"type":"text","id":"heading","label":"Heading"},
+      {"type":"textarea","id":"podcasts_iframe","label":"Podcasts (Iframe)"},
+      {"type":"text","id":"date","label":"Date"}
+]}
+{% endschema %}
+{%- capture MainListingPodcast -%}{%- liquid
+    assign SstP = section.settings
+    assign sub_heading = SstP.sub_heading
+    assign heading = SstP.heading
+    assign date = SstP.date
+    assign podcastIframe = SstP.podcasts_iframe
+  -%}
+<div class="MainListingPodcastWrapper" section="RQ-main-listing-banner">
+  <div class="ExecutionPodCastWp">
+    {%- if sub_heading != blank or heading != blank -%}<div class="HeadiingPodcastMn">
+      {%- if sub_heading != blank -%}<div class="posubhd">{{ sub_heading }}</div>{%- endif -%}
+      {%- if heading != blank -%}<div class="poshd show_des">{{ heading }}</div>{%- endif -%}
+    </div>{%- endif -%}
+    {%- if podcastIframe != blank -%}<div class="PodcastIframeWrapper">
+      <div class="IframePodacst">{{ podcastIframe }}</div>
+    </div>{%- endif -%}
+    {%- if heading != blank -%}<div class="HeadiingPodcastMn mbheadingpbst">
+      {%- if heading != blank -%}<div class="poshd show_mb">{{ heading }}</div>{%- endif -%}
+    </div>{%- endif -%}  
+    {%- if date != blank -%}<div class="RqArticleCardInfo show_mb">
+        <span class="RqArticleDate">{{ date }}</span>
+    </div>{%- endif -%}    
+  </div>
+</div>{%- endcapture -%}{{ MainListingPodcast | strip_newlines }}

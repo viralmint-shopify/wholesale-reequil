@@ -1,0 +1,60 @@
+<div class="Wrapper_Wishes_popup">
+ {% comment %} <div class="CrossWelcomepopUpInit">
+    <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">  <path d="M18 6L6 18" stroke="#4F4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>  <path d="M6 6L18 18" stroke="#4F4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </div>  {% endcomment %}
+  <div class="WishesPopupLayout">
+    <div class="InetriorWishPopupLyt">
+      <div class="MgpopupLytWp">
+        {{ images['latest-image-popup.png'] | image_url:width:images['latest-image-popup.png'].width | image_tag }}
+      </div>
+      <div class="MsgPopupDo">
+        <p>This festive season, <span class="LightUpGradient">{{ images['to-be-light.png'] | image_url:width:images['to-be-light.png'].width | image_tag }}</span> someone’s life.</p>
+      </div>
+      <div class="WishingDwWpPoup">
+        {{ images['HAPPY-DIWALI.png'] | image_url:width:images['HAPPY-DIWALI.png'].width | image_tag }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function createCookiePopup(name,value,days) {
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime()+(days*24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+  }
+  else var expires = "";
+  document.cookie = name+"="+value+expires+"; path=/";
+}
+function readCookiePopup(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+function eraseCookiePopup(name) {
+  createCookiePopup(name,"",-1);
+}
+$(document).ready(function() {
+  if (!readCookiePopup('DiwaliPopupInit')) {
+    $('body').addClass('ActiveDiwaliPopup');
+
+    setTimeout(function(){
+      $('body').removeClass('ActiveDiwaliPopup');
+      createCookiePopup('DiwaliPopupInit', true, 1)
+      return false;
+    },3000)
+    
+  }
+});
+$(document).on('click', '.CrossWelcomepopUpInit', function(){
+    $('body').removeClass('ActiveDiwaliPopup');
+    createCookiePopup('DiwaliPopupInit', true, 1)
+    return false;
+})
+</script>

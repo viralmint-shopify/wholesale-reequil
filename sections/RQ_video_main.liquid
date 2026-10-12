@@ -1,0 +1,57 @@
+{% schema %}
+  {
+    "name": "RQ Video Main",
+    "settings": [
+      {"type":"header","content":"Header Part"},
+      {"type":"text","id":"text","label":"Heading"},
+      {"type":"textarea","id":"para","label":"Paragraph"},
+      {"type":"header","content":"Video Options"},
+      {"type":"checkbox","id":"autoplay","label":"Enable Autoplay"},
+      {"type":"video","id":"desk_video","label":"Video"},
+      {
+      "type": "text",
+      "id": "video_url",
+      "label": "video"
+      }
+      
+    ],
+    "presets":[{"name":"RQ Video Main"}]
+  }
+{% endschema %}
+
+
+{% liquid
+  if section.settings.autoplay == true
+    assign autoplay = true
+    assign controls = true
+  else
+    assign autoplay = false
+    assign controls = false
+  endif
+%}
+<div class="RQ-slideshowMnWrapper rvm_main" section="RQ_video_main">
+  <div class="RQ-slideshowWidthWrapper rvm_wrapper">
+    {% if section.settings.text != blank or section.settings.para != blank %}
+      <div class="RQ-sd-hd-ds rvm_head">
+        {% if section.settings.text != blank %}<div class="RQ-sd-hd">{{ section.settings.text }}</div>{% endif %}
+        {% if section.settings.para != blank %}<div class="RQ-sd-ds">{{ section.settings.para }}</div>{% endif %}
+      </div>
+    {% endif %}
+    {% if section.settings.desk_video != blank or section.settings.video_url != blank %}
+      <div class="rvm_container">
+        <div class="rvm_vid_make">
+        {{ section.settings.desk_video | video_tag : image_size:'master',disablePictureInPicture:true,controls:controls,autoplay:autoplay,playsinline:true,loop:true,class:'videoJSHANDLE' }} 
+        
+        <iframe loading="lazy" src="{{ section.settings.video_url }}&autoplay=1&loop=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" muted="muted" allowfullscreen></iframe>
+       
+        </div>
+        {% if section.settings.autoplay != true and section.settings.video_url == blank %}
+          <div class="playPauseInit">
+            <span class="soundUnmuteSure soundIt">{% render 'icon-play' %}</span>
+            <span class="soundMuteSure soundIt hidden">{% render 'icon-pause' %}</span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

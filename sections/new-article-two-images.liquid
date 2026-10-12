@@ -1,0 +1,66 @@
+<div class="new-collection-images two-colomn-images-wrapp">
+  <div class="two-images-inner">
+    {% if section.settings.heading != blank %}
+    <div class="two-images-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {% endif %}
+    <div class="two-images-grid-wrapp">
+      {% for images in collection.metafields.custom.bridge_image_.value %}
+         {% if images  != blank %}
+              <div class="images_with_content">
+        <div class="custom-images-here">
+          <img src="{{ images | img_url:'master' }}">
+        </div>
+              {% assign images_loop = forloop.index | plus:1 %}
+        <div class="images-content for-desktop">
+          {% assign content_main = collection.metafields.custom.bridge_body | metafield_tag  %}    
+           {% assign content_main2 = content_main | split:"<strong>"%} 
+                 {% for content_main2 in content_main2 %}
+                   {% unless forloop.index == 1 %}
+                    {% if images_loop == forloop.index %}
+      <p><strong>{{content_main2 | split:"</strong>" | first}}</strong> <br/>{{content_main2 | split:"</strong>" | last | strip_html}}</p>
+          {% endif %}
+                     {% endunless %}
+                   {% endfor %}
+        </div>
+                
+
+      </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="images-content for-mobile">
+                {% assign content_main = collection.metafields.custom.bridge_body | metafield_tag  %}    
+           {% assign content_main2 = content_main | split:"<strong>"%} 
+                 {% for content_main2 in content_main2 %}
+                   {% unless forloop.index == 1 %}
+      <p><strong>{{content_main2 | split:"</strong>" | first}}</strong> <br/>{{content_main2 | split:"</strong>" | last | strip_html}}</p>
+                     {% endunless %}
+                   {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "New Article Two Image",
+    "settings": [
+                          {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+    ],
+      "presets": [
+    {
+      "name": "New Article Two Image"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

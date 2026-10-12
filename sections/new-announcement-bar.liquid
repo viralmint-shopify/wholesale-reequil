@@ -1,0 +1,41 @@
+{% if section.settings.announcement_text != blank %}
+<div class="custom_announcement_wrapper" style="display:none;">
+  <div class="webinar-announcement-inner">
+    <div class="webinor-announcement-content">
+      <div class="left_chrismass_tree">
+        <img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/leftAnimateImg.gif?v=1703575185">
+      </div>
+      <div class="centered_text_here">
+        <a class="announcement-text-here" {% if section.settings.announcement_url != blank %}href="{{ section.settings.announcement_url }}"{% endif %}>{{ section.settings.announcement_text }}
+</a>
+      </div>
+        <div class="right_chrismass_tree">
+          <img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/rightAnimateImg.gif?v=1703575686">
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Custom Announcement bar",
+    "settings": [
+                   {
+          "type": "text",
+          "id": "announcement_text",
+          "label": "Announcement Text"
+        },
+                         {
+          "type": "url",
+          "id": "announcement_url",
+          "label": "Announcement Url"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

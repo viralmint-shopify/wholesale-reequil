@@ -1,0 +1,64 @@
+{% if section.settings.heading_text != blank or section.settings.subheading_text != blank or section.settings.image != blank%}
+<div class="about-image-text-main">
+  <div class="about-inner-image-text">
+     {% if section.settings.heading_text != blank or section.settings.subheading_text != blank %}
+    <div class="about-left-side-text">
+      {% if section.settings.heading_text != blank %}
+      <div class="left-sec-heading">
+        {{ section.settings.heading_text }}
+      </div>
+      {% endif %}
+            {% if section.settings.subheading_text != blank %}
+      <div class="left-sec-subheading show_des">
+        {{ section.settings.subheading_text }}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if section.settings.image != blank %}
+    <div class="about-right-side-text {% if section.settings.overlay_content != blank %}overlay_content_show{% endif %}">
+      <div class="about-main_image">
+        <img src="{{ section.settings.image | img_url:'master' }}">
+      </div>
+      {% if section.settings.overlay_content != blank %}
+      <div class='about-image-overlay-content'>
+        {{ section.settings.overlay_content }}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+              {% if section.settings.subheading_text != blank %}
+      <div class="left-sec-subheading show_mb">
+        {{ section.settings.subheading_text }}
+      </div>
+      {% endif %}
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "About Image Text Overlay",
+    "settings": [
+              {
+          "type": "richtext",
+          "id": "heading_text",
+          "label": "Heading"
+        },
+                    {
+          "type": "richtext",
+          "id": "subheading_text",
+          "label": "Subheading"
+        },
+                          {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+                          {
+          "type": "richtext",
+          "id": "overlay_content",
+          "label": "Overlay content"
+        }
+      ],"presets":[{"name":"About Image Text Overlay"}]
+  }
+{% endschema %}

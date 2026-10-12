@@ -1,0 +1,64 @@
+{%- if article and article != empty -%}
+  {%- liquid
+    assign ratio = 1
+    if media_aspect_ratio != nil
+      assign ratio = media_aspect_ratio
+    endif
+  -%}
+  <div class="article-card-wrapper card-wrapper underline-links-hover">
+    {% comment %} <article aria-labelledby="Article-{{ article.id }}"> {% endcomment %}
+    <div class="card article-card
+      card--{{ settings.blog_card_style }}
+      {% if media_height and media_height != 'adapt' %} article-card__image--{{ media_height }}{% endif %}
+      {% if article.image and show_image %} card--media{% else %} card--text{% endif %}
+      {% if settings.blog_card_style == 'card' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}
+      {% if settings.blog_card_style == 'card' and media_height == nil and article.image == empty or show_image == false %} ratio{% endif %}"
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+    >
+      <div class="card__inner {% if settings.blog_card_style == 'standard' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}{% if article.image and show_image or settings.blog_card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+        {%- if show_image == true and article.image -%}
+          <div class="article-card__image-wrapper card__media">
+            <div class="article-card__image media media--hover-effect" {% if section.settings.media_height == 'adapt' %} style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"{% endif %}>
+              {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+              <img
+                srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if article.image.src.width >= 360 -%}{{ article.image.src | image_url: width: 360 }} 360w,{%- endif -%}
+                  {%- if article.image.src.width >= 533 -%}{{ article.image.src | image_url: width: 533 }} 533w,{%- endif -%}
+                  {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
+                  {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+                  {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+                  {{ article.image.src | image_url }} {{ article.image.src.width }}w"
+                src="{{ article.image.src | image_url: width: 533 }}"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                alt="{{ article.image.src.alt | escape }}"
+                class="motion-reduce"
+                {% unless lazy_load == false %}loading="lazy"{% endunless %}
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+              >
+              {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+            </div>
+            <div class="IconPlayWitter">
+              <svg width="83" height="83" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M41.5 82.9999C64.4198 82.9999 83 64.4198 83 41.4999C83 18.5801 64.4198 -6.10352e-05 41.5 -6.10352e-05C18.5802 -6.10352e-05 0 18.5801 0 41.4999C0 64.4198 18.5802 82.9999 41.5 82.9999ZM32 58.3204L62 40.9999L32 23.6794L32 58.3204Z" fill="black" fill-opacity="0.58"/></svg>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading{% if show_excerpt %} h2{% endif %}">
+              {{ article.title  }}
+          </h3>
+          <div class="SvgiconWithAudi">
+            <svg width="21" height="29" viewBox="0 0 21 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.6766 18.9176C12.1511 18.9176 13.5651 18.3299 14.6077 17.2838C15.6503 16.2377 16.2361 14.8189 16.2361 13.3395V6.36697C16.2361 4.88759 15.6503 3.46879 14.6077 2.42271C13.5651 1.37662 12.1511 0.78894 10.6766 0.78894C9.20217 0.78894 7.78811 1.37662 6.74551 2.42271C5.70291 3.46879 5.11719 4.88759 5.11719 6.36697V13.3395C5.11719 14.8189 5.70291 16.2377 6.74551 17.2838C7.78811 18.3299 9.20217 18.9176 10.6766 18.9176Z" fill="#27235E" fill-opacity="0.37"/><path d="M20.4073 13.3395C20.4073 12.9697 20.2608 12.615 20.0002 12.3534C19.7395 12.0919 19.386 11.945 19.0174 11.945C18.6488 11.945 18.2953 12.0919 18.0346 12.3534C17.774 12.615 17.6275 12.9697 17.6275 13.3395C17.6275 15.1887 16.8954 16.9622 15.5921 18.2698C14.2889 19.5775 12.5213 20.3121 10.6782 20.3121C8.83517 20.3121 7.06759 19.5775 5.76434 18.2698C4.4611 16.9622 3.72894 15.1887 3.72894 13.3395C3.72894 12.9697 3.58251 12.615 3.32186 12.3534C3.06121 12.0919 2.70769 11.945 2.33908 11.945C1.97047 11.945 1.61695 12.0919 1.3563 12.3534C1.09565 12.615 0.949219 12.9697 0.949219 13.3395C0.951958 15.6849 1.79621 17.9508 3.32752 19.7228C4.85883 21.4949 6.97482 22.6545 9.28838 22.9895V25.8901H6.35578C6.02771 25.8901 5.71308 26.0209 5.4811 26.2536C5.24912 26.4864 5.1188 26.802 5.1188 27.1312V27.438C5.1188 27.7672 5.24912 28.0828 5.4811 28.3156C5.71308 28.5484 6.02771 28.6791 6.35578 28.6791H15.0007C15.3288 28.6791 15.6434 28.5484 15.8754 28.3156C16.1074 28.0828 16.2377 27.7672 16.2377 27.438V27.1312C16.2377 26.802 16.1074 26.4864 15.8754 26.2536C15.6434 26.0209 15.3288 25.8901 15.0007 25.8901H12.0681V22.9895C14.3817 22.6545 16.4977 21.4949 18.029 19.7228C19.5603 17.9508 20.4045 15.6849 20.4073 13.3395Z" fill="#27235E" fill-opacity="0.37"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="article-card__info caption-with-letter-spacing h5">
+        {%- if show_date -%}
+          <span class="circle-divider">{{ article.published_at | time_tag: format: 'date' }}</span>
+        {%- endif -%}  
+      </div>              
+    </div>
+  </div>
+{%- endif -%}

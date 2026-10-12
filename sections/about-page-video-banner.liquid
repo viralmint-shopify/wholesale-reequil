@@ -1,0 +1,35 @@
+{% schema %}
+{"name": "About Video Banner","tag":"div","class":"about-page-video-banner","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"customClass","label":"Custom Class"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"video_url","label":"Video url (Desktop)"},
+        {"type":"textarea","id":"video_url_mb","label":"Video url (Mobile)"}
+],"presets":[{"name":"About Video Banner"}]}
+{% endschema %}
+{% capture RQVideo %}{%- liquid
+    assign svds = section.settings
+    assign heading = svds.heading
+    assign video = svds.video_url
+    assign mb_video = svds.video_url_mb
+    assign customClass = svds.customClass
+    %}
+<div class="aboutcust-videoMnWrapper{% if customClass != blank %} {{ customClass }}{% endif %}" section="about-page-video-banner">
+  <div class="aboutcust-videoWidthWrapper">
+    {%- if heading != blank  -%}
+      <div class="aboutcust-vd-hdMN">
+        {%- if heading != blank -%}<div class="aboutcust-vd-hd">{{ heading }}</div>{% endif %}
+      </div>
+    {%- endif -%}
+    {%- if video != blank -%}
+      <div class="aboutcust-LoadVideoSuccessfully">
+        <div class="aboutcust-VideoInt show_des" videosrc='{{ video }}'>
+          {{ video }}
+        </div>  
+        <div class="aboutcust-VideoInt show_mb" videosrc='{{ mb_video }}'>
+          {{ mb_video }}
+        </div>         
+      </div>
+    {%- endif -%}
+  </div>
+</div>{% endcapture %}{{ RQVideo | strip_newlines }}

@@ -1,0 +1,63 @@
+{% schema %}
+  {
+    "name": "RQ-latest-carousel",
+    "blocks": [
+      {"type":"item","name":"Item",
+        "settings":[
+          {"type":"text","id":"heading","label":"Heading"},
+          {"type":"textarea","id":"para","label":"Paragraph"},
+          {"type":"text","id":"badge","label":"Badge"},
+          {"type":"image_picker","id":"desk_media","label":"Media"},
+          {"type":"image_picker","id":"mob_media","label":"Media"},
+          {"type":"url","id":"blog_url","label":"URL"}
+        ]
+      }
+    ],
+    "presets":[{"name":"RQ-latest-carousel"}]
+  }
+{% endschema %}
+
+{% if section.blocks.size > 0 %}
+  <div class="RQ_LatestCarouselMN" section="RQ-latest-carousel">
+    <div class="RQ_LatestCrselInit">
+      <div class="RQ_LatestCarouselWrpr swiper mySwiper">
+        <div class="RQ_LtstCrselSliderMN swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.settings.heading != blank or block.settings.desk_media != blank or block.settings.mob_media != blank or block.settings.para != blank %}
+              <div class="RQ_LtstCrselItemMN swiper-slide">
+                <a {% if block.settings.blog_url != blank %}href="{{ block.settings.blog_url }}"{% endif %}>
+                                  <div class="RQ_LtstCrselItemWrpr">
+                  {% if block.settings.heading != blank %}
+                    <div class="RQ_LtstItemHeader">
+                      <div class="RQ_LtstItemHeading">
+                        {% if block.settings.badge != blank %}<span class="badgeRQInit">{{ block.settings.badge }}</span>{% endif %}
+                        <strong>{{ block.settings.heading }}</strong>
+                      </div>
+                      {% if block.settings.para != blank %}<div class="RQ_LtstItemPraMN show_des">{{ block.settings.para }}</div>{% endif %}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.desk_media != blank or block.settings.mob_media != blank or block.settings.para != blank %}
+                    <div class="RQ_LtstItemMediaPrMN">
+                      <div class="RQ_LtstItemMediaMN">
+                        {% if block.settings.desk_media != blank %}{{ block.settings.desk_media | image_url : width : block.settings.desk_media.width | image_tag : class: 'show_des' }}{% endif %}
+                        {% if block.settings.mob_media != blank %}{{ block.settings.mob_media | image_url : width : block.settings.mob_media.width | image_tag : class: 'show_mb' }}{% endif %}
+                      </div>
+                      {% if block.settings.para != blank %}<div class="RQ_LtstItemPraMN show_mb">{{ block.settings.para }}</div>{% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </a>
+
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination show_mb"></div>
+        <div class="RQ_stCrselNavigate">
+          <div class="swiper-button-prev show_des RQSwiperNav">{% render 'icon_RQCarouselPrev' %}</div>
+          <div class="swiper-button-next show_des RQSwiperNav">{% render 'icon_RQCarouselNext' %}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

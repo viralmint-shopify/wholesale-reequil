@@ -1,0 +1,138 @@
+{% schema %}
+{"name": "Support FAQ","tag":"div","class":"RQ-support-page-faq","settings":[
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading"},
+        {"type":"textarea","id":"description","label":"Description"}
+],"blocks":[{"type":"tabs","name":"Tabs","settings":[
+    {"type":"header","content":"Main tab Details"},
+        {"type":"text","id":"tab_heading","label":"Heading (Tab)"},
+    {"type":"header","content":"Main tab Accordion"},
+        {"type":"text","id":"ques_one","label":"Question?"},
+        {"type":"richtext","id":"detail_one1","label":"Brief"},
+        {"type":"text","id":"ques_two","label":"Question?"},
+        {"type":"richtext","id":"detail_two1","label":"Brief"},
+        {"type":"text","id":"ques_three","label":"Question?"},
+        {"type":"richtext","id":"detail_three1","label":"Brief"},
+        {"type":"text","id":"ques_four","label":"Question?"},
+        {"type":"richtext","id":"detail_four1","label":"Brief"},
+        {"type":"text","id":"ques_five","label":"Question?"},
+        {"type":"richtext","id":"detail_five1","label":"Brief"},
+        {"type":"text","id":"ques_six","label":"Question?"},
+        {"type":"richtext","id":"detail_six1","label":"Brief"},
+        {"type":"text","id":"ques_seven","label":"Question?"},
+        {"type":"richtext","id":"detail_seven1","label":"Brief"},
+        {"type":"text","id":"ques_eight","label":"Question?"},
+        {"type":"richtext","id":"detail_eight1","label":"Brief"},
+        {"type":"text","id":"ques_nine","label":"Question?"},
+        {"type":"richtext","id":"detail_nine1","label":"Brief"},
+        {"type":"text","id":"ques_ten","label":"Question?"},
+        {"type":"richtext","id":"detail_ten1","label":"Brief"},
+        {"type":"text","id":"ques_eleven","label":"Question?"},
+        {"type":"richtext","id":"detail_eleven1","label":"Brief"},
+        {"type":"text","id":"ques_twelve","label":"Question?"},
+        {"type":"richtext","id":"detail_twelve1","label":"Brief"},
+        {"type":"text","id":"ques_thirteen","label":"Question?"},
+        {"type":"richtext","id":"detail_thirteen1","label":"Brief"},
+        {"type":"text","id":"ques_fourteen","label":"Question?"},
+        {"type":"richtext","id":"detail_fourteen1","label":"Brief"},
+        {"type":"text","id":"ques_fifteen","label":"Question?"},
+        {"type":"richtext","id":"detail_fifteen1","label":"Brief"}    
+]}],"presets":[{"name":"Support FAQ"}]}
+{% endschema %}
+{%- capture SupportFaqSection -%}{%- liquid 
+    assign Sst = section.settings
+    assign heading = Sst.heading
+    assign description = Sst.description
+    assign SstBk = section.blocks
+-%}
+<div class="RQSupportPageMainWrapper" section="RQ-support-page-faq">
+  <div class="RQSupportInnerPageWp">
+    {%- if heading != blank or description != blank -%}<div class="RQ-support-headingPg">
+      {%- if heading != blank -%}<div class="RQhdSport">{{ heading }}</div>{%- endif -%}
+      {%- if description != blank -%}<div class="RQdssport">{{ description }}</div>{%- endif -%}
+    </div>{%- endif -%}
+    <div class="FaqBlockWithTabSupportMain">
+      <div class="FaqInnerBlockWTb">
+        <div class="FaqSupportMainHeadinghTabBlock"><div class="TabbingVirewSupportFaq">
+        {%- for Bk in SstBk -%}
+          {%- liquid 
+              assign BkS = Bk.settings
+              assign Tab_heading = BkS.tab_heading
+          -%}
+          <div class="BlockSupportFq {% if forloop.index == 1 %} active {% endif %}" tab-data="{{ Tab_heading | handle }}" js-support-tabdata><span>{{ Tab_heading }}</span></div>
+        {%- endfor -%}
+        </div></div>
+        <div class="TabbingBriefAccordionContent">
+        {%- for Bk in SstBk -%}
+          {%- liquid 
+              assign BkS = Bk.settings
+              assign Tab_heading = BkS.tab_heading
+              assign qus_one = BkS.ques_one
+              assign brief_one = BkS.detail_one1
+              assign qus_two = BkS.ques_two
+              assign brief_two = BkS.detail_two1
+              assign qus_three = BkS.ques_three
+              assign brief_three = BkS.detail_three1
+              assign qus_four = BkS.ques_four
+              assign brief_four = BkS.detail_four1
+              assign qus_five = BkS.ques_five
+              assign brief_five = BkS.detail_five1
+              assign qus_six = BkS.ques_six
+              assign brief_six = BkS.detail_six1
+              assign qus_seven = BkS.ques_seven
+              assign brief_seven = BkS.detail_seven1
+              assign qus_eight = BkS.ques_eight
+              assign brief_eight = BkS.detail_eight1
+              assign qus_nine = BkS.ques_nine
+              assign brief_nine = BkS.detail_nine1
+              assign qus_ten = BkS.ques_ten
+              assign brief_ten = BkS.detail_ten1
+              assign qus_eleven = BkS.ques_eleven
+              assign brief_eleven = BkS.detail_eleven1
+              assign qus_twelve = BkS.ques_twelve
+              assign brief_twelve = BkS.detail_twelve1
+              assign qus_thirteen = BkS.ques_thirteen
+              assign brief_thirteen = BkS.detail_thirteen1
+              assign qus_fourteen = BkS.ques_fourteen
+              assign brief_fourteen = BkS.detail_fourteen1
+              assign qus_fifteen = BkS.ques_fifteen
+              assign brief_fifteen = BkS.detail_fifteen1          
+          -%}
+          <div class="TabAccorionInnerExecution {% if forloop.index == 1 %} active {% endif %}" tab-content="{{ Tab_heading | handle }}">
+            {%- if qus_one != blank or brief_one != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_one }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_one }}</div></div></div>{%- endif -%}
+            {%- if qus_two != blank or brief_two != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_two }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_two }}</div></div></div>{%- endif -%}
+            {%- if qus_three != blank or brief_three != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_three }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_three }}</div></div></div>{%- endif -%}
+            {%- if qus_four != blank or brief_four != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_four }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_four }}</div></div></div>{%- endif -%}
+            {%- if qus_five != blank or brief_five != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_five }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_five }}</div></div></div>{%- endif -%}
+            {%- if qus_six != blank or brief_six != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_six }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_six }}</div></div></div>{%- endif -%}
+            {%- if qus_seven != blank or brief_seven != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_seven }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_seven }}</div></div></div>{%- endif -%}
+            {%- if qus_eight != blank or brief_eight != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_eight }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_eight }}</div></div></div>{%- endif -%}
+            {%- if qus_nine != blank or brief_nine != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_nine }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_nine }}</div></div></div>{%- endif -%}
+            {%- if qus_ten != blank or brief_ten != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_ten }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_ten }}</div></div></div>{%- endif -%}  
+            {%- if qus_eleven != blank or brief_eleven != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_eleven }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_eleven }}</div></div></div>{%- endif -%}  
+            {%- if qus_twelve != blank or brief_twelve != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_twelve }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_twelve }}</div></div></div>{%- endif -%}  
+            {%- if qus_thirteen != blank or brief_thirteen != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_thirteen }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_thirteen }}</div></div></div>{%- endif -%}  
+            {%- if qus_fourteen != blank or brief_fourteen != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_fourteen }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_fourteen }}</div></div></div>{%- endif -%}  
+            {%- if qus_fifteen != blank or brief_fifteen != blank -%}<div class="TabAccorionVwMn"><div class="TabAccordionQs" js-support-accordion>{{ qus_fifteen }}<span class="addIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#9391AE"/><path d="M12 18.7501C11.59 18.7501 11.25 18.4101 11.25 18.0001V6.00012C11.25 5.59012 11.59 5.25012 12 5.25012C12.41 5.25012 12.75 5.59012 12.75 6.00012V18.0001C12.75 18.4101 12.41 18.7501 12 18.7501Z" fill="#9391AE"/></svg></span><span class="minusIocnSvg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.7501H6C5.59 12.7501 5.25 12.4101 5.25 12.0001C5.25 11.5901 5.59 11.2501 6 11.2501H18C18.41 11.2501 18.75 11.5901 18.75 12.0001C18.75 12.4101 18.41 12.7501 18 12.7501Z" fill="#27235E"/></svg></span></div>
+            <div class="TabAccordionDtl"><div class="TabDetailsInnerObj">{{ brief_fifteen }}</div></div></div>{%- endif -%}                
+          </div>
+        {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{%- endcapture -%}{{ SupportFaqSection | strip_newlines }}

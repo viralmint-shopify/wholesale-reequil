@@ -1,0 +1,724 @@
+{%- style -%}
+body .discounts__discount--position {
+    justify-content: flex-end;
+    padding: 0 0 5px;
+}
+.page-width {
+    max-width: 1328px;
+    padding: 0 24px;
+    margin: auto;
+    width: 100%;
+} 
+.RQ-cart-recommendation {
+    padding: 0 24px;
+}
+.LessProductHaveThere .swiper-button-lock {
+    display: none !important;
+}   
+.RQRightPartOFCartPage.is-empty {
+    display: none !important;
+}
+.is-empty .cart__warnings {
+    padding: 0;
+}  
+.is-empty .RQLeftContentWrapper {
+    width: 100%;
+}
+.template-cart main#MainContent {
+    padding: 84px 0 50px;
+}
+cart-items.RQMainCartPageWrapper.page-width {
+    padding: 0 24px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link h1 {
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 140%;
+    color: #27235E;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link a.underlined-link {
+    font-size: 18px;
+    line-height: 140%;
+    text-decoration: underline !important;
+    color: #27235E;
+    position: relative;
+    top: 5px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link a.underlined-link:hover {
+    color: #524f7e;
+}   
+.RQMainCartPageWrapper .cart-items thead th {
+    text-transform: inherit;
+    font-size: 18px;
+    line-height: 140%;
+    color: #828282;
+    letter-spacing: 0;
+    padding: 0 0 20px;
+    border-bottom: none !important;
+}
+.RQMainCartPageWrapper thead th.cart-items__heading--wide {
+    padding-left: 26px;
+}
+.RQMainCartPageWrapper .cart-item>td+td, .RQMainCartPageWrapper .cart-item .cart-item__media {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.RQMainCartPageWrapper .cart-item>td+td {
+    padding-left: 20px;
+}
+.RQMainCartPageWrapper .cart-item>td {
+   border-top: 2px solid #F6F6F6 !important;
+}
+.RQMainCartPageWrapper .cart__items {
+    padding-bottom: 0px;
+    border-bottom: 2px solid #F6F6F6 !important;
+} 
+.RQMainCartPageWrapper .cart-item .cart-item__media .cart-item__image-container {
+    background: #F9F9F9;
+    border: 1px solid #F9F9F9;
+}
+.RQMainCartPageWrapper .cart-item__image-container .cart-item__image {
+    width: 100%;
+    display: block;
+}
+.RQMainCartPageWrapper .cart-item .cart-item__media {
+    width: 151px;
+    padding-left: 15px;
+}
+.RQMainCartPageWrapper .cart-items thead th:first-child {
+    padding-left: 15px;
+}
+.RQMainCartPageWrapper .cart-items thead th:last-child, .RQMainCartPageWrapper .cart-item>td+td:last-child {
+    padding-right: 15px;
+}
+.RQMainCartPageWrapper .cart-item__name {
+    font-size: 18px;
+    margin: 0 0 16px;
+    max-width: 364px;
+/*     display: -webkit-box; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.RQMainCartPageWrapper .cart-item .product-option {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #27235E;
+}
+.RQMainCartPageWrapper .cart-item .cart-item__old-price.product-option{
+    color: #828282;
+    margin-right: 5px;
+}  
+.RQMainCartPageWrapper span.price.price--end {
+    font-size: 18px;
+    line-height: 27px;
+    text-align: right;
+    color: #27235E;
+    letter-spacing: 0;
+}
+.RQMainCartPageWrapper cart-remove-button {
+    margin: 29px 0 0 !important;
+    justify-content: flex-end;
+}
+.RQMainCartPageWrapper cart-remove-button .button {
+    min-height: inherit;
+    min-width: inherit;
+}
+.RQMainCartPageWrapper cart-remove-button .button svg {
+    width: 24px;
+    height: 24px;
+}
+.RQMainCartPageWrapper .cart-item__quantity-wrapper {
+    margin-top: 13px;
+}
+.RQLeftContentWrapper .title-wrapper-with-link {
+    margin: 0 0 34px;
+}
+.RQLeftContentWrapper {
+    width: 59.1%;
+}
+.RQCombineCartPageLayoutWp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.RQRightPartOFCartPage {
+    width: 39.9%;
+    padding-left: 102px;
+    padding-top: 94px;
+}
+.SideBVarHd {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: #27235E;
+    margin: 0 0 24px;
+}
+.totalMrpCartPage {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 10px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #828282;
+}
+.TotalMrpPrice {
+    color: #27235E;
+}
+.totalMrpCartPage:nth-child(3) .TotalMrpPrice {
+    font-weight: 600;
+}
+.TotalMrpLabel, .TotalShippingLabel {
+    padding-right: 5px;
+}
+.totalShippingCartPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #828282;
+}
+.TotalShippingDes {
+    color: #27235E;
+}
+.RQRightPartOFCartPage .cart__checkout-button {
+    max-width: 100%;
+    min-height: 46px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: inherit !important;
+}
+.RQRightPartOFCartPage .GiftIcnwp {
+    flex: 0 0 24px;
+    margin: 0 11.83px 0 0;
+}
+.RQRightPartOFCartPage .BothIconTxtWp {
+    width: 100%;
+}
+.RQRightPartOFCartPage .GiftRewardsWrapper {
+    background: transparent;
+    border-bottom: 0.5px solid #E0E0E0;
+    padding: 0px;
+    border-top: 0.5px solid #E0E0E0;
+}
+.RQRightPartOFCartPage .cart__ctas {
+    margin: 0 0 24px;
+}
+.RQRightPartOFCartPage .GiftIcnwp svg,
+.RQRightPartOFCartPage .dwnarwwp svg,
+.Uparriw svg {
+    width: 24px;
+    height: 24px;
+}
+.RQRightPartOFCartPage .GiftContributionEhg {
+    margin: 0px 0 20px;
+}
+.RQRightPartOFCartPage .GiftContentWpRwds ul {
+    padding: 0 0 0 38px;
+}
+.RQRightPartOFCartPage .RedremmedBtnWp {
+    padding-left: 20px;
+}
+.RQRightPartOFCartPage .GiftContentWpRwds ul li {
+    font-size: 14px;
+    line-height: 180%;
+}
+.RQCouponCheckoutWP {
+    font-size: 12px;
+    line-height: 180%;
+    color: #828282;
+    text-align: right;
+    margin: 0 0 8px;
+}
+.RQRightPartOFCartPage .BothIconTxtWp .Gifttextwp {
+    font-size: 16px;
+    line-height: 24px;
+}
+.RQRightPartOFCartPage .RewardsWithGift {
+    padding: 18.5px 11px;
+}
+.RQRightPartOFCartPage .RedremmedBtnWp a {
+    padding: 8.11px 5px;
+    min-width: 116px;
+}
+/*  */
+.RQ-fdcBlockEachInner img {
+    width: 100%;
+    display: block;
+}
+.RQ-featcollWidthWrapper {
+    margin-top: 116px;
+}
+.RQ-fdc-hd {
+    font-size: 24px;
+    line-height: 140%;
+    color: #27235E;
+    margin: 0 0 24px;
+}
+.OfferMessageCart {
+    font-weight: 600;
+}
+.RQ-fdcBlockEachInner {
+/*     border: 1px solid rgb(192 192 192 / 50%); */
+    padding: 4px;
+}
+.RQ-fdc-bk-title {
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #333333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 14px;
+    padding: 0 4px;
+    min-height: 40px;
+}
+.CmbbtRqDt {
+    padding: 8px 0 0;
+}
+.cmbpriceCb {
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+} 
+.cmbpriceCb .cmbcpprc {
+    font-size: 16px;
+    line-height: 150%;
+    text-decoration-line: line-through;
+    color: #828282;
+    opacity: 0.8;
+    margin-right: 12px;
+} 
+.cmbpriceCb .cmbprc {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #27235E;
+} 
+.RQ-fdc-bk-btn span {
+    background: #27235E;
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 11px;
+    transition: ease .5s;
+    cursor: pointer;
+    height: 40px;
+    box-sizing: border-box;
+}
+.RQ-fdc-bk-btn .loading-overlay__spinner svg .path {
+    stroke: #fff;
+}
+.RQ-fdc-bk-btn span:hover {
+    background: #524f7e;
+}
+.RQ-fdc-bk-btn {
+    margin: 16px 0 0;
+}
+.RqOfferfeaturedslideshow .swiper-pagination {
+    position: static;
+    font-size: 14px;
+    line-height: 100%;
+    color: #828282;
+}
+.OfferPaginationWrapperRq {
+    display: flex;
+    align-items: center;
+    max-width: 100px;
+    justify-content: center;
+    margin: 24px auto auto;
+} 
+.PrevButtonSlideShowfdOffer {
+    display: block !important;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0306/6262/3364/files/arrow-left.png?v=1673261335);
+    background-repeat: no-repeat;
+    position: static !important;
+    background-size: 20px;
+    margin: 0;
+}
+.NextButtonSlideshowfdOffer {
+    display: block !important;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0306/6262/3364/files/arrow-right.png?v=1673261335);
+    background-repeat: no-repeat;
+    position: static !important;
+    background-size: 20px;
+    margin: 0;
+}
+.PrevButtonSlideShowfdOffer:after, .NextButtonSlideshowfdOffer:after {
+    display: none !important;
+}
+/*  */
+
+/* product recommendation section css */
+h2.product-recommendations__heading {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    color: #27235E;
+    margin: 0 0 24px;
+}
+.RQ-cart-recommendation .RQ-fdcBlockEachInner {
+/*     border: 1px solid #D5D5D5; */
+    padding: 0;
+}
+.RQ-cart-recommendation .CmbbtRqDt {
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 36px;
+    background: #f6f6f6;
+}
+.RQ-cart-recommendation .RQ-fdc-bk-title {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 18px;
+    padding-right: 7px;
+}
+.RQ-cart-recommendation .RQ-fdc-bk-btn {
+    margin: 0;
+    min-width: 80px;
+}
+.RQ-cart-recommendation .RQ-fdc-bk-btn a {
+    background: #27235E;
+    display: block;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 20px;
+    padding: 2px;
+}
+.RQ-cart-recommendation .RQ-fdc-bk-btn a:hover {
+    background: #524f7e;
+}
+.NextButtonSlideshowfd {
+    display: block !important;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0306/6262/3364/files/arrow-right.png?v=1673261335);
+    background-repeat: no-repeat;
+    position: static !important;
+    background-size: 20px;
+    margin: 0;
+}
+.PrevButtonSlideShowfd {
+    display: block !important;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0306/6262/3364/files/arrow-left.png?v=1673261335);
+    background-repeat: no-repeat;
+    position: static !important;
+    background-size: 20px;
+    margin: 0;
+}
+.NextButtonSlideshowfd:after, .PrevButtonSlideShowfd:after {
+  display: none;
+}
+.mySwiper.Rqproductrecommendationslideshow {
+    overflow: visible;
+} 
+.PaginationWithFractionRecomm .paginationFractionWp {
+    position: static;
+    font-size: 14px;
+    line-height: 100%;
+    color: #828282;
+}   
+.RQ-cart-recommendation .product-recommendations {
+    overflow: hidden;
+    padding: 116px 0 0;
+    max-width: 1280px;
+}
+.PaginationWithFractionRecomm {
+    display: flex;
+    align-items: center;
+    max-width: 100px;
+    justify-content: center;
+    margin: 24px auto auto;
+}
+/* product recommendation section css end */
+  
+/* media css start here */
+@media (max-width: 1279px) {
+.RQRightPartOFCartPage {
+    padding-left: 30px;
+}
+.template-cart main#MainContent {
+    padding: 64px 0 50px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link h1 {
+    font-size: 30px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link a.underlined-link {
+    font-size: 16px;
+}
+ {
+    font-size: 16px;
+}
+.SideBVarHd {
+    font-size: 18px;
+}
+.RQMainCartPageWrapper .cart-item .product-option, 
+.RQMainCartPageWrapper span.price.price--end, .totalMrpCartPage,
+.RQMainCartPageWrapper .cart-item__name,
+.RQMainCartPageWrapper .cart-items thead th {
+    font-size: 16px;
+}
+}
+
+@media (max-width: 1023px) {
+.RQMainCartPageWrapper .cart-item .product-option, 
+.RQMainCartPageWrapper span.price.price--end, .totalMrpCartPage,
+.RQMainCartPageWrapper .cart-item__name,
+.RQMainCartPageWrapper .cart-items thead th, .totalShippingCartPage {
+    font-size: 14px;
+}
+.RQRightPartOFCartPage .BothIconTxtWp .Gifttextwp {
+    font-size: 14px;
+    line-height: 18px;
+}
+.RQRightPartOFCartPage .GiftIcnwp svg, .RQRightPartOFCartPage .dwnarwwp svg,
+.RQMainCartPageWrapper cart-remove-button .button svg {
+    width: 18px;
+    height: 18px;
+}
+.RQRightPartOFCartPage .RewardsWithGift {
+    padding: 18.5px 3px;
+}
+}
+@media (max-width: 768px) {
+.RQMainCartPageWrapper .cart-item .product-option, 
+.RQMainCartPageWrapper span.price.price--end, .totalMrpCartPage,
+.RQMainCartPageWrapper .cart-item__name,
+.RQMainCartPageWrapper .cart-items thead th, .totalShippingCartPage,
+.RQRightPartOFCartPage .BothIconTxtWp .Gifttextwp {
+    font-size: 12px;
+}
+}  
+
+@media (max-width: 767px) {
+.RqOfferfeaturedslideshow {
+    position: static;
+}
+.RQ-cart-recommendation {
+    padding-left: 0px;
+    padding-right: 0;
+}
+.RQCombineCartPageLayoutWp .cart-item__totals .cart-item__discounted-prices .price.price--end {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: right;
+    color: #27235E;
+    letter-spacing: 0;
+}
+.RQCombineCartPageLayoutWp .cart-item__totals .cart-item__discounted-prices s.cart-item__old-price {
+    color: #121212;
+}
+.RQ-cart-recommendation .product-recommendations {
+    padding: 64px 0px 0 16px;
+    overflow: inherit;
+}
+h2.product-recommendations__heading {
+    font-size: 20px;
+    line-height: 140%;
+    margin: 0 0 11px;
+}
+.RQ-featcollMnWrapper.page-width {
+    padding-left: 16px;
+    padding-right: 0;
+}
+.RQ-fdc-hd-ds {
+    padding-right: 16px;
+}
+.RQRightPartOFCartPage .cart__ctas {
+    margin: 0;
+}
+.RQ-featcollWidthWrapper {
+    margin-top: 64px;
+}
+.RQ-fdc-hd {
+    font-size: 20px;
+    margin: 0 0 13px;
+}
+.RqOfferfeaturedslideshow .swiper-pagination {
+    font-size: 12px;
+    padding-right: 0;
+    position: absolute;
+    bottom: auto;
+    margin: auto;
+}
+.PaginationWithFractionRecomm .paginationFractionWp {
+    position: absolute;
+    margin: auto;
+    bottom: auto;
+}
+.mySwiper.Rqproductrecommendationslideshow {
+    overflow: hidden;
+    position: static;
+}
+.PrevButtonSlideShowfdOffer, .NextButtonSlideshowfdOffer,
+.NextButtonSlideshowfd, .PrevButtonSlideShowfd {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+    display: none !important;
+}
+body .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background: #D9D9D9;
+    opacity: 1;
+    margin: 0 3px !important;
+}
+body .swiper-pagination-bullet-active {
+    background: #27235E;
+}
+.PaginationWithFractionRecomm {
+    max-width: 100%;
+    margin: 14px auto auto;
+    padding-right: 16px;
+}
+.OfferPaginationWrapperRq {
+    margin: 12px auto auto;
+    max-width: 100%;
+}
+.RQ-fdc-bk-title {
+    font-size: 12px;
+    line-height: 140%;
+    margin: 0 0 12px;
+    padding: 0 6px;
+    min-height: 36px;
+}
+.cmbpriceCb .cmbcpprc {
+    font-size: 14px;
+    line-height: 100%;
+    margin-right: 10px;
+}
+.cmbpriceCb .cmbprc {
+    font-size: 14px;
+    line-height: 100%;
+}
+.RQ-fdc-bk-btn span {
+    padding: 10px;
+}
+.CmbbtRqDt {
+    padding: 12px 0 0;
+}
+.cmbpriceCb {
+    padding: 0 6px;
+}
+.RQLeftContentWrapper {
+    width: 100%;
+}
+.RQRightPartOFCartPage {
+    padding-left: 0;
+    width: 100%;
+    padding-top: 34px;
+}
+.template-cart main#MainContent {
+    padding: 20px 0 28px;
+}
+cart-items.RQMainCartPageWrapper.page-width {
+    padding: 0 16px;
+}
+.RQLeftContentWrapper .title-wrapper-with-link {
+    margin: 0 0 20px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link h1 {
+    font-size: 16px;
+}
+.RQMainCartPageWrapper .cart-items thead th:first-child {
+    padding-left: 0;
+}
+.RQMainCartPageWrapper .cart-items thead th {
+    padding: 0 0 10px;
+}
+.RQMainCartPageWrapper .cart-items thead tr {
+    border: none;
+    margin: 0;
+}
+.RQMainCartPageWrapper .cart-item>td+td:last-child {
+    display: block !important;
+    width: 30%;
+}
+body .cart-item cart-remove-button {
+    margin: 28px auto auto !important;
+    margin-right: 0 !important;
+}
+.RQMainCartPageWrapper .cart-items tbody .cart-item {
+    display: flex;
+    gap: 0;
+    margin: 0;
+}
+.RQMainCartPageWrapper .cart-item td.cart-item__totals,
+.RQMainCartPageWrapper .cart-item td.cart-item__quantity {
+    display: none;
+}
+.RQMainCartPageWrapper .cart-item>td+td, .RQMainCartPageWrapper .cart-item .cart-item__media {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.RQMainCartPageWrapper .cart-item>td+td {
+    padding-left: 12px;
+    width: 100%;
+}
+.RQMainCartPageWrapper .cart-item .cart-item__media {
+    width: 151px;
+    padding-left: 0;
+}
+.RQMainCartPageWrapper .cart-items thead th:last-child, .RQMainCartPageWrapper .cart-item>td+td:last-child {
+    padding-right: 0;
+}
+.RQMainCartPageWrapper .cart-item__name {
+    font-size: 10px;
+    margin: 0 0 12px;
+}
+.RQMainCartPageWrapper .cart-item .product-option {
+    display: none;
+}
+.RQMainCartPageWrapper span.price.price--end {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 15px;
+}
+.RQMainCartPageWrapper .title-wrapper-with-link a.underlined-link {
+    font-size: 12px;
+}
+.SideBVarHd {
+    font-size: 20px;
+    margin: 0 0 20px;
+}
+.totalMrpCartPage, .totalShippingCartPage {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0 0 11px;
+}
+.RQCouponCheckoutWP, .RQRightPartOFCartPage .GiftRewardsWrapper {
+    display: none;
+}
+.RQRightPartOFCartPage .cart__checkout-button {
+    min-height: 36px;
+    font-size: 12px;
+}
+}
+{%- endstyle -%}

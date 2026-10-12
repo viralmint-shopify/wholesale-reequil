@@ -1,0 +1,49 @@
+{% schema %}
+  {
+    "name": "RQ-newyear-banner",
+    "settings": [
+      {"type":"text","id":"heading","label":"Heading"},
+      {"type":"image_picker","id":"desk_media","label":"Desktop Media"},
+      {"type":"text","id":"desk_video","label":"Desktop Video"},
+      {"type":"image_picker","id":"mob_media","label":"Mobile Media"},
+      {"type":"text","id":"mob_video","label":"Mobile Video"},
+      {"type":"header","content":"Link"},
+        {"type":"url","id":"cta_link","label":"Link"}
+    ],
+    "presets":[{"name": "RQ-newyear-banner"}]
+  }
+{% endschema %}
+
+{% if section.settings.heading != blank or section.settings.desk_media != blank or section.settings.mob_media != blank %}
+  <div class="RQ_NewYearBnrMN" section="RQ-newyear-banner">
+    <div class="RQ_NewYearBnrWrpr">
+      {% if section.settings.heading != blank %}<div class="RQ_NewYearBnrHeading">{{ section.settings.heading }}</div>{% endif %}
+      {% if section.settings.desk_media != blank or section.settings.mob_media != blank %}
+        <div class="RQ_NewYearBnrMedia">
+          {% if section.settings.desk_media != blank %}{{ section.settings.desk_media | image_url : width : section.settings.desk_media.width | image_tag : class : 'show_des' }}{% endif %}
+          {% if section.settings.mob_media != blank %}{{ section.settings.mob_media | image_url : width : section.settings.mob_media.width | image_tag : class : 'show_mb' }}{% endif %}
+        </div>
+      {% endif %}
+      {% if section.settings.desk_video != blank or section.settings.mob_video != blank %}
+        <div class="RQ_NewYearBnrVideo">
+          {% if section.settings.desk_video != blank %}
+            <div class="RQ_NewYearVideoMN">
+              {% if section.settings.cta_link != blank %}
+                <a href="{{ section.settings.cta_link }}" class="NavigationFrmae"></a>
+              {% endif %}
+                <iframe class="show_des" loading="lazy" src="{{ section.settings.desk_video }}&autoplay=1&loop=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" muted="muted" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+          {% if section.settings.mob_video != blank %}
+            <div class="RQ_NewYearVideoMN">
+              {% if section.settings.cta_link != blank %}
+                <a href="{{ section.settings.cta_link }}" class="NavigationFrmae"></a>
+              {% endif %}              
+              <iframe class="show_mb" loading="lazy" src="{{ section.settings.mob_video }}&autoplay=1&loop=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" muted="muted" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

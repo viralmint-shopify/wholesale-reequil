@@ -1,0 +1,67 @@
+ {% if  section.settings.image != blank or section.settings.mobile_image != blank %}
+<div class="webinar-image_popup_main">
+  <div class="popup__image_inner_main">
+    <div class="cross_icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="147" height="148" viewBox="0 0 147 148" fill="none">
+<mask id="mask0_6659_3408" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="6" y="6" width="135" height="136">
+<path d="M73.4744 135.359C107.241 135.359 134.613 107.987 134.613 74.2205C134.613 40.4537 107.241 13.082 73.4744 13.082C39.7076 13.082 12.3359 40.4537 12.3359 74.2205C12.3359 107.987 39.7076 135.359 73.4744 135.359Z" fill="white" stroke="white" stroke-width="12.2277" stroke-linejoin="round"/>
+<path d="M90.7696 56.9258L56.1836 91.5118M56.1836 56.9258L90.7696 91.5118" stroke="black" stroke-width="12.2277" stroke-linecap="round" stroke-linejoin="round"/>
+</mask>
+<g mask="url(#mask0_6659_3408)">
+<path d="M0.107422 0.855469H146.84V147.588H0.107422V0.855469Z" fill="#27235E" fill-opacity="0.18"/>
+</g>
+</svg>
+
+</div>
+    <div class="webinar-image-text-wrapper">
+<div class="popup_inner_image">
+  <a {% if section.settings.popup_url != blank %}href="{{ section.settings.popup_url }}"{% endif %}>
+   {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | img_url:'master' }}" class="for-desktop">
+     {% else %}
+     {% if section.settings.mobile_image != blank %}
+      <img src="{{ section.settings.mobile_image | img_url:'master' }}" class="for-desktop">
+    {% endif %}
+     {% endif %}
+     {% if section.settings.mobile_image != blank %}
+       <img src="{{ section.settings.mobile_image | img_url:'master' }}" class="for-mobile">
+       {% else %}
+        {% if section.settings.image != blank %}
+       <img src="{{ section.settings.image | img_url:'master' }}" class="for-mobile">
+    {% endif %}
+       {% endif %}
+    
+  </a>
+</div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Webinar Popup",
+    "settings": [
+              {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+                    {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+                   {
+          "type": "url",
+          "id": "popup_url",
+          "label": "Popup URL"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

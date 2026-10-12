@@ -1,0 +1,339 @@
+<style>
+.section-{{ section.id }}.offer-faq-section {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+.offer-faq-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.offer-faq-left {
+  flex: 1 1 45%;
+}
+.offer-heading {
+    color: var(--gray-900);
+    margin: 0px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 0;
+}
+.offer-image-text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.offer-image img {
+  max-width: 200px;
+  height: auto;
+}
+.offer-text p {
+    color: #333;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0;
+}
+.offer-text strong,
+.offer-text b {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0;
+  color:var(--brand-900);
+}
+.offer-faq-right {
+  flex: 1 1 45%;
+}
+.faq-heading {
+    color: var(--gray-900);
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 0;
+}
+.faq-item {
+    padding: 20px 16px;
+    border-radius: 8px;
+}
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.faq-question h3 {
+    color: var(--brand-900);
+    margin: 0;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+}
+.faq-toggle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1c174c;
+  transition: transform 0.3s;
+}
+.faq-item .faq-toggle .icons-plus-outline{
+  display: block;
+}
+.faq-item.active .faq-toggle .icons-plus-outline{
+  display: none;
+}
+.faq-item.active .faq-toggle .icons-minus-outline{
+  display: block;
+}
+.faq-question span.icons-minus-outline {
+    display: none;
+}
+.faq-answer {
+  display: none;
+  margin-top: 10px;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+.faq-answer p {
+    margin: 0;
+    color: var(--gray-500);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+}
+.faq-item.active{
+    background: #f9f9f9;
+}
+.offer-text {
+    padding-left: 10px;
+}
+@media (max-width: 768px) {
+    .section-{{ section.id }}.offer-faq-section {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .offer-faq-wrapper {
+        flex-direction: column;
+    }
+    .offer-image-text {
+        flex-direction: column;
+        text-align: center;
+    }
+    .offer-image img {
+        max-width: 120px;
+    }
+    .faq-question h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+.faq-answer p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.035px;
+  } 
+  .faq-heading {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+  } 
+}
+</style>
+<section class="section-{{ section.id }} offer-faq-section">
+  <div class="page-width offer-faq-wrapper">
+    <!-- LEFT SIDE -->
+    <div class="offer-faq-left for-desktop">
+      {% if section.settings.left_heading %}
+        <h2 class="offer-heading">{{ section.settings.left_heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.image %}
+        <div class="offer-image-text">
+          <div class="offer-image">
+            <img src="{{ section.settings.image | image_url: height: 155 }}" alt="{{ section.settings.image.alt }}" loading="lazy" height="" width="">
+          </div>
+          <div class="offer-text">
+            {% if section.settings.offer_text %}
+              <p>{{ section.settings.offer_text }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="offer-faq-right">
+      {% if section.settings.right_heading %}
+        <h2 class="faq-heading">{{ section.settings.right_heading }}</h2>
+      {% endif %}
+
+      <div class="faq-list">
+        {% for block in section.blocks %}
+          <div class="faq-item {% if forloop.first %}active{% endif %}">
+            <div class="faq-question">
+              <h3>{{ block.settings.question }}</h3>
+              <span class="faq-toggle">
+                <span class="icons-plus-outline">
+                    {% render 'icons-plus-outline' %}
+                </span>
+                <span class="icons-minus-outline">
+                    {% render 'icons-minus-outline' %}
+                </span>
+              </span>
+            </div>
+            <div class="faq-answer">
+              <p>{{ block.settings.answer }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach((item) => {
+    const header = item.querySelector('.faq-question');
+
+    header.addEventListener('click', () => {
+      // Close all others
+      faqItems.forEach((i) => {
+        if (i !== item) {
+          i.classList.remove('active');
+          i.querySelector('.faq-answer').style.maxHeight = null;
+        }
+      });
+
+      // Toggle current one
+      const content = item.querySelector('.faq-answer');
+      const isActive = item.classList.contains('active');
+
+      if (isActive) {
+        item.classList.remove('active');
+        content.style.maxHeight = null;
+      } else {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "Offer + FAQ Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Left Side Heading",
+      "default": "Transparent margins, profitable partnerships"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Offer Image"
+    },
+    {
+      "type": "liquid",
+      "id": "offer_text",
+      "label": "Offer Description",
+      "default": "Enjoy up to <strong>30% OFF</strong> on our bestselling products, with exclusive discounts"
+    },
+    {
+      "type": "text",
+      "id": "right_heading",
+      "label": "Right Side Heading (FAQ Title)",
+      "default": "FAQ’s"
+    },
+    {
+        "type": "header",
+        "content": "Desktop Settings"
+    },
+    {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "header",
+        "content": "Mobile Settings"
+    },
+    {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Padding Top Mobile",
+        "default":  40,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom Mobile",
+        "default": 40,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "I just signed up, why can’t I access my account?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "After signing up, we follow a verification process that can take some time to process. Once verified, you will be able to log in and access your Vendor account."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offer + FAQ Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

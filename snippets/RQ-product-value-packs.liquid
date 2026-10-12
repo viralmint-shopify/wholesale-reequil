@@ -1,0 +1,49 @@
+{%- capture ProductValuePacks -%}{%- liquid
+    assign loadMode = "jsLazy"
+    assign MainHeading = "Value packs"
+    %}
+{%- if product.metafields.custom.value_packs.value != blank -%}  
+<div class="RQProductValuePacksWrapper" snippets="RQ-product-value-packs">
+  <div class="ValueAddedMainHd">{{ MainHeading }}</div>
+  <div class="WrapperValuePacksEx swiper mySwiper"><div class="RQ-ColB-mg-bkMn swiper-wrapper">
+    {%- for ValuePack in product.metafields.custom.value_packs.value -%}
+    {%- liquid
+        assign image = ValuePack.featured_image
+        assign title = ValuePack.title
+        assign price = ValuePack.price | money
+        assign compare_price = ValuePack.compare_at_price | money
+        assign url = ValuePack.url
+        assign button = "shop now"
+        %}  
+        {% capture Valuediscount %}
+        {{ ValuePack.selected_or_first_available_variant.compare_at_price | minus:ValuePack.selected_or_first_available_variant.price | times:100 | divided_by:ValuePack.selected_or_first_available_variant.compare_at_price }}%
+        {% endcapture %}    
+       <div class="swiper-slide valueAddedEachEqu"><div class="ValueDaddeMaxWit"> <a href="{{ url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+        <div class="spd-img-wrapper">
+        {%- liquid 
+          if image != blank
+          assign imgWidth = "800" | abs
+          assign image = image
+          assign classes = 'img-primary img-all'
+          assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+          if imgWidth == blank
+          assign imgWidth = image.width
+          endif
+          assign imgUrl = image | image_url: width: imgWidth
+          assign imgFit = "contain" | prepend: 'fit-'
+          assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+          endif
+      -%}
+        <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+        </div>
+      </spd-img></a>
+      <div class="ValueproductTile"><a href="{{ url }}">{{ title }}{%- unless ValuePack.has_only_default_variant -%}<span> - {{ ValuePack.selected_or_first_available_variant.title }}</span>{%- endunless -%}</a></div>
+      <div class="ValueProductprice">
+        {% if ValuePack.selected_or_first_available_variant.compare_at_price > ValuePack.selected_or_first_available_variant.price %}<span class="cpvalp"><s>{{ compare_price }}</s></span>{%- endif -%}
+        <span class="pvalp">{{ price }}</span>
+        {% if ValuePack.selected_or_first_available_variant.compare_at_price > ValuePack.selected_or_first_available_variant.price %}<span class="pvalpds">| {{ Valuediscount }} off</span>{%- endif -%}
+      </div>
+      <div class="ButtonValueWp"><a href="{{ url }}">{{ button }}</a></div></div></div>
+    {%- endfor -%}
+  </div></div>
+</div>{%- endif -%}{%- endcapture -%}{{ ProductValuePacks | strip_newlines }}

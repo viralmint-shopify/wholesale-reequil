@@ -1,0 +1,62 @@
+{% schema %}
+{"name": "RQ Collection Faq","tag":"div","class":"RQ-collection-faq","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"description","label":"Description","default":"Description"},
+    {"type":"header","content":"Metafiled Heading"}, 
+        {"type":"liquid","id":"heading_metafiled","label":"Heading","default":"Heading"},
+        {"type":"liquid","id":"description_metafiled","label":"Description","default":"Description"}  
+],"blocks":[{"type":"faq","name":"Faq","settings":[
+    {"type":"header","content":"Faq"}, 
+        {"type":"text","id":"title","label":"Custom title"},
+        {"type":"textarea","id":"description","label":"Custom description"},
+    {"type":"header","content":"Metafiled Faq"}, 
+        {"type":"liquid","id":"title_metafiled","label":"Custom title"},
+        {"type":"liquid","id":"description_metafiled","label":"Custom description"}  
+]}],"presets":[{"name":"RQ Collection Faq"}],"templates":["collection"]}
+{% endschema %}
+{% capture RQCollectionFaq %}{%- liquid
+    assign sps = section.settings
+    if sps.heading_metafiled != blank
+    assign heading = sps.heading_metafiled
+    else
+    assign heading = sps.heading
+    endif
+    if sps.description_metafiled != blank
+    assign description = sps.description_metafiled
+    else
+    assign description = sps.description
+    endif    
+    assign spdbk = section.blocks
+    %}
+{%- if heading != blank or description != blank  -%}<div class="RQ-collectionfqMnWrapper" section="RQ-collection-faq">
+  <div class="RQ-collectionfqWidthWrapper">
+    {%- if heading != blank or description != blank -%}<div class="RQ-sd-hd-dsQ">
+      {%- if heading != blank -%}<div class="RQ-pds-hd">{{ heading }}</div>{%- endif -%}
+      {%- if description != blank -%}<div class="RQ-pds-ds">{{ description }}</div>{%- endif -%}
+    </div>{%- endif -%} 
+    <div class="RQ-collection-mgbknMn"><div class="RQ-pds-mg-bkMn">
+      {%- for bk in spdbk -%}
+        {%- liquid
+            assign bKs = bk.settings
+            if bKs.title_metafiled != blank
+            assign title = bKs.title_metafiled
+            else
+            assign title = bKs.title
+            endif
+            if bKs.description_metafiled != blank           
+            assign description = bKs.description_metafiled
+            else
+            assign description = bKs.description
+            endif
+          -%}     
+          {%- if title != blank or description != blank -%}<div class="RQ-sdBlockEachQ">
+          <div class="RQ-pds-MnAll">{%- if title != blank -%}<div class="RQ-pds-bk-title" js-tiitle-faq-collt>{{ title }}
+          <span class="addicon"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 18.0625H8.5C7.91917 18.0625 7.4375 17.5808 7.4375 17C7.4375 16.4192 7.91917 15.9375 8.5 15.9375H25.5C26.0808 15.9375 26.5625 16.4192 26.5625 17C26.5625 17.5808 26.0808 18.0625 25.5 18.0625Z" fill="#27235E"/><path d="M17 26.5625C16.4192 26.5625 15.9375 26.0808 15.9375 25.5V8.5C15.9375 7.91917 16.4192 7.4375 17 7.4375C17.5808 7.4375 18.0625 7.91917 18.0625 8.5V25.5C18.0625 26.0808 17.5808 26.5625 17 26.5625Z" fill="#27235E"/></svg></span>  
+          <span class="minusicon"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.5 18.0625H8.5C7.91917 18.0625 7.4375 17.5808 7.4375 17C7.4375 16.4192 7.91917 15.9375 8.5 15.9375H25.5C26.0808 15.9375 26.5625 16.4192 26.5625 17C26.5625 17.5808 26.0808 18.0625 25.5 18.0625Z" fill="#27235E"/></svg></span>              
+          </div>{%- endif -%}
+          {%- if description != blank -%}<div class="RqProductWrappedscfq" js-descr-faq-collt><div class="RQ-pds-bk-dsc">{{ description }}</div></div>{%- endif -%}</div>
+        </div>{%- endif -%}
+      {%- endfor -%}</div></div>    
+  </div>
+</div>{%- endif -%}{% endcapture %}{{ RQCollectionFaq | strip_newlines }}

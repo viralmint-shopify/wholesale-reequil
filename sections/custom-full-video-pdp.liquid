@@ -1,0 +1,31 @@
+  {% assign video_url = product.metafields.custom.product_full_video %}
+   {% if video_url != blank %}
+     <div class="custom_video_outer-wrapp">
+       {% if product.metafields.custom.full_video_heading != blank %}
+     <div class="single_video_heading">
+       {{ product.metafields.custom.full_video_heading }}
+     </div>
+       {% endif %}
+       <div class="custom_full_videoWrap">
+   <div class="custom_full_video">
+ {% if video_url contains 'vimeo' %}
+        {%assign videoid = video_url | split : '/'%}
+        <iframe src="https://player.vimeo.com/video/{{videoid.last}}" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="560" height="315" id="video" data-ready="true"> </iframe>
+        {%- elsif video_url contains "youtube"  or video_url contains "youtu.be"  -%}
+        <iframe src="{{video_url }}" width="560" height="315">  </iframe>
+        {% else %}
+            <video width="560" height="315" controls>
+              <source src="{{video_url}}" type="video/mp4">
+              <source src="{{video_url}}" type="video/ogg">
+            </video>
+        {% endif %}
+   </div>
+       </div>
+     </div>
+  {% endif %}
+{% schema %}
+  {
+    "name": "Custom Video Section",
+    "settings": [],"presets":[{"name":"Custom Video Section"}],"templates":["product"]
+  }
+{% endschema %}

@@ -1,0 +1,627 @@
+
+  <style>
+    .section-{{ section.id }}.custom-image-with-text {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .section-{{ section.id }} .custom-image-with-text__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 70px;
+      flex-wrap: wrap;
+    }
+    .section-{{ section.id }} .custom-image-with-text__heading {
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -1px;
+      margin: 0;
+      color: var(--gray-900);
+    }
+    .section-{{ section.id }} .custom-image-with-text__text {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 28px;
+      margin-top: 16px;
+      color: var(--gray-900);
+    }
+    .section-{{ section.id }} .custom-image-with-text__buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+    }
+    .section-{{ section.id }} .btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: 0.3s ease;
+      font-weight: 600;
+      line-height: 20px;
+    }
+    .section-{{ section.id }} .btn--primary {
+      background: var(--brand-800);
+      color: #fff;
+    }
+    .section-{{ section.id }} .btn--secondary {
+      background: var(--gray-50);
+      color: var(--brand-800);
+    }
+    .section-{{ section.id }} .custom-image__image img {
+      max-width: 100%;
+      border-radius: 16px;
+    }
+    .section-{{ section.id }} .content_block {
+        width: calc(100% - 70px - {{ section.settings.image_width }}px);
+    }
+    .section-{{ section.id }} .custom-image__image {
+        width: {{ section.settings.image_width }}px;
+    }
+    .section-{{ section.id }}.custom-image-with-text{
+      background-color: {{ section.settings.background_color }};
+    }
+    .section-{{ section.id }} .custom-image__info__item {
+        position: relative;
+        padding: 20px;
+        border-radius: 12px;
+        background: #FFFFFF0A;
+        margin-bottom: 28px;
+    }
+    .section-{{ section.id }} .backdrop {
+      border-radius: 12px;
+      border: 0.3px solid #27235E;
+      background: linear-gradient(238deg, rgba(39, 35, 94, 0.20) -8.51%, rgba(255, 255, 255, 0.00) 99.61%);
+      filter: blur(1.5px);
+      position: absolute;
+      inset: 0;
+  }
+    .section-{{ section.id }} .text__info__heading {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      letter-spacing: 0;
+      margin: 0;
+      margin-bottom: 8px;
+    }
+    .section-{{ section.id }} .text__info__text {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0;
+      margin: 0;
+    }
+    .section-{{ section.id }} .custom-image__info {
+        max-width: 578px;
+    }
+    @media (min-width:769px){
+        .image_content_mobile {
+            display: none;
+        }
+    }
+    @media (max-width: 768px) {
+      .section-{{ section.id }} .btn {
+        font-size: 12px;
+        line-height: 16px;
+      }
+      .section-{{ section.id }} .custom-image__image img {
+        border-radius: 0;
+      }
+      .section-{{ section.id }} .custom-image-with-text__wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .section-{{ section.id }} .custom-image-with-text__buttons {
+        justify-content: center;
+      }
+      .section-{{ section.id }} .content_block {
+        width: 100%;
+      }
+      .section-{{ section.id }} .custom-image__image {
+        width: 100%;
+        position: relative;
+      }
+      .section-{{ section.id }}.custom-image-with-text {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
+       .section-{{ section.id }}.custom-image-with-text{
+        background-color: {{ section.settings.background_color_mobile }};
+      }
+      .image_content_mobile {
+        position: absolute;
+        bottom: 16px;
+      }
+      .image_content_mobile .image_content__title {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        margin-top:0;
+        margin-bottom: 12px;
+      }
+      .image_content_mobile .image_content__text {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin:0;
+      }
+      .section-{{ section.id }} a.btn {
+        font-size: 12px;
+        font-style: normal;
+        line-height: 16px;
+        letter-spacing: 0.06px;
+      }
+      .image_content__buttons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin: 20px 0 0 0;
+      }
+      .image_content__mobile {
+        padding: 16px 12px 0;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        margin: 0 12px;
+      }
+      .section-{{ section.id }}.flex-column .custom-image-with-text__wrapper{
+        flex-direction: column;
+      }
+      .section-{{ section.id }} .text__info__heading {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 24px;
+          text-align: left;
+      }
+      .section-{{ section.id }} .text__info__text {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+      }
+      .section-{{ section.id }} .custom-image__info__item {
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+      .section-{{ section.id }} .custom-image-with-text__wrapper {
+        gap: 60px;
+      }
+      .template-index .custom-image__image .image__title {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 32px;
+        margin: 0 0 30px;
+      }
+      .mobile_padding_0 p.image_content__text {
+        color: var(--gray-900) !important;
+      }
+  }
+  </style>
+<section class="section-{{ section.id }} custom-image-with-text {{ section.settings.section_class }}">
+  <div class="page-width custom-image-with-text__wrapper">
+    {% for block in section.blocks %}
+      {% case block.type %}
+      
+        {% when 'content' %}
+          <div class="content_block {% if block.settings.hide_on_mobile != blank %}for-desktop{% endif %}">
+            <h2 class="custom-image-with-text__heading" style="color: {{ block.settings.heading_color }};">
+              {{ block.settings.heading }}
+            </h2>
+
+            <p class="custom-image-with-text__text" style="color: {{ block.settings.description_color }};">
+              {{ block.settings.text }}
+            </p>
+
+            <div class="custom-image-with-text__buttons">
+              {% if block.settings.primary_button_label != blank %}
+                <a href="{{ block.settings.primary_button_link }}" class="btn btn--primary">
+                  {{ block.settings.primary_button_label }}
+                </a>
+              {% endif %}
+              {% if block.settings.secondary_button_label != blank %}
+                <a href="{{ block.settings.secondary_button_link }}" class="btn btn--secondary">
+                  {{ block.settings.secondary_button_label }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+      
+        {% when 'image' %}
+          <div class="custom-image__image">
+            {% if block.settings.image_title != blank %}
+              <h2 class="image__title" style="color: {{ block.settings.image_title_color }};">
+                {{ block.settings.image_title }}
+              </h2>
+            {% endif %}
+
+            {% if block.settings.image != blank %}
+              <div class="image_wrapper">
+                <img 
+                  src="{{ block.settings.image | image_url: width: 800 }}" 
+                  alt="{{ block.settings.image.alt | escape }}" 
+                  class="desktop-image for-desktop"
+                  height=""
+                  width=""
+                >
+                {% if block.settings.mobile_image != blank %}
+                  <img 
+                    src="{{ block.settings.mobile_image | image_url: width: 800 }}" 
+                    alt="{{ block.settings.mobile_image.alt | escape }}" 
+                    class="mobile-image for-mobile"
+                    height="100%"
+                    width="100%"
+                  >
+                {% else %}
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 800 }}" 
+                    alt="{{ block.settings.image.alt | escape }}" 
+                    class="mobile-image for-mobile"
+                    height=""
+                    width=""
+                  >
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if block.settings.image_title_image != blank 
+              or block.settings.text_image != blank 
+              or block.settings.primary_button_label_image != blank 
+              or block.settings.secondary_button_label_image != blank %}
+              <div class="image_content_mobile">
+                {% if block.settings.image_title_image != blank %}
+                  <div class="image_content__mobile">
+                    <h2 class="image_content__title" style="color: {{ block.settings.image_title_color_image }};">
+                      {{ block.settings.image_title_image }}
+                    </h2>
+                    <p class="image_content__text" style="color: {{ block.settings.text_color_image }};">
+                      {{ block.settings.text_image }}
+                    </p>
+                  </div>
+                {% endif %}
+                {% if block.settings.primary_button_label_image != blank 
+                  or block.settings.secondary_button_label_image != blank %}
+                  <div class="image_content__buttons">
+                    {% if block.settings.primary_button_label_image != blank %}
+                      <a href="{{ block.settings.primary_button_link_image }}" class="btn btn--primary">
+                        {{ block.settings.primary_button_label_image }}
+                      </a>
+                    {% endif %}
+                    {% if block.settings.secondary_button_label_image != blank %}
+                      <a href="{{ block.settings.secondary_button_link_image }}" class="btn btn--secondary">
+                        {{ block.settings.secondary_button_label_image }}
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% when 'info' %}
+          <div class="custom-image__info">
+            {% for i in (1..5) %}
+              {% assign heading_key = 'heading_' | append: i %}
+              {% assign text_key = 'text_' | append: i %}
+              {% assign heading = block.settings[heading_key] %}
+              {% assign text = block.settings[text_key] %}
+              {% if heading != blank or text != blank %}
+                <div class="custom-image__info__item">
+                  {% if heading != blank %}
+                    <h3 class="text__info__heading" style="color: {{ block.settings.heading_color }};">
+                      {{ heading }}
+                    </h3>
+                  {% endif %}
+                  {% if text != blank %}
+                    <p class="text__info__text" style="color: {{ block.settings.text_color }};">
+                      {{ text }}
+                    </p>
+                  {% endif %}
+                  <div class="backdrop"></div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Custom Image with Text",
+  "class": "image_with_text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_class",
+      "label": "Section Class",
+      "info": "Developer Use Only Do not Change anything in this field"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#27235E"
+    },
+    {
+      "type": "color",
+      "id": "background_color_mobile",
+      "label": "Background color",
+      "default": "#27235E"
+    },
+    {
+      "type": "text",
+      "id": "image_width",
+      "label": "Image width",
+      "default": "590"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_on_mobile",
+          "label": "Hide on mobile",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading text",
+          "default": "Grow with India’s Trusted Dermatological Skincare Brand"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "Description color",
+          "default": "#fff"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description text",
+          "default": "We’re creating the next generation of science-backed skincare for Indian skin — and we’re looking for partners who share our passion for honest, effective skincare."
+        },
+        {
+          "type": "text",
+          "id": "primary_button_label",
+          "label": "Primary button label",
+          "default": "Become a Vendor"
+        },
+        {
+          "type": "url",
+          "id": "primary_button_link",
+          "label": "Primary button link"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_label",
+          "label": "Secondary button label",
+          "default": "Download Brochure"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link",
+          "label": "Secondary button link"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_title",
+          "label": "Image title",
+          "default": "Benefits of partnering with us"
+        },
+        {
+          "type": "color",
+          "id": "image_title_color",
+          "label": "Image title color",
+          "default": "#fff"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload image"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "text",
+          "id": "image_title_image",
+          "label": "Image title",
+          "default": "Benefits of partnering with us"
+        },
+        {
+          "type": "color",
+          "id": "image_title_color_image",
+          "label": "Image title color",
+          "default": "#fff"
+        },
+        {
+          "type": "textarea",
+          "id": "text_image",
+          "label": "Description text",
+          "default": "We’re creating the next generation of science-backed skincare for Indian skin — and we’re looking for partners who share our passion for honest, effective skincare."
+        },
+        {
+          "type": "color",
+          "id": "text_color_image",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "text",
+          "id": "primary_button_label_image",
+          "label": "Primary button label",
+          "default": "Become a Vendor"
+        },
+        {
+          "type": "url",
+          "id": "primary_button_link_image",
+          "label": "Primary button link"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_label_image",
+          "label": "Secondary button label",
+          "default": "Download Brochure"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link_image",
+          "label": "Secondary button link"
+        }
+      ]
+    },
+    {
+      "type": "info",
+      "name": "Info",
+      "settings": [
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#fff"
+        },
+        {
+          "type": "text",
+          "id": "heading_1",
+          "label": "Heading text",
+          "default": "Invoice Margins ranging from 30% and up to 45%"
+        },
+        {
+          "type": "textarea",
+          "id": "text_1",
+          "label": "Description text",
+          "default": "Depending upon your order value slab"
+        },
+        {
+          "type": "text",
+          "id": "heading_2",
+          "label": "Heading text",
+          "default": "Low MOVs and MOQs"
+        },
+        {
+          "type": "textarea",
+          "id": "text_2",
+          "label": "Description text",
+          "default": "Minimum order value starts at just Rs. 6000/- and Minimum order quantity per product is 6 units."
+        },
+        {
+          "type": "text",
+          "id": "heading_3",
+          "label": "Heading text",
+          "default": "Lucrative GST credit"
+        },
+        {
+          "type": "textarea",
+          "id": "text_3",
+          "label": "Description text",
+          "default": "Input GST credit of 18% for all orders"
+        },
+        {
+          "type": "text",
+          "id": "heading_4",
+          "label": "Heading text",
+          "default": "No questions asked Return/Exchange"
+        },
+        {
+          "type": "textarea",
+          "id": "text_4",
+          "label": "Description text",
+          "default": "Return or exchange products in 90 days from date of purchase - no questions asked!"
+        },
+        {
+          "type": "text",
+          "id": "heading_5",
+          "label": "Heading text"
+        },
+        {
+          "type": "textarea",
+          "id": "text_5",
+          "label": "Description text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Image with Text",
+      "blocks": [
+        { "type": "content" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

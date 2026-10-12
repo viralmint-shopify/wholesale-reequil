@@ -1,0 +1,63 @@
+<div class="two-colomn-images-wrapp {% if product.id == 9525498183938 or product.id == 9525494710530 or product.id == 9525483143426 or product.id == 9525495791874 %}hidden{% endif %}">
+  <div class="two-images-inner">
+    {% if section.settings.heading != blank %}
+    <div class="two-images-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {% endif %}
+    <div class="two-images-grid-wrapp">
+      {% for images in product.metafields.custom.bridge_section_images.value %}
+         {% if images  != blank %}
+              <div class="images_with_content">
+        <div class="custom-images-here">
+          <img src="{{ images | img_url:'master' }}">
+        </div>
+              {% if forloop.index == 2 %}
+        <div class="images-content for-desktop">
+          {{ product.metafields.custom.bridge_section_body_text | metafield_tag }}
+        </div>
+             {% endif %}   
+
+      </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% if  product.metafields.custom.bridge_section_images == blank%}
+      <div class="images_with_content for-desktop">
+    <div class="images-content ">
+{{  product.metafields.custom.bridge_section_body_text | metafield_tag  }}
+    </div>
+      </div>
+        <div class="images-content for-mobile">
+{{  product.metafields.custom.bridge_section_body_text | metafield_tag  }}
+    </div>
+    {% else %}
+       <div class="images-content for-mobile">
+{{  product.metafields.custom.bridge_section_body_text | metafield_tag  }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Two image With Text",
+    "settings": [
+                          {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+    ],
+      "presets": [
+    {
+      "name": "Two image With Text"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

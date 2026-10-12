@@ -1,0 +1,76 @@
+{% schema %}
+{"name": "RQ Offer Collection","tag":"div","class":"RQ-cart-page-offer-collection","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"description","label":"Description","default":"Description"}
+],"presets":[{"name":"RQ Offer Collection"}],"templates":["cart"]}
+{% endschema %}
+
+{% capture RQfeaturedCollection %}{%- liquid
+    assign sfcs = section.settings
+    assign loadMode = "jsLazy"
+    assign collection = collections[settings.cart_drawer_collection].products
+    assign CartItemsCheck = cart.items | map:'product' | map:'handle' | join:','
+    assign DiscountOff = settings.cart_discountOff
+    assign HeadingDiscountOff = settings.cart_message_show
+    %}
+{%- if cart.item_count > 0 -%}    
+<div class="RQ-featcollMnWrapper {% if cart.total_price >= 100000 %} {% else %}hidden{% endif %} page-width {% if collection.size < 6 %} LessProductHaveThere {% endif %}" section="RQ-cart-page-offer-collection" id="RQ-cart-page-offer-collection">
+  <div class="RQ-featcollWidthWrapper">
+    {%- if sfcs.heading != blank or sfcs.description != blank -%}<div class="RQ-fdc-hd-ds">
+      {%- if sfcs.heading != blank -%}<div class="RQ-fdc-hd">{{ sfcs.heading }} <span class="OfferMessageCart">{{ HeadingDiscountOff }}% off</span></div>{%- endif -%}
+      {%- if sfcs.description != blank -%}<div class="RQ-fdc-ds">{{ sfcs.description }}</div>{%- endif -%}
+    </div>{%- endif -%}
+    <div class="swiper mySwiper RqOfferfeaturedslideshow"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+      {%- for pd in collection -%}
+        {%- liquid
+            assign title = pd.title
+            assign image = pd.featured_image
+            assign url = pd.url
+            assign handle = pd.handle
+          -%}    
+       {% unless pd.handle contains 'v1' %}
+        <div class="RQ-fdcBlockEach swiper-slide">
+          <div class="RQ-fdcBlockEachInner">
+          <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+            <div class="spd-img-wrapper">
+            {%- liquid 
+              if image != blank
+              assign imgWidth = "800" | abs
+              assign image = image
+              assign classes = 'img-primary img-all'
+              assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+              if imgWidth == blank
+              assign imgWidth = image.width
+              endif
+              assign imgUrl = image | image_url: width: imgWidth
+              assign imgFit = "contain" | prepend: 'fit-'
+              assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+              endif
+          -%}
+            <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+            <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>  
+            </div>
+          </spd-img></a>
+          <div class="CmbbtRqDt"><a href="{{ pd.url }}">{%- if title != blank -%}<div class="RQ-fdc-bk-title">{{ title }}</div>{%- endif -%}</a>
+          <div class="cmbpriceCb"><span class="cmbcpprc">{% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}{{ pd.selected_or_first_available_variant.compare_at_price | money }}{% else %}{{ pd.selected_or_first_available_variant.price | money }}{% endif %}</span><span class="cmbprc">{% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}{{ pd.selected_or_first_available_variant.compare_at_price | times: DiscountOff | divided_by: 100 | money }}{% else %}{{ pd.selected_or_first_available_variant.price | times: DiscountOff | divided_by: 100 | money }}{% endif %}</span></div>
+            <form method="post" action="/cart/add" js-offerCartupsell>
+              <input name="id" value="{{ pd.selected_or_first_available_variant.id }}" type="hidden"/>
+              <input type="hidden" id="__samplePro" name="properties[__samplePro]" value="true"/>
+              <div {% if pd.selected_or_first_available_variant.available %}{% else %} style="pointer-events: none;opacity: 0.5;" {% endif %}class="RQ-fdc-bk-btn {% if CartItemsCheck contains handle %} CartHaveThis {% endif %}" js-fiiftyOff-products><span> <txt>{% if CartItemsCheck contains handle %} Remove {% else %}{%- if pd.selected_or_first_available_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}{% endif %}</txt>
+                <div class="loading-overlay__spinner hidden">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>         
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+      {% endunless %}
+      {%- endfor -%}
+    </div><div class="OfferPaginationWrapperRq"><div class="swiper-button-prev arrsdprev PrevButtonSlideShowfdOffer"></div><div class="swiper-pagination"></div><div class="swiper-button-next arrsdnxt NextButtonSlideshowfdOffer"></div></div></div>
+  </div>
+</div>{%- endif -%}{% endcapture %}{{ RQfeaturedCollection | strip_newlines }}

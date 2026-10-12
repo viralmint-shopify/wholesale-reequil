@@ -1,0 +1,256 @@
+
+<style>
+.vendor-heading {
+    margin: 0;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+    color: var(--gray-900);
+}
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.vendor-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.vendor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.vendor-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    background: linear-gradient(90deg, rgb(102 101 101 / 31%), rgb(0 0 0 / 9%));
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    margin: 16px auto;
+    padding: 20px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    right: 0;
+}
+.vendor-quote {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0;
+    margin: 0px;
+}
+.vendor-meta {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.8px;
+    margin: 0px;
+    margin-top: 16px;
+}
+.section-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+.vendor-grid.swiper {
+    position: relative;
+    padding-bottom: 30px;
+}
+.vendor-grid .swiper-pagination{
+  bottom: 0px !important;
+}
+body .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next,
+ body .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev,
+ body .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next,
+ body .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev,
+ body .swiper-pagination-bullet-active-next,
+ body .swiper-pagination-bullet-active-prev,
+ body .swiper-pagination-bullet-active-next-next,
+ body .swiper-pagination-bullet-active-prev-prev {
+  transform: scale(1) !important;
+}
+.vendor-grid .swiper-pagination .swiper-pagination-bullet {
+    width: 26px !important;
+    border-radius: 4px;
+    height: 4px !important;
+}
+@media(max-width: 768px) {
+      .vendor-quote {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    p.vendor-meta {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.3px;
+    }
+    .vendor-heading {
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: 0;
+        margin-bottom: 12px;
+    }
+    .section-{{ section.id }}{
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  .section-{{ section.id }} .vendor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<section class="section-{{ section.id }} vendor-testimonials">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="vendor-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    <div class="vendor-grid swiper mySwiper">
+      <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="vendor-card swiper-slide">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.name }}" class="vendor-image" height="" width="">
+          {% endif %}
+
+          <div class="vendor-overlay">
+            <p class="vendor-quote">{{ block.settings.quote }}</p>
+            <p class="vendor-meta">– {{ block.settings.name }}, {{ block.settings.location }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+      <div class="vendor-testimonials swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+<script>
+  var vendorTestimonialsSwiper = new Swiper(".vendor-testimonials .mySwiper", {
+    slidesPerView: 1.2,
+    spaceBetween: 24,
+    navigation: {
+      nextEl: ".vendor-testimonials .swiper-button-next",
+      prevEl: ".vendor-testimonials .swiper-button-prev",
+      disabledClass: "swiper-button-disabled",
+    },
+    pagination: {
+      el: ".vendor-testimonials .swiper-pagination",
+      clickable: true,
+      dynamicBullets: false,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
+{% schema %}
+{
+  "name": "Vendor Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "What Our Vendors Say"
+    },
+    {
+        "type": "header",
+        "content": "Desktop Settings"
+    },
+    {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "header",
+        "content": "Mobile Settings"
+    },
+    {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Padding Top",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+    {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Vendor image"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Smooth onboarding, transparent pricing, and always-on support. A great partner for the long run."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name / Role",
+          "default": "Wholesaler"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Ahmedabad"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Vendor Testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+{% schema %}
+{"name": "RQ logos","tag":"div","class":"RQ-logos","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"description","label":"Description","default":"Description"}
+],"blocks":[{"type":"logo","name":"Logo","settings":[
+    {"type":"header","content":"Logo"}, 
+        {"type":"image_picker","id":"logo_image","label":"Logo image"}
+]}],"presets":[{"name":"RQ logos"}],"templates":["index","product"]}
+{% endschema %}
+{% capture RqLogosExecution %}{%- liquid
+    assign slgs = section.settings
+    assign slgbk = section.blocks
+    assign loadMode = "jsLazy"
+    assign heading = slgs.heading
+    assign description = slgs.description
+    %}
+<div class="RQ-logoMnWrapper" section="RQ-logos">
+  <div class="RQ-logoWidthWrapper">
+    {%- if heading != blank or description != blank -%}<div class="RQ-log-hd-ds">
+      {%- if heading != blank -%}<div class="RQ-log-hd">{{ heading }}</div>{%- endif -%}
+      {%- if description != blank -%}<div class="RQ-log-ds">{{ description }}</div>{%- endif -%}
+    </div>{%- endif -%}
+    <div class="Rqiconsslideshow"><div class="RQ-log-mg-bkMn" id="marquee-icon-horizontal">
+      {%- for bk in slgbk -%}
+        {%- liquid
+            assign bKs = bk.settings
+            assign image = bKs.logo_image
+          -%}     
+        <div class="RQ-logBlockEach">
+          <spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+            <div class="spd-img-wrapper">
+            {%- liquid 
+              if image != blank 
+              assign imgWidth = "300" | abs
+              assign image = image
+              assign classes = 'img-primary img-all'
+              assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+              if imgWidth == blank
+              assign imgWidth = image.width
+              endif
+              assign imgUrl = image | image_url: width: imgWidth
+              assign imgFit = "contain" | prepend: 'fit-'
+              assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+              endif
+          -%}
+            <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+            </div>
+          </spd-img>
+        </div>
+      {%- endfor -%}
+    </div></div>    
+  </div>
+</div>{% endcapture %}{{ RqLogosExecution | strip_newlines }}

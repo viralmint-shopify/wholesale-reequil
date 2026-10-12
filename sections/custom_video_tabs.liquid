@@ -1,0 +1,152 @@
+<div class="video_section_tabs_wrapp">
+  <div class="custom_inner_wrapp">
+    {% if section.settings.heading %}
+    <div class="video_heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+      {% endif %}
+      <div class="vide_content_wrapper" {{ section.settings.video_url }}>
+     {% assign video_url = section.settings.video_url %}
+     <div class="content_vido-inner">
+              {% if video_url != blank %}
+        <div class="custom-video-tabs">
+          <div class="tabsall_video_wrapp show_video">
+   <div class="tabs-video_main_wrapper_main">       
+  <div class="tabs-video_main_wrapper">
+             {% if video_url contains 'vimeo' %}
+        {%assign videoid = video_url | split : '/'%}
+        <iframe src="https://player.vimeo.com/video/{{videoid.last}}" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="560" height="315" id="video" data-ready="true"> </iframe>
+        {%- elsif video_url contains "youtube"  or video_url contains "youtu.be"  -%}
+        <iframe src="{{video_url }}" width="560" height="315">  </iframe>
+        {% else %}
+            <video width="560" height="315" controls>
+              <source src="{{video_url}}" type="video/mp4">
+              <source src="{{video_url}}" type="video/ogg">
+            </video>
+        {% endif %}
+          </div>
+   </div>
+          </div>
+        </div>
+         {% endif %}
+         <div class="side_tabs_content">
+           {% if section.settings.subheading != blank %}
+           <div class="tabs_sub_heading">
+             {{ section.settings.subheading }}
+           </div>
+           {% endif %}
+           {% if section.settings.heading2 != blank %}
+             <div class="tabs_heading">
+             <h2> {{ section.settings.heading2 }}</h2>
+           </div>
+           {% endif %}
+
+
+{% if template.suffix == 'new-PDP-skin' or template.suffix == 'new-sun-cc' %}
+           {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_ != blank %}
+                <div class="tabs_grid-wrapp">
+                           <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'cleanse' %}style="background-color:#4379BB"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'cleanse' %}style="color:#fff;"{% endif %}>Cleanse</p>
+               </div>
+             <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'tone' %}style="background-color:#82BF41"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'tone' %}style="color:#fff;"{% endif %}>Tone</p>
+               </div>                            
+                        <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'treat' %}style="background-color:#FBF032"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'treat' %}style="color:#000;"{% endif %}>Treat</p>
+               </div>
+
+ 
+   
+                                       <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'moisturise' %}style="background-color:#E61D7F"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'moisturise' %}style="color:#fff;"{% endif %}>Moisturise</p>
+               </div>
+                                       <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'protect' %}style="background-color:#F9B72F"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_skin_products_.value.system.handle == 'protect' %}style="color:#000;"{% endif %}>Protect</p>
+               </div>
+           </div>
+             {% endif %}
+{% endif %}
+{% if template.suffix == 'new-PDP-hair' %}
+           {% if product.metafields.custom.where_it_fits_in_your_regime_hair_ != blank %}
+                      <div class="tabs_grid-wrapp">
+                                                           <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'treat' %}style="background-color:#FBF032"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'treat' %}style="color:#000;"{% endif %}>Treat</p>
+               </div>
+               <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'cleanse' %}style="background-color:#4379BB"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'cleanse' %}style="color:#fff;"{% endif %}>Cleanse</p>
+               </div>
+    
+                                       <div class="tabs_inner_rpeater"   {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'condition' %}style="background-color:#E61D7F"{% endif %}>
+                 <p {% if product.metafields.custom.where_it_fits_in_your_regime_hair_.value.system.handle == 'condition' %}style="color:#fff;"{% endif %}>Condition</p>
+               </div>
+           </div>
+             {% endif %}
+           {% endif %}
+         </div> 
+     </div>
+
+      </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Video With Tabs",
+    "settings": [
+                      {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+      {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL"
+        },
+            {
+          "type": "richtext",
+          "id": "subheading",
+          "label": "Sub Heading"
+        },
+            {
+          "type": "text",
+          "id": "heading2",
+          "label": "Tabs Heading"
+        }
+    ],
+          "blocks": [
+    {
+      "type": "tabs",
+      "name": "Tabs",
+      "settings": [
+         {
+          "type": "color",
+          "id": "tab_color",
+          "label": "Tab Color"
+        },
+                 {
+          "type": "color",
+          "id": "tab_background",
+          "label": "Tab Background"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title"
+        }
+      ]
+    }
+  ],
+      "presets": [
+    {
+      "name": "Video With Tabs"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+
+{% endjavascript %}

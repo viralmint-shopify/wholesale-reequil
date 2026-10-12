@@ -1,0 +1,143 @@
+{%- capture FontOptimizedFiles -%}
+{% style %}
+@font-face {
+    font-family: 'Arial';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/ArialMT.woff2?v=1697175353') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/ArialMT.woff?v=1697175353') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Bold.woff2?v=1673239278') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Bold.woff?v=1673239278') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Regular.woff2?v=1673239278') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Regular.woff?v=1673239278') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Medium.woff2?v=1673239278') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Medium.woff?v=1673239278') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-SemiBold.woff2?v=1673239278') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-SemiBold.woff?v=1673239278') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Light.woff2?v=1674037168') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Poppins-Light.woff?v=1674037167') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Bold.woff2?v=1701322197') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Bold.woff?v=1701322198') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Light.woff2?v=1701322198') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Light.woff?v=1701322198') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Medium.woff2?v=1701322198') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Medium.woff?v=1701322198') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Regular.woff2?v=1701322198') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-Regular.woff?v=1701322198') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-SemiBold.woff2?v=1701322197') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Inter-SemiBold.woff?v=1701322198') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Bold.woff2?v=1701336675') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Bold.woff?v=1701336675') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Medium.woff2?v=1701336674') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Medium.woff?v=1701336675') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Light.woff2?v=1701336675') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Light.woff?v=1701336675') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-SemiBold.woff2?v=1701336675') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-SemiBold.woff?v=1701336674') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Regular.woff2?v=1701336675') format('woff2'),
+        url('https://cdn.shopify.com/s/files/1/0306/6262/3364/files/PontanoSans-Regular.woff?v=1701336675') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+{% endstyle %}{%- endcapture -%}{{ FontOptimizedFiles | strip_newlines }}

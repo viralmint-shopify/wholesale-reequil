@@ -1,0 +1,35 @@
+{% if section.settings.heading_text != blank or section.settings.left_side_content != blank %}
+<div class="about-keypoints-main">
+  <div class="about-inner-keys">
+     {% if section.settings.heading_text != blank  %}
+    <div class="about-left-keypoints">
+      <div class="key-points-listed">
+        {{ section.settings.heading_text }}
+      </div>
+    </div>
+    {% endif %}
+    {% if section.settings.left_side_content != blank %}
+    <div class="right-side-single-content">
+        {{ section.settings.left_side_content }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "About Key Points",
+    "settings": [
+              {
+          "type": "richtext",
+          "id": "heading_text",
+          "label": "Key Points"
+        },
+                          {
+          "type": "richtext",
+          "id": "left_side_content",
+          "label": "Left Side content"
+        }
+      ],"presets":[{"name":"About Key Points"}]
+  }
+{% endschema %}

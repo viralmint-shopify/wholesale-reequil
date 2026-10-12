@@ -1,0 +1,442 @@
+
+<style>
+.how-to-start-earning__title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+    color: var(--gray-900);
+}
+.how-to-start-earning__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.how-to-start-earning__steps {
+  flex: 1 1 50%;
+  padding-right: 60px;
+  position: relative;
+}
+
+.how-to-start-earning__steps::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #EAE9EF;
+}
+.how-to-start-earning__step.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--brand-900);
+}
+.how-to-start-earning__step {
+  position: relative;
+  padding: 16px 0;
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+.how-to-start-earning__step:last-child {
+  margin-bottom: 0;
+}
+.how-to-start-earning__step h3 {
+    color: var(--brand-900);
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+}
+.step-number {
+   color: var(--brand-900);
+    margin: 0;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+}
+.how-to-start-earning__step p {
+    color: var(--gray-500);
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+}
+.how-to-start-earning__image {
+  flex: 1 1 40%;
+  text-align: center;
+}
+.how-to-start-earning__image img {
+  max-width: 100%;
+  height: auto;
+}
+.how-to-start-earning.section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+@media screen and (max-width: 768px) {
+  .how-to-start-earning.section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .how-to-start-earning__content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .how-to-start-earning__steps {
+    order: 2;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .how-to-start-earning__image {
+    order: 1;
+    margin-bottom: 30px;
+  }
+  .how-to-start-earning__steps::before ,
+  .how-to-start-earning__steps::after{
+    left: 0px;
+  }
+  .how-to-start-earning__image {
+    display: none;
+  }
+  .how-to-start-earning__steps .how-to-start-earning__step{
+    padding:14px 5px 14px 16px;
+    text-align: left;
+  }
+  .how-to-start-earning__step h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+  .how-to-start-earning__step p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.035px;
+  }
+  .how-to-start-earning__step{
+    margin-bottom: 16px;
+  }
+  .offer-block-wrapper .offer-heading {
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 12px;
+}
+
+.offer-block-wrapper .offer-image-text {
+    flex-direction: row;
+    text-align: left;
+}
+
+.offer-block-wrapper p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--gray-900);
+}
+
+.offer-block-wrapper p strong {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    color: var(--brand-900);
+}
+.offer-block-wrapper .offer-image img{
+  max-width: 79px;
+  height: auto;
+}
+.how-to-start-earning {
+    padding: 46px 0 6px;
+}
+.offer-block-wrapper {
+    margin-bottom: 46px;
+}
+h2.how-to-start-earning__title.for-mobile {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+    color: var(--gray-900);
+    margin-bottom: 12px;
+}
+}
+</style>
+<section class="how-to-start-earning section-{{ section.id }}">
+  <div class="page-width">
+    <div class="for-mobile">
+      <div class="offer-block-wrapper">
+        {% if section.settings.offer_title %}
+          <h2 class="offer-heading">{{ section.settings.offer_title }}</h2>
+        {% endif %}
+  
+        {% if section.settings.offer_image %}
+          <div class="offer-image-text">
+            <div class="offer-image">
+              <img src="{{ section.settings.offer_image | image_url: width: 400 }}" alt="{{ section.settings.offer_image.alt }}" loading="lazy" height="auto" width="auto">
+            </div>
+            {% if section.settings.offer_description %}
+              <p>{{ section.settings.offer_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% if section.settings.main_heading != blank %}
+      <h2 class="how-to-start-earning__title for-desktop">{{ section.settings.main_heading }}</h2>
+    {% endif %}
+    {% if section.settings.main_heading_mobile != blank %}
+      <h2 class="how-to-start-earning__title for-mobile">{{ section.settings.main_heading_mobile }}</h2>
+    {% endif %}
+    <div class="how-to-start-earning__content">
+      <div class="how-to-start-earning__steps ">
+        {% for i in (1..4) %}
+          {% assign heading_key = 'heading_' | append: i %}
+          {% assign text_key = 'text_' | append: i %}
+          {% assign heading = section.settings[heading_key] %}
+          {% assign text = section.settings[text_key] %}
+
+          {% if heading != blank or text != blank %}
+            <div class="how-to-start-earning__step step-{{ i }}">
+              {% if heading != blank %}
+                <h3><span class="step-number">{{ i }}.</span> {{ heading }}</h3>
+              {% endif %}
+              {% if text != blank %}
+                <p>{{ text }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.image != blank %}
+        <div class="how-to-start-earning__image">
+          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.main_heading | escape }}" height="auto" width="auto">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".HeaderWrapperExecution");
+  const steps = document.querySelectorAll(".how-to-start-earning__step");
+
+  if (!header || steps.length === 0) return;
+
+  function updateActiveStep() {
+    const headerRect = header.getBoundingClientRect();
+    const headerLine = headerRect.bottom + 25; 
+    // Line where touching should be detected
+
+    let activeStep = null;
+
+    steps.forEach(step => {
+      const rect = step.getBoundingClientRect();
+
+      // If step top crosses the header bottom, it becomes active
+      if (rect.top <= headerLine && rect.bottom > headerLine) {
+        activeStep = step;
+      }
+    });
+
+    // Remove active from all
+    steps.forEach(s => s.classList.remove("active"));
+
+    // Add to the current step
+    if (activeStep) {
+      activeStep.classList.add("active");
+    }
+  }
+
+  window.addEventListener("scroll", updateActiveStep);
+  window.addEventListener("resize", updateActiveStep);
+
+  updateActiveStep();
+});
+</script>
+{% schema %}
+{
+  "name": "How to Start Earning",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Offer Block Only For Mobile"
+    },
+    {
+      "type": "liquid",
+      "id": "offer_title",
+      "label": "Offer Title",
+      "default": "Transparent margins, profitable partnerships"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_image",
+      "label": "Offer Image"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_description",
+      "label": "Offer Description",
+      "default": "Enjoy up to <strong>30% OFF</strong> on our bestselling products, with exclusive discounts"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "How to Start Earning"
+    },
+    {
+      "type": "text",
+      "id": "main_heading_mobile",
+      "label": "Main Heading Mobile",
+      "default": "How it works",
+      "info": "This heading will be shown on mobile devices"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Illustration Image"
+    },
+    {
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Step 1 Heading",
+      "default": "Register"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "Step 1 Description",
+      "default": "Enjoy competitive wholesale margins with fast-moving SKUs that maximize your profitability."
+    },
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Step 2 Heading",
+      "default": "Get Approved"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Step 2 Description",
+      "default": "Enjoy competitive wholesale margins with fast-moving SKUs that maximize your profitability."
+    },
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Step 3 Heading",
+      "default": "Place Orders"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Step 3 Description",
+      "default": "Enjoy competitive wholesale margins with fast-moving SKUs that maximize your profitability."
+    },
+    {
+      "type": "header",
+      "content": "Step 4"
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Step 4 Heading",
+      "default": "Start selling and earning"
+    },
+    {
+      "type": "textarea",
+      "id": "text_4",
+      "label": "Step 4 Description",
+      "default": "Enjoy competitive wholesale margins with fast-moving SKUs that maximize your profitability."
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top Mobile",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom Mobile",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How to Start Earning"
+    }
+  ]
+}
+{% endschema %}

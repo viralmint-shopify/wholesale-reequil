@@ -1,0 +1,60 @@
+ {% if section.settings.content != blank %}
+<div class="more_information_wrapper">
+  <div class="more-informationa_inner">
+    {% if section.settings.heading != blank %}
+    <div class="heading">
+      <h2 aria-expanded="false">{{ section.settings.heading }}<svg class="icon icon-caret AddIconAccordion" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="#9391AE"/><path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="#9391AE"/></svg>
+                    <svg class="icon icon-caret MinusIconAccordion" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="#9391AE"/></svg>
+</h2>
+    </div>
+    {% endif %}
+    {% if section.settings.content != blank %}
+    <div class="bottom_content_main" style="display:none;">
+      {{ section.settings.content }}
+    </div>
+  {% endif %}
+  </div>
+</div>
+                      {% endif %}
+{% schema %}
+  {
+    "name": "More Information",
+    "settings": [
+                          {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+        },
+         {
+          "type": "liquid",
+          "id": "content",
+          "label": "Contemt"
+        }
+    ],
+      "presets": [
+    {
+      "name": "More Information"
+    }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+  $(".more_information_wrapper h2").click(function() {
+    var aria_expanded = $(this).attr("aria-expanded");
+    if(aria_expanded == 'true'){
+      $(this).attr("aria-expanded","false");
+       $(this).removeClass("active");
+    $(this).parents(".more_information_wrapper").find(".bottom_content_main").slideUp();
+    }else{
+       $(this).attr("aria-expanded","true");
+       $(this).addClass("active");
+    $(this).parents(".more_information_wrapper").find(".bottom_content_main").slideDown();
+    }
+   
+    
+});
+{% endjavascript %}

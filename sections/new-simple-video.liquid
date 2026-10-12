@@ -1,0 +1,63 @@
+{% schema %}
+  {
+    "name": "Single Custom Video",
+    "settings": [
+      {"type":"text","id":"text","label":"Heading"},
+        {"type":"url","id":"video_link","label":"Video Link"},
+      {"type":"textarea","id":"para","label":"Paragraph"},
+      {"type":"text","id":"desk_video","label":"Desktop Video"},
+      {"type":"text","id":"mob_video","label":"Mobile Video"}
+    ],
+    "presets":[{"name": "Single Custom Video"}]
+  }
+{% endschema %}
+
+ {% if section.settings.desk_video != blank or section.settings.mob_video != blank %}
+  <div class="RQ_NewYearBnrMN" section="RQ-newyear-banner">
+   {% if section.settings.text != blank or section.settings.para != blank %}
+      <div class="RQ-sd-hd-ds rvm_head">
+        {% if section.settings.text != blank %}<div class="RQ-sd-hd">{{ section.settings.text }}</div>{% endif %}
+        {% if section.settings.para != blank %}<div class="RQ-sd-ds">{{ section.settings.para }}</div>{% endif %}
+      </div>
+    {% endif %}
+    <div class="RQ_NewYearBnrWrpr">
+      {% if section.settings.desk_video != blank or section.settings.mob_video != blank %}
+        <div class="new_NewYearBnrVideo">
+          <div class="vidoe-link-inner-wrapp">
+            {% if section.settings.video_link != blank %}
+            <a class="cust-video-upper-link" href="{{ section.settings.video_link }}"></a>
+              {% endif %}
+                      {% if section.settings.desk_video != blank %}
+            <div class="new_NewYearVideoMN show_des">
+              <iframe class="show_des" loading="lazy" src="{{ section.settings.desk_video }}&autoplay=1&loop=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" muted="muted" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+          {% if section.settings.mob_video != blank %}
+            <div class="new_NewYearVideoMN show_mb">
+              <iframe class="show_mb" loading="lazy" src="{{ section.settings.mob_video }}&autoplay=1&loop=1&muted=1" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" muted="muted" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+          </div>
+
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+<style>
+.new_NewYearVideoMN {
+    position: relative;
+    padding-bottom: 56.25%;
+}
+.new_NewYearVideoMN iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>

@@ -1,0 +1,105 @@
+{% comment %}
+    Renders a list of product's price (regular, sale)
+
+    Accepts:
+    - product: {Object} Product Liquid object (optional)
+    - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+    - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+    - price_class: {String} Adds a price class to the price element (optional)
+
+    Usage:
+    {% render 'price', product: product %}
+{% endcomment %}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+  assign money_price = price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+  if target == product and product.price_varies
+    assign money_price = money_price
+  endif
+-%}
+
+{%- capture discount -%}
+{%- assign DiscountComparePrice = product.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+{%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+{%- assign DiscountPrice = product.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+{{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+{%- endcapture -%}
+            
+<div class="price
+  {%- if price_class %} {{ price_class }}{% endif -%}
+  {%- if available == false %} price--sold-out {% endif -%}
+  {%- if compare_at_price > price %} price--on-sale {% endif -%}
+  {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+  {%- if show_badges %} price--show-badge{% endif -%}">
+  <div class="price__container">
+    {%- comment -%}
+      Explanation of description list:
+        - div.price__regular: Displayed when there are no variants on sale
+        - div.price__sale: Displayed when a variant is a sale
+    {%- endcomment -%}
+    <div class="price__regular">
+      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="price-item price-item--regular">
+       {% if product.selected_or_first_available_variant.compare_at_price == blank or product.selected_or_first_available_variant.price >= product.selected_or_first_available_variant.compare_at_price %} <span class="mrpText" style="padding-right:7px; color:#333333;opacity:1">MRP</span>{% endif %}  {{ money_price }} <span class="shippingstripe">|</span><span class="shipping_icon-text">Free Shipping <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 140.61"><title>Shipping</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_38" data-name="Layer 38"><path d="M8.54,56.17H6.27a6.27,6.27,0,1,0,0,12.53H8.54a6.27,6.27,0,1,0,0-12.53Z"/><path d="M60.66,68.7a6.27,6.27,0,1,0,0-12.53H25.88a6.27,6.27,0,1,0,0,12.53Z"/><path d="M29.75,45.43H32A6.27,6.27,0,0,0,32,32.9H29.75a6.27,6.27,0,1,0,0,12.53Z"/><path d="M67.52,32.9H49.34a6.27,6.27,0,1,0,0,12.53H67.52a6.27,6.27,0,0,0,0-12.53Z"/><path d="M134.36,46.6a6.27,6.27,0,0,0-8.83-.79L103,64.62l-7-9.26a6.27,6.27,0,0,0-10,7.54L97,77.43a6.27,6.27,0,0,0,8.77,1.24,7.16,7.16,0,0,0,.65-.57q.24-.16.48-.36l26.68-22.31A6.27,6.27,0,0,0,134.36,46.6Z"/><path d="M32,79.43H29.75a6.27,6.27,0,0,0,0,12.54H32a6.27,6.27,0,0,0,0-12.54Z"/><path d="M67.52,79.43H49.36a6.27,6.27,0,0,0,0,12.54H67.52a6.27,6.27,0,0,0,0-12.54Z"/><path d="M234.36,67.84l-30.08-32.9a6.28,6.28,0,0,0-4.63-2H164.09V6.27A6.27,6.27,0,0,0,157.82,0H43.61a6.27,6.27,0,1,0,0,12.53h108v99.8h-54a22,22,0,0,0-42.2,0H43.61a6.27,6.27,0,1,0,0,12.54h11.7a22,22,0,0,0,42.2,0h75.17a22,22,0,0,0,42.2,0h14.86A6.27,6.27,0,0,0,236,118.6V72.07A6.23,6.23,0,0,0,234.36,67.84Zm-158,60.24a9.48,9.48,0,1,1,9.47-9.48A9.49,9.49,0,0,1,76.41,128.08Zm117.37,0a9.48,9.48,0,1,1,9.48-9.48A9.49,9.49,0,0,1,193.78,128.08Zm21.1-15.75a22,22,0,0,0-42.2,0h-8.59V45.43h32.8L215.51,65.8H180a6.27,6.27,0,0,0,0,12.54h43.46v34Z"/></g></g></svg></span>
+      </span>
+    </div>
+    <div class="price__sale">
+            <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+      <span class="price-item price-item--sale price-item--last">
+        {{ money_price }}
+      </span>
+      {%- unless product.price_varies == false and product.compare_at_price_varies %}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class="mrpTextouter">
+          <span class="mrpTextInnerContent">
+          <span class="mrpText">MRP</span>
+          <s class="price-item price-item--regular">
+            {% if settings.currency_code_enabled %}
+              {{ compare_at_price | money_with_currency }}
+            {% else %}
+              {{ compare_at_price | money }}
+            {% endif %}
+          </s>
+          </span>
+          {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}<span class="priceOfferText">(<span class="priceOffer">{{discount | strip}} off</span>)</span>{% endif %}
+        </span>
+      {%- endunless -%}
+    </div>
+    <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
+      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+      <span class="price-item price-item--last">
+        <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+        <span aria-hidden="true">/</span>
+        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+        <span>
+          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+            {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+          {%- endif -%}
+          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+        </span>
+      </span>
+    </small>
+    {% if template contains 'product' %}{% if product.metafields.price.include_text != blank %}<div class="PriceWithtax">{{ product.metafields.price.include_text }}</div>{% endif %}{% endif %}
+    
+  </div>
+  {%- if show_badges -%}
+    <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+      {{ 'products.product.on_sale' | t }}
+    </span>
+
+    <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+      {{ 'products.product.sold_out' | t }}
+    </span>
+  {%- endif -%}
+</div>

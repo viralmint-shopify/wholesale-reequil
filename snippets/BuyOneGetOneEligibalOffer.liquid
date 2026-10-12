@@ -1,0 +1,11 @@
+{%- assign MinimumOrderValue = settings.minimum_order_value -%}
+{%- assign EligibleProducts = collections[settings.eligible_products] -%} 
+{%- assign FreeProducts = collections[settings.totally_free_product] -%} 
+<input type="hidden" name="Eligible_products" value="
+  {%- for EgPd in EligibleProducts.products -%}
+  {{- EgPd.id -}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}" minimum="{{- MinimumOrderValue -}}">
+<input type="hidden" name="Free_products" value="
+  {%- for FrPd in FreeProducts.products -%}
+  {{- FrPd.selected_or_first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}" minimum="{{- MinimumOrderValue -}}">

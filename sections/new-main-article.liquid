@@ -1,0 +1,984 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{% render 'blog-listing-article-style' %}
+{% render 'new-article-style' %}
+<div class="progress-bar-container">
+  <div class="progress-bar"></div>
+</div>
+<style>
+  .progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+    display:none;
+  height: 5px;
+  background-color: #f0f0f0;
+  z-index: 9999;
+}
+.progress-bar-container .progress-bar {
+    display: block !IMPORTANT;
+}
+.progress-bar {
+  height: 100%;
+  background-color: #27235E;
+  transition: all 0.3s ease;
+}
+
+</style>
+<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        <div class="page-width page-width--narrow">
+          {% render block %}
+        </div>
+  {% when 'mobile_sec' %}
+                <header class="new-article-title for-mobile" {{ block.shopify_attributes }}>
+          <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
+                    {% if article.tags contains 'Bottom_Author' or article.tags contains 'bottom_author'  %}
+    <p class="single_author_date">{{ article.published_at | time_tag: format: 'date' }} </p>
+    {% endif %}
+          </header>
+
+   {% unless article.tags contains 'Bottom_Author' or article.tags contains 'bottom_author'%}
+                <div class="author_data_wrapp for-mobile">
+      <div class="author_share_wrapper">
+            <div class="autor_image_content_wrapp">
+      {% if block.settings.author_image  != blank %}
+      <div class="author_image"><img src="{{ block.settings.author_image | img_url:'master' }}"></div>
+        {% endif %}
+      <div class="author_content">
+      <div class="author_name_desination">
+      <p><strong>{% if article.author contains 'Manasi' %}Dr{% endif %} {{ article.author }}</strong></p>
+        <p>{{ block.settings.author_designation }} | {{ article.published_at | time_tag: format: 'date' }} </p>
+      </div>
+      </div>
+      </div>
+         {% if block.settings.author_description != blank %}
+        <div class="author_content">
+            <p>{{ block.settings.author_description }}</p>
+        </div>
+         {% endif %}
+      </div>
+                </div>
+  {% endunless %}
+      {%- when 'featured_image'-%}
+        {%- if article.image -%}
+          <div class="article-template__hero-container" {{ block.shopify_attributes }}>
+            <div class="article-template__hero-{{ block.settings.image_height }} media"
+              itemprop="image"
+              {% if block.settings.image_height == 'adapt' and article.image %} style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"{% endif %}
+            >
+              <img
+                srcset="{% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
+                  {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
+                  {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
+                  {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
+                  {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
+                  {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
+                  {{ article.image | image_url }} {{ article.image.width }}w"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                src="{{ article.image | image_url: width: 1100 }}"
+                loading="eager"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+                alt="{{ article.image.alt | escape }}">
+            </div>
+          <header class="new-article-title page-width page-width--narrow for-desktop" {{ block.shopify_attributes }}>
+          <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
+          {% if article.published_at %}
+          <p>{{ article.published_at | time_tag: format: 'date' }} {% if article.metafields.custom.reading_time %}| {{ article.metafields.custom.reading_time }}{% endif %}</p>
+            {% endif %}
+          </header>
+          </div>
+        {%- endif -%}
+
+        {%- when 'content'-%}
+      <div class="new-article-content_wrapp">
+                 <div class="article-template__content page-width page-width--narrow rte" itemprop="articleBody" {{ block.shopify_attributes }}>
+              {{ article.content }}
+          </div> 
+      </div>
+
+                 {%- when 'authordata'-%}
+      {% unless article.tags contains 'Bottom_Author' or article.tags contains 'bottom_author'%}
+          <div class="author_data_wrapp for-desktop">
+      <div class="author_share_wrapper">
+            <div class="autor_image_content_wrapp">
+      {% if block.settings.author_image  != blank %}
+      <div class="author_image"><img src="{{ block.settings.author_image | img_url:'master' }}"></div>
+        {% endif %}
+      <div class="author_content">
+      <div class="author_name_desination">
+      <p><strong>{% if article.author contains 'Manasi' %}Dr{% endif %}  {{ article.author }}</strong> {{ block.settings.author_designation }}</p>
+    {% if block.settings.author_description != blank %}  <p>{{ block.settings.author_description }}</p>{% endif %}
+      </div>
+      </div>
+      </div>
+      <div class="article_share_icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.63807 15.6658C7.66242 15.6658 9.30349 14.0247 9.30349 12.0004C9.30349 9.97603 7.66242 8.33496 5.63807 8.33496C3.61373 8.33496 1.97266 9.97603 1.97266 12.0004C1.97266 14.0247 3.61373 15.6658 5.63807 15.6658Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3608 8.61697C20.3852 8.61697 22.0261 6.9759 22.0261 4.95155C22.0261 2.9272 20.3852 1.28613 18.3608 1.28613C16.3364 1.28613 14.6953 2.9272 14.6953 4.95155C14.6953 6.9759 16.3364 8.61697 18.3608 8.61697Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3608 22.7146C20.3852 22.7146 22.0261 21.0735 22.0261 19.0491C22.0261 17.0248 20.3852 15.3838 18.3608 15.3838C16.3364 15.3838 14.6953 17.0248 14.6953 19.0491C14.6953 21.0735 16.3364 22.7146 18.3608 22.7146Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33594 8.7926C10.683 6.90479 10.8862 6.8889 14.6952 5.81445" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33594 15.209C10.683 17.0968 10.8862 17.1127 14.6952 18.1872" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      </div>
+      </div>
+
+          </div>
+  {% endunless %}
+
+{%- when 'bottomauthordata'-%}
+      {% if article.tags contains 'Bottom_Author' or article.tags contains 'bottom_author'%}
+          <div class="author_data_wrapp for-desktop bottom-autor-data">
+      <div class="author_share_wrapper">
+            <div class="autor_image_content_wrapp">
+      {% if block.settings.author_image  != blank %}
+      <div class="author_image"><img src="{{ block.settings.author_image | img_url:'master' }}"></div>
+        {% endif %}
+      <div class="author_content">
+      <div class="author_name_desination">
+      <p><strong>By{% if article.author contains 'Manasi' %}Dr{% endif %}  {{ article.author }}</strong> {{ block.settings.author_designation }}</p>
+    {% if block.settings.author_description != blank %}  <p>{{ block.settings.author_description }}</p>{% endif %}
+      </div>
+      </div>
+      </div>
+      <div class="article_share_icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.63807 15.6658C7.66242 15.6658 9.30349 14.0247 9.30349 12.0004C9.30349 9.97603 7.66242 8.33496 5.63807 8.33496C3.61373 8.33496 1.97266 9.97603 1.97266 12.0004C1.97266 14.0247 3.61373 15.6658 5.63807 15.6658Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3608 8.61697C20.3852 8.61697 22.0261 6.9759 22.0261 4.95155C22.0261 2.9272 20.3852 1.28613 18.3608 1.28613C16.3364 1.28613 14.6953 2.9272 14.6953 4.95155C14.6953 6.9759 16.3364 8.61697 18.3608 8.61697Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3608 22.7146C20.3852 22.7146 22.0261 21.0735 22.0261 19.0491C22.0261 17.0248 20.3852 15.3838 18.3608 15.3838C16.3364 15.3838 14.6953 17.0248 14.6953 19.0491C14.6953 21.0735 16.3364 22.7146 18.3608 22.7146Z" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33594 8.7926C10.683 6.90479 10.8862 6.8889 14.6952 5.81445" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33594 15.209C10.683 17.0968 10.8862 17.1127 14.6952 18.1872" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      </div>
+      </div>
+
+          </div>
+
+                  <div class="author_data_wrapp for-mobile">
+      <div class="author_share_wrapper">
+            <div class="autor_image_content_wrapp">
+      {% if block.settings.author_image  != blank %}
+      <div class="author_image"><img src="{{ block.settings.author_image | img_url:'master' }}"></div>
+        {% endif %}
+      <div class="author_content">
+      <div class="author_name_desination">
+      <p><strong>By {% if article.author contains 'Manasi' %}Dr{% endif %} {{ article.author }}</strong></p>
+        <p>{{ block.settings.author_designation }}</p>
+      </div>
+      </div>
+      </div>
+         {% if block.settings.author_description != blank %}
+        <div class="author_content">
+            <p>{{ block.settings.author_description }}</p>
+        </div>
+         {% endif %}
+      </div>
+                </div>
+  {% endif %}
+
+  
+    {%- when 'why-reequil'-%}
+      {% if  block.settings.three_points  != blank %}
+          <div class="why-reequil_wrapper">
+              <div class="heading_points-wrapper">
+      <h2>Why <img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/logo_972683d7-bc86-4132-a8bb-644cae34c175.png?v=1702551638"></h2>
+      <div class="points_content_wrapp">
+      {{ block.settings.three_points }}
+      </div>
+            </div>
+          </div>             
+{% endif %}
+          {%- when 'key-highlights'-%}
+      {% if article.metafields.custom.blog_key_highlights_ != blank %}
+          <div class="key-highligths_wrapper">
+        <div class="page-width">
+        {% if  block.settings.heading != blank %}
+              <div class="post-top_heading">
+      <h2 data-handle="{{ block.settings.heading }}">{{ block.settings.heading }}</h2>
+            </div>
+           {% endif %}
+      <div class="key_highlights_content">
+      {% for content in article.metafields.custom.blog_key_highlights_.value %}
+        <div class="highlights_inner_rpeater">
+        <div class="icon_text_wrapp">
+        <div class="higlighhts_icons">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.0003 29.4393C15.6003 29.4393 15.2003 29.346 14.867 29.1593C12.3737 27.7993 7.98699 26.3593 5.24033 25.9993L4.85366 25.946C3.10699 25.7327 1.66699 24.0927 1.66699 22.3193V6.21265C1.66699 5.15932 2.08033 4.19932 2.84033 3.50599C3.60033 2.81265 4.58699 2.47932 5.62699 2.57265C8.56033 2.79932 12.987 4.26599 15.4937 5.83932L15.8137 6.02599C15.907 6.07932 16.107 6.07932 16.187 6.03932L16.4003 5.90598C18.907 4.33265 23.3337 2.83932 26.2803 2.58599C26.307 2.58599 26.4137 2.58599 26.4403 2.58599C27.4137 2.49265 28.4137 2.83932 29.1603 3.53265C29.9203 4.22599 30.3337 5.18598 30.3337 6.23932V22.3327C30.3337 24.1193 28.8937 25.746 27.1337 25.9593L26.6937 26.0127C23.947 26.3727 19.547 27.826 17.107 29.1727C16.787 29.3593 16.4003 29.4393 16.0003 29.4393ZM5.30699 4.55932C4.88033 4.55932 4.49366 4.70599 4.18699 4.98599C3.85366 5.29265 3.66699 5.73265 3.66699 6.21265V22.3193C3.66699 23.106 4.34699 23.866 5.10699 23.9727L5.50699 24.026C8.50699 24.426 13.107 25.9327 15.7737 27.386C15.8937 27.4393 16.067 27.4527 16.1337 27.426C18.8003 25.946 23.427 24.426 26.4403 24.026L26.8937 23.9727C27.6537 23.8793 28.3337 23.106 28.3337 22.3193V6.22599C28.3337 5.73265 28.147 5.30599 27.8137 4.98599C27.467 4.67932 27.027 4.53265 26.5337 4.55932C26.507 4.55932 26.4003 4.55932 26.3737 4.55932C23.827 4.78599 19.7203 6.15932 17.4803 7.55932L17.267 7.70599C16.5337 8.15932 15.4937 8.15932 14.787 7.71932L14.467 7.53265C12.187 6.13265 8.08033 4.77265 5.46699 4.55932C5.41366 4.55932 5.36033 4.55932 5.30699 4.55932Z" fill="#27235E"/>
+<path d="M16 28.3199C15.4533 28.3199 15 27.8666 15 27.3199V7.31995C15 6.77328 15.4533 6.31995 16 6.31995C16.5467 6.31995 17 6.77328 17 7.31995V27.3199C17 27.8799 16.5467 28.3199 16 28.3199Z" fill="#27235E"/>
+<path d="M10.333 12.3199H7.33301C6.78634 12.3199 6.33301 11.8666 6.33301 11.3199C6.33301 10.7733 6.78634 10.3199 7.33301 10.3199H10.333C10.8797 10.3199 11.333 10.7733 11.333 11.3199C11.333 11.8666 10.8797 12.3199 10.333 12.3199Z" fill="#27235E"/>
+<path d="M11.333 16.3199H7.33301C6.78634 16.3199 6.33301 15.8666 6.33301 15.3199C6.33301 14.7733 6.78634 14.3199 7.33301 14.3199H11.333C11.8797 14.3199 12.333 14.7733 12.333 15.3199C12.333 15.8666 11.8797 16.3199 11.333 16.3199Z" fill="#27235E"/>
+</svg>
+
+        </div>
+        <div class="highlights_content">
+        <p>{{ content }}</p>
+        </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+</div>
+          </div>             
+     {% endif %}
+      {% when 'two-image' %}
+        {% if article.metafields.custom.bridge_section_image_ != blank or article.metafields.custom.bridge_section_body_text != blank %}
+      <div class="new-collection-images two-colomn-images-wrapp{% if article.metafields.custom.bridge_section_image_ == blank  %}  here_only_contemt{% endif %}  {% if article.tags contains 'Bottom_Author' or article.tags contains 'bottom_author'%}author_is_bottom{% endif %}">
+  <div class="two-images-inner">
+    {% if block.settings.heading != blank %}
+    <div class="two-images-heading">
+      <h2>{{ block.settings.heading }}</h2>
+    </div>
+    {% endif %}
+         {% if article.metafields.custom.bridge_section_image_ != blank %}   
+    <div class="two-images-grid-wrapp">
+      {% for images in article.metafields.custom.bridge_section_image_.value %}
+         {% if images  != blank %}
+              <div class="images_with_content">
+        <div class="custom-images-here">
+          <img src="{{ images | img_url:'master' }}">
+        </div>
+              {% assign images_loop = forloop.index | plus:1 %}
+        <div class="images-content for-desktop">
+          {% assign content_main = article.metafields.custom.bridge_section_body_text | metafield_tag  %}    
+           {% assign content_main2 = content_main | split:"<strong>"%} 
+                 {% for content_main2 in content_main2 %}
+                   {% unless forloop.index == 1 %}
+                    {% if images_loop == forloop.index %}
+      <p><strong>{{content_main2 | split:"</strong>" | first}}</strong> <br/>{{content_main2 | split:"</strong>" | last | strip_html}}</p>
+          {% endif %}
+                     {% endunless %}
+                   {% endfor %}
+        </div>
+                
+
+      </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+           {% else %}
+           {% if article.metafields.custom.bridge_section_body_text != blank %}
+            <div class="images-content for-desktop">
+                {% assign content_main2 = article.metafields.custom.bridge_section_body_text | metafield_tag  %}    
+           
+     {{ content_main2 }}
+
+    </div>
+             {% endif %}
+           {% endif %}
+            {% if article.metafields.custom.bridge_section_body_text != blank %}
+    <div class="images-content for-mobile">
+                {% assign content_main = article.metafields.custom.bridge_section_body_text | metafield_tag  %}    
+           
+     {{ content_main }}
+
+    </div>
+              {% endif %}
+  </div>
+</div>
+            {% endif %}
+          {%- when 'you-will-know'-%}
+          <div class="post_see_wrapper">
+       {% if  block.settings.heading != blank or block.settings.content   != blank  %}
+              <div class="post-top_heading">
+      {% if  block.settings.heading != blank %}
+      <h2>{{ block.settings.heading }}</h2>
+        {% endif %}
+      {% if block.settings.content   != blank %}
+      <div class="post-top-content">
+      {{ block.settings.content }}
+      </div>
+        {% endif %}
+            </div>
+            {% endif %}
+        {% if block.settings.you_will_know_heading != blank or block.settings.you_will_know_list != blank %}
+        <div class="post_bottom_heading">
+           {% if block.settings.you_will_know_heading != blank  %}
+        <h2>{{ block.settings.you_will_know_heading }}</h2>
+             {% endif %}
+          {% if block.settings.you_will_know_list != blank %}
+          <div class="posts_key_points">
+          {{ block.settings.you_will_know_list }}
+          </div>
+            {% endif %}
+        </div>
+      {% endif %}
+          </div>             
+        {%- when 'share' -%}
+
+        <div class="DetailsCombineAuthoreWpr">
+          <div class="ArticleDateTileField">
+          {% comment %}<div class="Authorimagearticle">
+            <span class="article__author--avatar">
+              <img src="{{ article.user.image | img_url: 'master' }}" alt="{{ article.author }}">
+            </span> 
+          </div>{% endcomment %}
+          <div class="DataWithAuthorDetails">
+            {%- if block.settings.blog_show_author -%}
+              <span class="authorname cpalternate caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">Author : {% if article.author contains 'Manasi' %}Dr{% endif %} {{ article.author }}</span>
+              </span>
+            {%- endif -%}
+            {%- if block.settings.blog_show_date -%}
+              <span class="publishedArtcile cpalternate caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
+            {%- endif -%}  
+          </div>
+          <span class="AuthorNameBio cpalternate show_mb">{{ article.user.bio }}</span>
+          <div class="SharingArticleWap article-template__social-sharing" {{ block.shopify_attributes }}>
+            <share-button class="share-button" {{ block.shopify_attributes }}>
+              <button class="share-button__button hidden">
+                {{ block.settings.share_label | escape }}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.1" width="24" height="24" rx="4" fill="#27235E"/><path d="M18.4642 12.8025C18.1792 12.8025 17.9392 12.585 17.9017 12.3C17.7217 10.605 16.8067 9.06752 15.3967 8.09252C15.1417 7.91252 15.0817 7.56752 15.2542 7.31252C15.4342 7.05752 15.7867 6.99752 16.0342 7.17002C17.7142 8.33252 18.7942 10.1625 19.0117 12.18C19.0417 12.4875 18.8242 12.765 18.5092 12.8025C18.5017 12.8025 18.4792 12.8025 18.4642 12.8025Z" fill="#27235E"/><path d="M5.61987 12.84C5.59737 12.84 5.58237 12.84 5.55987 12.84C5.25237 12.8025 5.02737 12.525 5.05737 12.2175C5.25987 10.2 6.33237 8.37751 7.98987 7.20001C8.24487 7.02001 8.59737 7.08001 8.77737 7.33501C8.95737 7.59001 8.89737 7.94251 8.64237 8.12251C7.24737 9.10501 6.34737 10.6425 6.17487 12.3375C6.15237 12.6225 5.90487 12.84 5.61987 12.84Z" fill="#27235E"/><path d="M12.045 19.9575C10.935 19.9575 9.87747 19.7025 8.88747 19.2075C8.60997 19.065 8.49747 18.7275 8.63997 18.45C8.78247 18.1725 9.11997 18.06 9.39747 18.2025C11.0175 19.02 12.9675 19.035 14.6025 18.2475C14.88 18.1125 15.2175 18.2325 15.3525 18.51C15.4875 18.7875 15.3675 19.125 15.09 19.26C14.13 19.725 13.11 19.9575 12.045 19.9575Z" fill="#27235E"/><path d="M12.0459 9.33C10.5834 9.33 9.39844 8.145 9.39844 6.6825C9.39844 5.22 10.5834 4.035 12.0459 4.035C13.5084 4.035 14.6934 5.22 14.6934 6.6825C14.6934 8.145 13.5009 9.33 12.0459 9.33ZM12.0459 5.1675C11.2059 5.1675 10.5234 5.85 10.5234 6.69C10.5234 7.53 11.2059 8.2125 12.0459 8.2125C12.8859 8.2125 13.5684 7.53 13.5684 6.69C13.5684 5.85 12.8784 5.1675 12.0459 5.1675Z" fill="#27235E"/><path d="M6.62406 18.5025C5.16156 18.5025 3.97656 17.3175 3.97656 15.855C3.97656 14.4 5.16156 13.2075 6.62406 13.2075C8.08656 13.2075 9.27156 14.3925 9.27156 15.855C9.27156 17.31 8.08656 18.5025 6.62406 18.5025ZM6.62406 14.3325C5.78406 14.3325 5.10156 15.015 5.10156 15.855C5.10156 16.695 5.78406 17.3775 6.62406 17.3775C7.46406 17.3775 8.14656 16.695 8.14656 15.855C8.14656 15.015 7.46406 14.3325 6.62406 14.3325Z" fill="#27235E"/><path d="M17.3741 18.5025C15.9116 18.5025 14.7266 17.3175 14.7266 15.855C14.7266 14.4 15.9116 13.2075 17.3741 13.2075C18.8366 13.2075 20.0216 14.3925 20.0216 15.855C20.0141 17.31 18.8291 18.5025 17.3741 18.5025ZM17.3741 14.3325C16.5341 14.3325 15.8516 15.015 15.8516 15.855C15.8516 16.695 16.5341 17.3775 17.3741 17.3775C18.2141 17.3775 18.8966 16.695 18.8966 15.855C18.8891 15.015 18.2141 14.3325 17.3741 14.3325Z" fill="#27235E"/></svg>
+              </button>
+              <details id="Details-{{ block.id }}-{{ section.id }}">
+                <summary class="share-button__button">
+                  {{ block.settings.share_label | escape }}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.1" width="24" height="24" rx="4" fill="#27235E"/><path d="M18.4642 12.8025C18.1792 12.8025 17.9392 12.585 17.9017 12.3C17.7217 10.605 16.8067 9.06752 15.3967 8.09252C15.1417 7.91252 15.0817 7.56752 15.2542 7.31252C15.4342 7.05752 15.7867 6.99752 16.0342 7.17002C17.7142 8.33252 18.7942 10.1625 19.0117 12.18C19.0417 12.4875 18.8242 12.765 18.5092 12.8025C18.5017 12.8025 18.4792 12.8025 18.4642 12.8025Z" fill="#27235E"/><path d="M5.61987 12.84C5.59737 12.84 5.58237 12.84 5.55987 12.84C5.25237 12.8025 5.02737 12.525 5.05737 12.2175C5.25987 10.2 6.33237 8.37751 7.98987 7.20001C8.24487 7.02001 8.59737 7.08001 8.77737 7.33501C8.95737 7.59001 8.89737 7.94251 8.64237 8.12251C7.24737 9.10501 6.34737 10.6425 6.17487 12.3375C6.15237 12.6225 5.90487 12.84 5.61987 12.84Z" fill="#27235E"/><path d="M12.045 19.9575C10.935 19.9575 9.87747 19.7025 8.88747 19.2075C8.60997 19.065 8.49747 18.7275 8.63997 18.45C8.78247 18.1725 9.11997 18.06 9.39747 18.2025C11.0175 19.02 12.9675 19.035 14.6025 18.2475C14.88 18.1125 15.2175 18.2325 15.3525 18.51C15.4875 18.7875 15.3675 19.125 15.09 19.26C14.13 19.725 13.11 19.9575 12.045 19.9575Z" fill="#27235E"/><path d="M12.0459 9.33C10.5834 9.33 9.39844 8.145 9.39844 6.6825C9.39844 5.22 10.5834 4.035 12.0459 4.035C13.5084 4.035 14.6934 5.22 14.6934 6.6825C14.6934 8.145 13.5009 9.33 12.0459 9.33ZM12.0459 5.1675C11.2059 5.1675 10.5234 5.85 10.5234 6.69C10.5234 7.53 11.2059 8.2125 12.0459 8.2125C12.8859 8.2125 13.5684 7.53 13.5684 6.69C13.5684 5.85 12.8784 5.1675 12.0459 5.1675Z" fill="#27235E"/><path d="M6.62406 18.5025C5.16156 18.5025 3.97656 17.3175 3.97656 15.855C3.97656 14.4 5.16156 13.2075 6.62406 13.2075C8.08656 13.2075 9.27156 14.3925 9.27156 15.855C9.27156 17.31 8.08656 18.5025 6.62406 18.5025ZM6.62406 14.3325C5.78406 14.3325 5.10156 15.015 5.10156 15.855C5.10156 16.695 5.78406 17.3775 6.62406 17.3775C7.46406 17.3775 8.14656 16.695 8.14656 15.855C8.14656 15.015 7.46406 14.3325 6.62406 14.3325Z" fill="#27235E"/><path d="M17.3741 18.5025C15.9116 18.5025 14.7266 17.3175 14.7266 15.855C14.7266 14.4 15.9116 13.2075 17.3741 13.2075C18.8366 13.2075 20.0216 14.3925 20.0216 15.855C20.0141 17.31 18.8291 18.5025 17.3741 18.5025ZM17.3741 14.3325C16.5341 14.3325 15.8516 15.015 15.8516 15.855C15.8516 16.695 16.5341 17.3775 17.3741 17.3775C18.2141 17.3775 18.8966 16.695 18.8966 15.855C18.8891 15.015 18.2141 14.3325 17.3741 14.3325Z" fill="#27235E"/></svg>
+                </summary>
+                <div id="Article-share-{{ section.id }}" class="share-button__fallback motion-reduce">
+                  <div class="field">
+                    <span id="ShareMessage-{{ section.id }}" class="share-button__message hidden" role="status">
+                    </span>
+                    <input type="text"
+                          class="field__input"
+                          id="url"
+                          value="{{ request.origin | append: article.url }}"
+                          placeholder="{{ 'general.share.share_url' | t }}"
+                          onclick="this.select();"
+                          readonly
+                    >
+                    <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
+                  </div>
+                  <button class="share-button__close hidden no-js-hidden">
+                    {% render 'icon-close' %}
+                    <span class="visually-hidden">{{ 'general.share.close' | t }}</span>
+                  </button>
+                  <button class="share-button__copy no-js-hidden">
+                    {% render 'icon-clipboard' %}
+                    <span class="visually-hidden">{{ 'general.share.copy_to_clipboard' | t }}</span>
+                  </button>
+                </div>
+              </details>
+            </share-button>
+            <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+          </div>      
+          </div>
+          <span class="AuthorNameBio cpalternate show_des">{{ article.user.bio }}</span>
+
+
+         </div>
+        {%- when 'related_products' -%}
+        {%- if article.metafields.custom.related_product_list.value != blank -%}       
+          <div class="RelatedProductsWrapper" {{ block.shopify_attributes }}>
+            <div class="WrapperRelatedproductEx">
+              {%- if block.settings.heading != blank -%}
+              <div class="WrapperheadingRelated">
+                <div class="hdrel">{{ block.settings.heading }}</div>
+                <div class="PaginationWithFractionRecomm"><div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div><div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div></div>
+              </div>
+              {%- endif -%}
+              {%- assign loadMode = 'jsLazy' -%}
+              {%- assign button = 'MoRE DETAILS'-%}
+              <div class="swiper mySwiper newMainRelatedArticlepodcasts">
+                
+                <div class="TabbingContentEztar RqTabOneContentRw swiper-wrapper">
+                {%- for pd in article.metafields.custom.related_product_list.value -%}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "800" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                      </div>
+                      {% comment %}
+                    <div class="products_rating">{{ pd.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">8.0k</span>
+</div>{% endcomment %}
+                    </spd-img></a>  
+                    {%- capture discount -%}
+                    {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                    {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                    {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                    {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                    {%- endcapture -%}                    
+                    <div class="CmbbtRqDt">
+                  <div class="title_content_wrapper">
+                                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                  {% if product.metafields.custom.product_highlights_updated != blank %}
+          <div class="sub_title"><p>{% for highlights in product.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+        {% endif %}
+                  </div>
+
+                            
+                    {%- if button != blank -%}
+                              <a href="{{ pd.url  }}"
+          class="button button--full-width button--secondary"
+        >
+                                 <span class="more-details_text"> {{ button }} </span> 
+          <span class="text_price_wrapper">
+            <span class="price_com_wrapp">
+              <span class="cmbprc"> {{ pd.price | money }}</span>  {% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}
+            </span>
+       
+          </span>
+        </a>
+                      {%- endif -%}</div>
+                  </div></div>
+                {%- endfor -%}
+              </div></div>
+            </div>
+          </div>       
+          {%- endif -%}           
+    {%- endcase -%}
+  {%- endfor -%}
+{% if article.metafields.custom.more_articles != blank %}
+      {%- assign EpisodeHeading = 'More articles to feed your curiosity...' -%}{% assign loadMode = "jsLazy" %}
+  <div class="RQ-MnlistPodCastWp">  
+    <div class="EpisodesPodcastListArticalWp">
+      <div class="ExecuteMainPodcastWrapperWxt">
+        <div class="RqNextListVwMre">{%- if EpisodeHeading != blank -%}<div class="Episodehading">{{ EpisodeHeading }}</div>{%- endif -%}
+        <div class="PaginationWithFractionRecomm"><div class="swiper-button-prev arrsdprev PrevButtonSlideepis"><svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.89086 13.42C6.60586 13.42 6.32086 13.315 6.09586 13.09L0.800859 7.79499C0.365859 7.35999 0.365859 6.63999 0.800859 6.20499L6.09586 0.90999C6.53086 0.47499 7.25086 0.47499 7.68586 0.90999C8.12086 1.34499 8.12086 2.06499 7.68586 2.49999L3.18586 6.99999L7.68586 11.5C8.12086 11.935 8.12086 12.655 7.68586 13.09C7.47586 13.315 7.19086 13.42 6.89086 13.42Z" fill="#27235E"/>
+</svg>
+</div><div class="swiper-button-next arrsdnxt NextButtonSlideepis"><svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.10953 13.42C1.82453 13.42 1.53953 13.315 1.31453 13.09C0.879531 12.655 0.879531 11.935 1.31453 11.5L5.81453 6.99999L1.31453 2.49999C0.879531 2.06499 0.879531 1.34499 1.31453 0.90999C1.74953 0.47499 2.46953 0.47499 2.90453 0.90999L8.19953 6.20499C8.63453 6.63999 8.63453 7.35999 8.19953 7.79499L2.90453 13.09C2.67953 13.315 2.39453 13.42 2.10953 13.42Z" fill="#27235E"/>
+</svg>
+</div></div>
+        </div>
+        <div class="swiper AllEpisodeEachMainWp">
+          <div class="custom_new_article_blogs swiper-wrapper">
+            {% assign more_article = article.metafields.custom.more_articles | split:',' %}
+            {% for more_article in more_article %}
+            {%assign article = articles[more_article]%} 
+
+
+            <div class="swiper-slide ArticlesPodcastEpisodeEach">
+              <div class="new-articles-innner_wrapper">
+                            <a href="{{ article.url }}">
+                <div class="ArticleImgWoEspidodePfd">
+                  <spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                  <div class="spd-img-wrapper">
+                  {%- liquid 
+                    if article.image != blank
+                    assign imgWidth = "800" | abs
+                    assign image = article.image
+                    assign classes = 'img-primary img-all'
+                    assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                    if imgWidth == blank
+                    assign imgWidth = image.width
+                    endif
+                    assign imgUrl = image | image_url: width: imgWidth
+                    assign imgFit = "contain" | prepend: 'fit-'
+                    assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                    endif
+                  -%}
+                  <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  </div>
+                 </spd-img>
+                </div>
+                <div class="MainConeEpisode">
+                  <div class="TileEpisodeart">{{ article.title }}</div>
+                  <div class="RqArticleCardInfo">
+                      <span class="RqArticleDate">{% if article.author contains 'Manasi' %}Dr{% endif %} {{ article.author }} {% if article.metafields.custom.reading_time %}| {{ article.metafields.custom.reading_time }}{% endif %}</span>
+                  </div>                  
+                  {%- if article.excerpt.size > 0 or article.content.size > 0 -%}<div class="Exceptarticleep">
+                    <p>
+                      {%- if article.excerpt.size > 0 -%}
+                        {{ article.excerpt | strip_html | truncatewords: 30 }}
+                      {%- else -%}
+                        {{ article.content | strip_html | truncatewords: 30 }}
+                      {%- endif -%}
+                    </p>
+                  </div>{%- endif -%}
+                </div>
+              </a>
+              </div>
+
+            </div>
+  
+              {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>                 
+      {% endif %}             
+
+ {% comment %} <div class="article-template__back element-margin-top center">
+    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
+      <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+      {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+    </a>
+  </div>
+  {%- if blog.comments_enabled? -%}
+    <div class="article-template__comment-wrapper background-secondary">
+      <div id="comments" class="page-width page-width--narrow">
+        {%- if article.comments_count > 0 -%}
+          {%- assign anchorId = '#Comments-' | append: article.id -%}
+
+          <h2 id="Comments-{{ article.id }}" tabindex="-1">{{ 'blogs.article.comments' | t: count: article.comments_count }}</h2>
+          {% paginate article.comments by 5 %}
+            <div class="article-template__comments">
+              {%- if comment.status == 'pending' and comment.content -%}
+                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                  {{ comment.content }}
+                  <footer class="right">
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+                  </footer>
+                </article>
+              {%- endif -%}
+
+              {%- for comment in article.comments -%}
+                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                  {{ comment.content }}
+                  <footer class="right">
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span><span class="caption-with-letter-spacing">{{ comment.created_at | time_tag: format: 'date' }}</span>
+                  </footer>
+                </article>
+              {%- endfor -%}
+              {% render 'pagination', paginate: paginate, anchor: anchorId %}
+            </div>
+          {% endpaginate %}
+        {%- endif -%}
+        {% form 'new_comment', article %}
+          {%- liquid
+            assign post_message = 'blogs.article.success'
+            if blog.moderated? and comment.status == 'unapproved'
+              assign post_message = 'blogs.article.success_moderated'
+            endif
+          -%}
+          <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
+          {%- if form.errors -%}
+            <div class="form__message" role="alert">
+              <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
+                {% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}
+              </h3>
+            </div>
+            <ul class="form-status-list caption-large">
+              {%- for field in form.errors -%}
+                <li>
+                  <a href="#CommentForm-{{ field }}" class="link">
+                    {%- if form.errors.translated_fields[field] contains 'author' -%}
+                      {{ 'blogs.article.name' | t }}
+                    {%- elsif form.errors.translated_fields[field] contains 'body'-%}
+                     {{ 'blogs.article.message' | t }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] }}
+                    {%- endif -%}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- elsif form.posted_successfully? -%}
+            <div class="form-status-list form__message" role="status">
+              <h3 class="form-status" tabindex="-1" autofocus>{% render 'icon-success' %} {{ post_message | t }}</h3>
+            </div>
+          {%- endif -%}
+
+          <div{% if blog.moderated? == false %} class="article-template__comments-fields"{% endif %}>
+            <div class="article-template__comment-fields">
+              <div class="field field--with-error">
+                <input
+                  type="text"
+                  name="comment[author]"
+                  id="CommentForm-author"
+                  class="field__input"
+                  autocomplete="name"
+                  value="{{ form.author }}"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'author' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-author-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.name' | t }}"
+                >
+                <label class="field__label" for="CommentForm-author">{{ 'blogs.article.name' | t }} <span aria-hidden="true">*</span></label>
+                {%- if form.errors contains 'author' -%}
+                  <small id="CommentForm-author-error">
+                    <span class="form__message">{% render 'icon-error' %}{{ 'blogs.article.name' | t }} {{ form.errors.messages['author'] }}.</span>
+                  </small>
+                {%- endif -%}
+              </div>
+              <div class="field field--with-error">
+                <input
+                  type="email"
+                  name="comment[email]"
+                  id="CommentForm-email"
+                  autocomplete="email"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.email' | t }}"
+                >
+                <label class="field__label" for="CommentForm-email">{{ 'blogs.article.email' | t }} <span aria-hidden="true">*</span></label>
+                {%- if form.errors contains 'email' -%}
+                  <small id="CommentForm-email-error">
+                    <span class="form__message">{% render 'icon-error' %}{{ 'blogs.article.email' | t }} {{ form.errors.messages['email'] }}.</span>
+                  </small>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="field field--with-error">
+              <textarea
+                rows="5"
+                name="comment[body]"
+                id="CommentForm-body"
+                class="text-area field__input"
+                aria-required="true"
+                required
+                {% if form.errors contains 'body' %}
+                  aria-invalid="true"
+                  aria-describedby="CommentForm-body-error"
+                {% endif %}
+                placeholder="{{ 'blogs.article.message' | t }}"
+              >{{ form.body }}</textarea>
+                <label class="form__label field__label" for="CommentForm-body">{{ 'blogs.article.message' | t }} <span aria-hidden="true">*</span></label>
+            </div>
+            {%- if form.errors contains 'body' -%}
+              <small id="CommentForm-body-error">
+                <span class="form__message">{% render 'icon-error' %}{{ 'blogs.article.message' | t }} {{ form.errors.messages['body'] }}.</span>
+              </small>
+            {%- endif -%}
+          </div>
+          {%- if blog.moderated? -%}
+            <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
+          {%- endif -%}
+          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+        {% endform %}
+      </div>
+  </div>
+  {%- endif -%}{% endcomment %}
+</article>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ request.origin | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      "image": [
+        {{ article | image_url: width: article.image.width | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {% if article.author contains 'Manasi' %}Dr{% endif %} {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {% if settings.share_image %}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ settings.share_image.height | json }},
+          "url": {{ settings.share_image | image_url: width: settings.share_image.width | prepend: "https:" | json }},
+          "width": {{ settings.share_image.width | json }}
+        },
+      {% endif %}
+      "name": {{ shop.name | json }}
+    }
+  }
+  </script>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-article.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+        {
+      "type": "mobile_sec",
+      "name": "Moblle Author Section",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+                {
+          "type": "text",
+          "id": "author_designation",
+          "label": "Author Designation"
+        },
+         {
+          "type": "text",
+          "id": "author_description",
+          "label": "Author Description"
+        }
+      ]
+    },  
+    {
+      "type": "featured_image",
+      "name": "t:sections.main-article.blocks.featured_image.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "image_height",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
+            },
+            {
+              "value": "small",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
+          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
+        }
+      ]
+    },
+    {
+      "type": "related_products",
+      "name": "Related Products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "info":"Products managing With metafields"
+        }   
+      ]
+    },     
+    {
+      "type": "content",
+      "name": "t:sections.main-article.blocks.content.name",
+      "limit": 1
+    },
+        {
+      "type": "authordata",
+      "name": "Author Data",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+                {
+          "type": "text",
+          "id": "author_designation",
+          "label": "Author Designation"
+        },
+         {
+          "type": "text",
+          "id": "author_description",
+          "label": "Author Description"
+        }
+      ]
+    },
+
+        {
+      "type": "bottomauthordata",
+      "name": "Bottom Author Data",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+                {
+          "type": "text",
+          "id": "author_designation",
+          "label": "Author Designation"
+        },
+         {
+          "type": "text",
+          "id": "author_description",
+          "label": "Author Description"
+        }
+      ]
+    },
+    
+        {
+      "type": "why-reequil",
+      "name": "Why Re'equil",
+      "limit": 1,
+                "settings": [
+        {
+          "type": "richtext",
+          "id": "three_points",
+          "label": "Review Points"
+        }
+      ]
+    },
+            {
+      "type": "two-image",
+      "name": "Bride Section",
+      "limit": 1,
+                "settings": [
+                          {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    },
+            {
+      "type": "you-will-know",
+      "name": "You Will Know",
+      "limit": 1,
+                "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+                          {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+       {
+          "type": "text",
+          "id": "you_will_know_heading",
+          "label": "You Will Know Heading"
+        },
+           {
+          "type": "richtext",
+          "id": "you_will_know_list",
+          "label": "You Will Know List"
+        }
+      ]
+    },
+            {
+      "type": "key-highlights",
+      "name": "Key Highlights",
+      "limit": 1,
+                "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-article.blocks.share.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-article.blocks.share.settings.text.label",
+          "default": "Share"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_date",
+          "default": true,
+          "label": "t:sections.main-article.blocks.title.settings.blog_show_date.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author",
+          "default": true,
+          "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
+        }        
+      ]
+    }
+  ]
+}
+{% endschema %}
+<script>
+  const shareData = {
+  title: "{{article.title}}",
+  text: " {{ article.excerpt | strip_html | truncatewords: 30 }}",
+  url: "{{article.url}}",
+};
+
+const btn = document.querySelector(".article_share_icon");
+
+// Share must be triggered by "user activation"
+btn.addEventListener("click", async () => {
+  try {
+    await navigator.share(shareData);
+  } catch (err) {
+  }
+});
+
+
+  // Progress bar
+function updateProgressBar() {
+  const progressBar = document.querySelector('.progress-bar');
+  const header_height = $("#shopify-section-header").height();
+  const totalHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (window.pageYOffset / totalHeight) * 100;
+ 
+  progressBar.style.width = progress + '%';
+  if(progress == 0){
+     $(".progress-bar-container").hide();
+  }else{
+     $(".progress-bar-container").show();
+  }
+  $(".progress-bar-container").css("top",header_height);
+}
+
+updateProgressBar(); 
+window.addEventListener('scroll', updateProgressBar);
+window.addEventListener('resize', updateProgressBar);
+  
+</script>

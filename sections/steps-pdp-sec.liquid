@@ -1,0 +1,63 @@
+{% if template.suffix == 'new-PDP-hair' %}
+{% if product.metafields.custom.build_your_haircare_regime != blank %}
+  <div class="all_cstm_pdp_tabs">
+    {% for metaobject in  shop.metaobjects.build_your_haircare_regime.values %}
+{% render 'hair-card-pdp', cleanse: metaobject.cleanse, treat: metaobject.treat, condition:metaobject.condition%}
+{% endfor %}
+  </div>
+
+  {% endif %}
+  {% endif %}
+  {% if template.suffix == 'new-PDP-skin' %}
+  {% if product.metafields.custom.build_your_skincare_regime != blank %}
+    <div class="all_cstm_pdp_tabs">
+{% for metaobject in  shop.metaobjects.build_your_skin_regime.values %}
+{% render 'skin-card-pdp', cleanse: metaobject.step_1_cleanse, tone: metaobject.step_2_tone, treat:metaobject.step_3_treat, moisturise:metaobject.step_4_moisturise, protect:metaobject.step_5_protect %}
+{% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+{% schema %}
+  {
+    "name": "PDP Collections Steps",
+    "settings": [
+              {
+          "type": "text",
+          "id": "heading",
+          "label": "Hair Heading"
+        },
+                    {
+          "type": "text",
+          "id": "skin_heading",
+          "label": "Skin Heading"
+        }
+    ],
+      "presets": [
+    {
+      "name": "PDP Collections Steps",
+      "blocks": [
+        
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+  $(".steps_dsktop_tabs .innner_tabs_rpeater h2").click(function() {
+     $(this).parents(".all_cstm_pdp_tabs").find(".steps_dsktop_tabs .innner_tabs_rpeater").css("background","#fff");
+     $(this).parents(".all_cstm_pdp_tabs").find(".steps_dsktop_tabs .innner_tabs_rpeater h2").css("color","#000");
+      var data_color = $(this).attr("data-color");
+          var data_bg_color = $(this).attr("data-background");
+   var tab_title = $(this).parents(".innner_tabs_rpeater").attr("data-handle");
+  $(this).parents(".all_cstm_pdp_tabs").find(".product__accordion_custom").hide();
+    $(this).parents(".all_cstm_pdp_tabs").find(".product__accordion_custom[data-handle='"+tab_title+"']").show();
+      $(this).css("color",data_color);
+      $(this).parents(".innner_tabs_rpeater").css("background-color",data_bg_color);
+});
+</script>

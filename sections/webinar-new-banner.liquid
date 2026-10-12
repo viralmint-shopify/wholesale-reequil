@@ -1,0 +1,52 @@
+{% schema %}
+{"name": "Webinar New Banner","tag":"div","class":"webinar-banner-image","settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+   {"type":"image_picker","id":"mob_image","label":"Mobile Image"},
+  {"type": "richtext","id": "about_text","label": "About Content"}
+],"presets":[{"name":"Webinar New Banner"}],"templates":["page"]}
+{% endschema %}
+{% capture RQAboutPageBanner %}{%- liquid
+    assign sabts = section.settings
+    assign image = sabts.image
+    assign mobile_image = sabts.mob_image
+    assign loadMode = "jsLazy"
+    %}
+  
+<div class="RQ-webinar-wrapp" section="RQ-webinar-page-banner"> 
+  <div class="RQ-webBnWidthWrapper">    
+    <spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+      {% if image != blank %}
+      <div class="spd-img-wrapper for-dektop">
+     
+          <img src="{{ image | img_url:'master' }}" data-src="{{ image | img_url:'master' }}" height="{{ image.height }}" width="{{ image.width }}">
+     
+      </div>
+      {% else %}
+            {% if mobile_image != blank %}
+         <div class="spd-img-wrapper for-dektop">
+       <img src="{{ mobile_image | img_url:'master' }}" data-src="{{ mobile_image | img_url:'master' }}" height="{{ mobile_image.height }}" width="{{ mobile_image.width }}">
+      </div>
+      {% endif %}
+{% endif %}
+  {%  if mobile_image != blank %}
+ <div class="spd-img-wrapper for-mobile">
+     <img src="{{ mobile_image | img_url:'master' }}" data-src="{{ mobile_image | img_url:'master' }}" height="{{ mobile_image.height }}" width="{{ mobile_image.width }}">
+      </div>
+      {% else %}
+      {% if image != blank %}
+      <div class="spd-img-wrapper for-mobile">
+     
+          <img src="{{ image | img_url:'master' }}" data-src="{{ image | img_url:'master' }}" height="{{ image.height }}" width="{{ image.width }}">
+     
+      </div>
+      {% endif %}
+      {% endif %}
+    </spd-img>
+  </div>
+   {% if section.settings.about_text != blank %}
+  <div class="bottom_section_about">
+    {{ section.settings.about_text }}
+  </div>
+  {% endif %}
+  
+</div>{% endcapture %}{{ RQAboutPageBanner | strip_newlines }}

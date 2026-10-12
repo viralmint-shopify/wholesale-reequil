@@ -1,0 +1,28 @@
+{% schema %}
+{"name": "RQ Specification","tag":"div","class":"RQ-specification","settings": [],
+  "blocks":[{"type":"specification","name":"Specification","limit":4,"settings":[
+    {"type":"header","content":"Specification"}, 
+        {"type":"text","id":"count","label":"Count"},
+        {"type":"text","id":"specification","label":"Specification"}
+]}],"presets":[{"name":"RQ Specification"}],"templates":["index"]}
+{% endschema %}
+{%- liquid
+    assign sps = section.settings
+    assign spbk = section.blocks
+    %}
+{% capture RQSpecification %}<div class="RQ-specificationMnWrapper" section="RQ-specification">
+  <div class="swiper mySwiper Rqspecificationmbslideshow"><div class="RQ-specificationWidthWrapper swiper-wrapper">
+    {%- for bk in spbk -%}
+      {%- liquid
+          assign bKs = bk.settings
+          assign count = bKs.count
+          assign specification = bKs.specification
+        -%} 
+      {%- if count != blank or specification != blank -%}<div class="RQ-spMnEach swiper-slide">
+        <div class="RQ-spMnEachInner">
+        {%- if count != blank -%}<div class="RQ-sp-ct">{{ count }}</div>{%- endif -%}
+        {%- if specification != blank -%}<div class="RQ-sp-ds">{{ specification }}</div>{%- endif -%}
+      </div></div>{%- endif -%}
+    {%- endfor -%}
+  </div><div class="swiper-pagination paginationSlideshowbannerp"></div></div>
+</div>{% endcapture %}{{ RQSpecification | strip_newlines }}

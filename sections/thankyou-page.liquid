@@ -1,0 +1,55 @@
+ {% if section.settings.heading  != blank or section.settings.subheading  != blank or section.settings.btn_text  != blank %}
+<div class="thankyou-page-content WrapperPageDefaultLayout">
+  <div class="heading_icon_page">
+    <img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/thank-you-icon.png?v=1704364594">
+  </div>
+  {% if section.settings.heading  != blank %}
+  <h1 class="thankyou-page-heading">
+   {{ section.settings.heading }}
+  </h1>
+  {% endif %}
+  {% if section.settings.subheading  != blank %}
+  <div class="tahnkyou-page-content">
+    {{ section.settings.subheading }}
+  </div>
+  {% endif %}
+      {% if  section.settings.btn_text  != blank %}
+    <div class="thankyou-page_bottom_btn">
+      <a class="button button--primary" {% if section.settings.btn_url != blank %}href="{{ section.settings.btn_url }}"{% endif %}>{{ section.settings.btn_text }}</a>
+    </div>
+    {% endif %}
+</div>
+  {% endif %}
+{% schema %}
+  {
+    "name": "Thankyou Page",
+    "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+                          {
+          "type": "richtext",
+          "id": "subheading",
+          "label": "Content"
+        },
+                            {
+          "type": "text",
+          "id": "btn_text",
+          "label": "CTA Text"
+        },
+                      {
+          "type": "url",
+          "id": "btn_url",
+          "label": "CTA URL"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

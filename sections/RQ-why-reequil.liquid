@@ -1,0 +1,54 @@
+{% schema %}
+  {
+    "name": "RQ-why-reequil",
+    "settings":[
+      {"type":"text","id":"customClass","label":"Custom Class"},
+      {"type":"text","id":"heading","label":"Heading"},
+      {"type":"image_picker","id":"logo","label":"Logo"},
+      {"type":"textarea","id":"para","label":"Paragraph"}
+    ],
+    "blocks": [
+      {"type":"features","name":"Features",
+        "settings":[
+          {"type":"checkbox","id":"icon","label":"Icon"},
+          {"type":"text","id":"point","label":"Point"}
+        ]
+      }
+    ],
+    "presets":[{"name":"RQ-why-reequil"}]
+  }
+{% endschema %}
+
+{% if section.settings.heading != blank or section.settings.para != blank or section.blocks.size > 0 %}
+  <div class="RQ_WhyRquilMN{% if section.settings.customClass != blank %} {{ section.settings.customClass }}{% endif %}" section="RQ-why-reequil">
+    <div class="RQ_WhyRquilWrpr">
+      {% if section.settings.heading != blank or section.settings.para != blank %}
+        <div class="RQ_WhyRquilHeader">
+          {% if section.settings.heading != blank %}
+            <div class="RQ_WhyRquilHeading">
+              {{ section.settings.heading }}
+              {% if section.settings.logo != blank %}{{ section.settings.logo | image_url : width : section.settings.logo.width | image_tag }}{% endif %}
+            </div>
+            {% endif %}
+          {% if section.settings.para != blank %}<div class="RQ_WhyRquilPara">{{ section.settings.para }}</div>{% endif %}
+        </div>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="RQ_WhyRquilFeaturesMN">
+          <div class="RQ_WhyRquilFeaturesWrpr">
+            <ul class="featuredList" role="list">
+              {% for block in section.blocks %}
+                {% if block.settings.point != blank %}
+                  <li>
+                    {% if block.settings.icon == true %}<span class="checkIcon">{% render 'icon-check' %}</span>{% endif %}
+                    {% if block.settings.point != blank %}<span class="featuredPoint">{{ block.settings.point }}</span>{% endif %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

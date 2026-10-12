@@ -1,0 +1,415 @@
+{% schema %}
+{"name": "RQ multi tab viewed","tag":"div","class":"RQ-multi-tab-viewed","settings":[
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading"}
+],"blocks":[{"type":"tabs","name":"Tabs","settings":[
+    {"type":"header","content":"Main tab Details"}, 
+        {"type":"text","id":"main_tab_name","label":"Main tab name"},
+        {"type":"textarea","id":"tab_description_main","label":"Description"},
+    {"type":"header","content":"Each tab name with collection"}, 
+    {"type":"header","content":"Tab one"}, 
+        {"type":"text","id":"tab_one_name","label":"Tab name"},
+        {"type":"collection","id":"tab_one_collection","label":"Tab collection"},
+    {"type":"header","content":"Tab two"}, 
+        {"type":"text","id":"tab_two_name","label":"Tab name"},
+        {"type":"collection","id":"tab_two_collection","label":"Tab collection"},  
+    {"type":"header","content":"Tab three"}, 
+        {"type":"text","id":"tab_three_name","label":"Tab name"},
+        {"type":"collection","id":"tab_three_collection","label":"Tab collection"},  
+    {"type":"header","content":"Tab four"}, 
+        {"type":"text","id":"tab_four_name","label":"Tab name"},
+        {"type":"collection","id":"tab_four_collection","label":"Tab collection"},  
+    {"type":"header","content":"Tab five"}, 
+        {"type":"text","id":"tab_five_name","label":"Tab name"},
+        {"type":"collection","id":"tab_five_collection","label":"Tab collection"},
+    {"type":"header","content":"Tab six"}, 
+        {"type":"text","id":"tab_six_name","label":"Tab name"},
+        {"type":"collection","id":"tab_six_collection","label":"Tab collection"},
+    {"type":"header","content":"Tab seven"}, 
+        {"type":"text","id":"tab_seven_name","label":"Tab name"},
+        {"type":"collection","id":"tab_seven_collection","label":"Tab collection"},  
+    {"type":"header","content":"Button"},  
+        {"type":"text","id":"button_text","label":"Button text"}
+]}],"presets":[{"name":"RQ multi tab viewed"}],"templates":["index"]}
+{% endschema %}
+{% capture RqMultitabviewed %}{%- liquid
+    assign smtvs = section.settings
+    assign heading = smtvs.heading
+    assign smtvBk = section.blocks
+    assign loadMode = "jsLazy"
+    assign limitview = 50
+    %}
+<div class="RQ-multtabMnWrapper" section="RQ-multi-tab-viewed">
+  <div class="RQ-multtabWidthWrapper">     
+    {%- if heading != blank -%}<div class="RQ-multtab-hd-ds">
+      {%- if heading != blank -%}<div class="RQ-multtab-hd">{{ heading }}</div>{%- endif -%}
+    </div>{%- endif -%}
+    <div class="RQ-tabStrutureVilter">
+      <div class="RQ-tabManNav">
+        <ul class="RQ-tabMnInnerEx">
+          {%- for bk in smtvBk -%}
+            {%- liquid
+                assign bKs = bk.settings
+                assign maintab = bKs.main_tab_name
+              -%}              
+            {%- if maintab != blank -%}<li class="MainTabViewerRQ Rq-indexTab-{{ forloop.index }} {% if forloop.index == 1 %} active {% endif %}" indexmn="{{ forloop.index }}" Jsmaintabexecution><span class="MainTabViewerRQHead">{{ maintab }}</span></li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="RQ-pds-mg-bkMnRW">
+        {%- for bk in smtvBk -%}
+          {%- liquid
+              assign bKs = bk.settings
+              assign maintabdescription = bKs.tab_description_main
+              assign tabone = bKs.tab_one_name
+              assign tabonecollection = bKs.tab_one_collection
+              assign tabtwo = bKs.tab_two_name
+              assign tabtwocollection = bKs.tab_two_collection 
+              assign tabthree = bKs.tab_three_name
+              assign tabthreecollection = bKs.tab_three_collection 
+              assign tabfour = bKs.tab_four_name
+              assign tabfourcollection = bKs.tab_four_collection  
+              assign tabfive = bKs.tab_five_name
+              assign tabfivecollection = bKs.tab_five_collection   
+              assign tabsix = bKs.tab_six_name
+              assign tabsixcollection = bKs.tab_six_collection
+              assign tabseven = bKs.tab_seven_name
+              assign tabsevencollection = bKs.tab_seven_collection             
+              assign button = bKs.button_text
+            -%} 
+          <div class="RQSubtabStructureViewer {% if forloop.first %}active{% endif %}">
+            {%- if maintabdescription != blank -%}<div class="DescritionTabviewRq">{{ maintabdescription }}</div>{%- endif -%}
+            <div class="RQInnerTabViewerCt">
+              <ul class="RQ-tabMnInnerExRn">
+                  {%- if tabone != blank -%}<li class="cptabRq active" tabname="{{ tabone | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabone }}</span></li>{%- endif -%}
+                  {%- if tabtwo != blank -%}<li class="cptabRq" tabname="{{ tabtwo | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabtwo }}</span></li>{%- endif -%}
+                  {%- if tabthree != blank -%}<li class="cptabRq" tabname="{{ tabthree | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabthree }}</span></li>{%- endif -%}
+                  {%- if tabfour != blank -%}<li class="cptabRq" tabname="{{ tabfour | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabfour }}</span></li>{%- endif -%}
+                  {%- if tabfive != blank -%}<li class="cptabRq" tabname="{{ tabfive | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabfive }}</span></li>{%- endif -%}
+                  {%- if tabsix != blank -%}<li class="cptabRq" tabname="{{ tabsix | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabsix }}</span></li>{%- endif -%}
+                  {%- if tabseven != blank -%}<li class="cptabRq" tabname="{{ tabseven | handleize }}" Jssubmaintabs><span class="cptabRqHead">{{ tabseven }}</span></li>{%- endif -%}
+              </ul>
+            </div>
+            <div class="RQHoldinnerTabCollection">
+              {%- comment -%} TAB ONE COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow active"  tabcontains="{{ tabone | handleize }}"><div class="TabbingContentEztar RqTabOneContentRw swiper-wrapper">
+                {%- for pd in tabonecollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button> -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>
+              {%- comment -%} TAB ONE END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB TWO COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabtwo | handleize }}"><div class="TabbingContentEztar RqTabTwoContentRw swiper-wrapper">
+                {%- for pd in tabtwocollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>   -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>
+              {%- comment -%} TAB TWO END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB THREE COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabthree | handleize }}"><div class="TabbingContentEztar RqTabThreeContentRw swiper-wrapper">
+                {%- for pd in tabthreecollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>  -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>
+              {%- comment -%} TAB THREE END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB FOUR COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabfour | handleize }}"><div class="TabbingContentEztar RqTabfourContentRw swiper-wrapper">
+                {%- for pd in tabfourcollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>   -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>
+              {%- comment -%} TAB FOUR END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB FIVE COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabfive | handleize }}"><div class="TabbingContentEztar RqTabfiveContentRw swiper-wrapper">
+                {%- for pd in tabfivecollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>  -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>
+              {%- comment -%} TAB FIVE END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB SIX COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabsix | handleize }}"><div class="TabbingContentEztar RqTabsixContentRw swiper-wrapper">
+                {%- for pd in tabsixcollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>  -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>              
+              {%- comment -%} TAB SIX END COLLECTION {%- endcomment -%}
+              {%- comment -%} TAB SEVEN COLLECTION {%- endcomment -%}
+              <div class="swiper mySwiper Rqmultitabslideshow" tabcontains="{{ tabseven | handleize }}"><div class="TabbingContentEztar RqTabsixContentRw swiper-wrapper">
+                {%- for pd in tabsevencollection.products limit:limitview -%}
+                  {% unless pd.handle contains 'v1' %}
+                  <div class="CollectionRqDataWp swiper-slide"><div class="CollectionRqDataInner">
+                    <a href="{{ pd.url }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+                      <div class="spd-img-wrapper">
+                      {%- liquid 
+                        if pd.featured_image != blank
+                        assign imgWidth = "400" | abs
+                        assign image = pd.featured_image
+                        assign classes = 'img-primary img-all'
+                        assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                        if imgWidth == blank
+                        assign imgWidth = image.width
+                        endif
+                        assign imgUrl = image | image_url: width: imgWidth
+                        assign imgFit = "contain" | prepend: 'fit-'
+                        assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                        endif
+                    -%}
+                      <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+                  <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pd.id}}" data-swaction="addToWishlist" data-product-id="{{pd.id | json}}" data-variant-id="{{pd.variants[0].id}}" data-product-url="{{ shop.url }}{{ pd.url }}"></button>    -->
+                  </div>
+                    </spd-img></a>
+                    <div class="CmbbtRqDt">
+                      {%- capture discount -%}
+                      {%- assign DiscountComparePrice = pd.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+                      {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+                      {%- assign DiscountPrice = pd.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+                      {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+                      {%- endcapture -%}
+                      {%- if pd.title != blank -%}<a href="{{ pd.url }}"><div class="RQ-fdc-bk-title">{{ pd.title }}</div></a>{%- endif -%}
+                      <div class="cmbpriceCb">{% if pd.compare_at_price > pd.price %}<span class="cmbcpprc">{{ pd.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pd.price | money }}</span> {% if pd.selected_or_first_available_variant.compare_at_price > pd.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pd.id }}"
+                        data-product-sku="{{ pd.handle }}" data-product-title="{{pd.title}}"
+                        data-product-type="{{pd.type}}" style="display: block;">
+                      </span>                  
+                      {%- if button != blank -%}<div class="RQ-fdc-bk-btn"><a href="{{ pd.url }}">{{ button }}</a></div>{%- endif -%}
+                    </div>
+                  </div></div>
+                    {% endunless %}
+                {%- endfor -%}
+              </div><div class="swiper-button-next arrsdnxt NextButtonSlideshowmt"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowmt"></div> <div class="swiper-pagination paginationSlideshowbannermt"></div></div>              
+              {%- comment -%} TAB SEVEN END COLLECTION {%- endcomment -%}          
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>      
+    </div>
+  </div>
+</div>{% endcapture %}{{ RqMultitabviewed | strip_newlines }}

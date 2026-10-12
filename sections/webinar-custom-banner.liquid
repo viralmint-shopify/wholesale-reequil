@@ -1,0 +1,93 @@
+ {% if  section.settings.image != blank or section.settings.heading != blank or  section.settings.subheading != blank or  section.settings.subheading2 != blank  %}
+<div class="webinar-page_banner">
+  <div class="banner_inner_main">
+    <div class="webinar-banner-text-wrapper">
+       {% if  section.settings.heading != blank or  section.settings.subheading != blank or  section.settings.subheading2 != blank %}
+      <div class="banner-right_side-content">
+        {% if  section.settings.heading != blank %}
+        <div class="webinar-banner-heading">
+          {{ section.settings.heading }}
+        </div>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+        <div class="banner-subheading">
+          {{ section.settings.subheading }}
+        </div>
+        {% endif %}
+                {% if section.settings.subheading2 != blank %}
+        <div class="banner-content_bottom">
+          {{ section.settings.subheading2 }}
+        </div>
+        {% endif %}
+        {% if section.settings.time_date != blank %}
+        <div class="banner-date_time_wrapper">
+          <p>{{ section.settings.time_date }}</p>
+        </div>
+        {% endif %}
+        
+      </div>
+      {% endif %}
+         {% if section.settings.image != blank %}
+      <div class="banner-image_main">
+        <div class="banner-main-left-image">
+          <img src="{{ section.settings.image | img_url:'master' }}">
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+   {% if section.settings.about_text != blank %}
+  <div class="bottom_section_about">
+    {{ section.settings.about_text }}
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Webinar Banner",
+    "settings": [
+              {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+                    {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading"
+        },
+                          {
+          "type": "richtext",
+          "id": "subheading",
+          "label": "Sub Heading"
+        },
+                                {
+          "type": "richtext",
+          "id": "subheading2",
+          "label": "Session Text"
+        },
+       {
+          "type": "text",
+          "id": "time_date",
+          "label": "Date Time"
+        },
+             {
+          "type": "richtext",
+          "id": "about_text",
+          "label": "About Content"
+        }
+    ],
+      "presets": [
+    {
+      "name": "Webinar Banner"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

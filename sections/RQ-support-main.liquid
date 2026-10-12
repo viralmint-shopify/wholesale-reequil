@@ -1,0 +1,168 @@
+{% schema %}
+{"name": "RQ support main","tag":"div","class":"RQ-about-page-banner","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading"},
+        {"type":"textarea","id":"description","label":"Description"},
+    {"type":"header","content":"Track your order"},
+        {"type":"textarea","id":"track_order_svgicon","label":"Svg Icon"},  
+        {"type":"text","id":"track_order_heading","label":"Heading"},
+        {"type":"textarea","id":"track_order_description","label":"Description"},
+        {"type":"text","id":"track_order_button","label":"Button"},
+        {"type":"url","id":"track_order_link","label":"Link"}, 
+    {"type":"header","content":"Raise Support Ticket"},
+        {"type":"textarea","id":"raise_support_svgicon","label":"Svg Icon"},  
+        {"type":"text","id":"raise_support_heading","label":"Heading"},
+        {"type":"textarea","id":"raise_support_description","label":"Description"},
+        {"type":"text","id":"raise_support_button","label":"Button"}  
+]}
+{% endschema %}
+{% capture RQSupportPageMain %}{%- liquid
+    assign sSSt = section.settings
+    assign heading = sSSt.heading
+    assign description = sSSt.description
+    assign TrackOrdersvgicon = sSSt.track_order_svgicon
+    assign TrackOrderheading = sSSt.track_order_heading
+    assign TrackOrderdescription = sSSt.track_order_description   
+    assign TrackOrderbutton = sSSt.track_order_button
+    assign TrackOrderlink = sSSt.track_order_link
+    assign RaiseTicketsvgicon = sSSt.raise_support_svgicon
+    assign RaiseTicketheading = sSSt.raise_support_heading
+    assign RaiseTicketdescription = sSSt.raise_support_description   
+    assign RaiseTicketbutton = sSSt.raise_support_button    
+    %}
+<div class="RQ-Support-MainWrapper" section="RQ-support-main"> 
+  <div class="rqSupportWrap">
+    {%- if heading != blank or description != blank -%}<div class="rqSupHeading">
+      {%- if heading != blank -%}<h2>{{ heading }}</h2>{%- endif -%}
+      {%- if description != blank -%}<p>{{ description }}</p>{%- endif -%}
+    </div>{%- endif -%}
+    <div class="rqSupTrackSec">
+      <div class="rqSupTrackItem">
+        <div class="rqSupTrackItemInner">
+          <div class="rqTracktopHead">
+            {%- if TrackOrdersvgicon != blank -%}<span class="rqTrackIcon">
+              {{ TrackOrdersvgicon }}
+            </span>{%- endif -%}
+            {%- if TrackOrderheading != blank -%}<h2>{{ TrackOrderheading }}</h2>{%- endif -%}
+            {%- if TrackOrderdescription != blank -%}<p>{{ TrackOrderdescription }}</p>{%- endif -%}
+          </div>
+          <div class="rqTrackField">
+            <input type="text" placeholder="Email/Phone number">
+            {%- if TrackOrderbutton != blank -%}<div class="trackBtn">
+              <a href="{{ TrackOrderlink | default:'#' }}">{{ TrackOrderbutton }}</a>
+            </div>{%- endif -%}
+          </div>
+        </div>
+      </div>
+      <div class="rqSupTrackItem rasise_ticker_sec">
+        <div class="rqSupTrackItemInner">
+          <div class="rqTracktopHead">
+            {%- if RaiseTicketsvgicon != blank -%}<span class="rqTrackIcon">
+              {{ RaiseTicketsvgicon }}
+            </span>{%- endif -%}
+            {%- if heading != blank -%}<h2>{{ RaiseTicketheading }}</h2>{%- endif -%}
+            {%- if description != blank -%}<p>{{ RaiseTicketdescription }}</p>{%- endif -%}
+          </div>
+          <div class="rqTrackField">
+            {%- if RaiseTicketbutton != blank -%}<div class="trackBtn">
+              <a href="#launcher-frame" js-raise-ticket>{{ RaiseTicketbutton }}</a>
+            </div>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{%- endcapture -%}{{ RQSupportPageMain | strip_newlines }}
+
+{% capture RQSupportPagePopupContent %}<div class="RqSupportPagePopUpModal">
+  <div class="RqSupportPopupBriefWrap">
+    <div class="CrossSupportpopup" js-crossraisedpopup>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z" fill="#333333"/><path d="M9.16937 15.58C8.97937 15.58 8.78938 15.51 8.63938 15.36C8.34938 15.07 8.34938 14.59 8.63938 14.3L14.2994 8.63999C14.5894 8.34999 15.0694 8.34999 15.3594 8.63999C15.6494 8.92999 15.6494 9.40998 15.3594 9.69998L9.69937 15.36C9.55937 15.51 9.35937 15.58 9.16937 15.58Z" fill="#333333"/><path d="M14.8294 15.58C14.6394 15.58 14.4494 15.51 14.2994 15.36L8.63938 9.69998C8.34938 9.40998 8.34938 8.92999 8.63938 8.63999C8.92937 8.34999 9.40937 8.34999 9.69937 8.63999L15.3594 14.3C15.6494 14.59 15.6494 15.07 15.3594 15.36C15.2094 15.51 15.0194 15.58 14.8294 15.58Z" fill="#333333"/></svg>
+    </div>
+    <div class="RQSupportMainContentWrap">
+      <div class="RqHeadingSvgIconWp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5396 21.94C10.3096 21.94 10.0895 21.84 9.93954 21.64L8.92953 20.29C8.71953 20.01 8.43956 19.85 8.13956 19.83C7.82956 19.81 7.53953 19.95 7.29953 20.2C5.84953 21.75 4.74954 21.62 4.21954 21.42C3.67954 21.21 2.76953 20.52 2.76953 18.3V7.04001C2.76953 2.60001 4.04953 1.25 8.23953 1.25H15.7896C19.9796 1.25 21.2596 2.60001 21.2596 7.04001V11.3C21.2596 11.71 20.9196 12.05 20.5096 12.05C20.0996 12.05 19.7596 11.71 19.7596 11.3V7.04001C19.7596 3.43001 19.1296 2.75 15.7896 2.75H8.23953C4.89953 2.75 4.26953 3.43001 4.26953 7.04001V18.3C4.26953 19.35 4.52953 19.93 4.76953 20.02C4.94953 20.09 5.43955 19.99 6.19955 19.18C6.74955 18.6 7.46954 18.29 8.21954 18.33C8.95954 18.37 9.65955 18.76 10.1295 19.39L11.1495 20.74C11.3995 21.07 11.3295 21.54 10.9995 21.79C10.8495 21.9 10.6896 21.94 10.5396 21.94Z" fill="#292D32"/><path d="M16 7.75H8C7.59 7.75 7.25 7.41 7.25 7C7.25 6.59 7.59 6.25 8 6.25H16C16.41 6.25 16.75 6.59 16.75 7C16.75 7.41 16.41 7.75 16 7.75Z" fill="#292D32"/><path d="M15 11.75H9C8.59 11.75 8.25 11.41 8.25 11C8.25 10.59 8.59 10.25 9 10.25H15C15.41 10.25 15.75 10.59 15.75 11C15.75 11.41 15.41 11.75 15 11.75Z" fill="#292D32"/><path d="M14.8196 21.78C14.4396 21.78 14.0796 21.64 13.8196 21.38C13.5096 21.07 13.3696 20.62 13.4396 20.15L13.6296 18.8C13.6796 18.45 13.8896 18.03 14.1396 17.78L17.6796 14.24C18.1596 13.76 18.6296 13.51 19.1396 13.46C19.7596 13.4 20.3796 13.66 20.9596 14.24C21.5396 14.82 21.7996 15.43 21.7396 16.06C21.6896 16.56 21.4296 17.04 20.9596 17.52L17.4196 21.06C17.1696 21.31 16.7496 21.52 16.3996 21.57L15.0495 21.76C14.9695 21.77 14.8996 21.78 14.8196 21.78ZM19.3096 14.95C19.2996 14.95 19.2896 14.95 19.2796 14.95C19.1396 14.96 18.9496 15.09 18.7396 15.3L15.1996 18.84C15.1696 18.87 15.1196 18.97 15.1196 19.01L14.9396 20.26L16.1896 20.08C16.2296 20.07 16.3295 20.02 16.3595 19.99L19.8996 16.45C20.1096 16.23 20.2396 16.05 20.2496 15.91C20.2696 15.71 20.0696 15.47 19.8996 15.3C19.7396 15.14 19.5096 14.95 19.3096 14.95Z" fill="#292D32"/><path d="M19.9206 18.2499C19.8506 18.2499 19.7806 18.2399 19.7206 18.2199C18.4006 17.8499 17.3506 16.7999 16.9806 15.4799C16.8706 15.0799 17.1006 14.6699 17.5006 14.5499C17.9006 14.4399 18.3106 14.6699 18.4206 15.0699C18.6506 15.8899 19.3006 16.5399 20.1206 16.7699C20.5206 16.8799 20.7506 17.2999 20.6406 17.6999C20.5506 18.0299 20.2506 18.2499 19.9206 18.2499Z" fill="#292D32"/></svg>
+      </div>
+      <div class="RaiseTicketPopupHd">
+        <div class="hdwpmn">Raise a ticket</div>
+        <div class="dswpmn">Please share following details and we will get back to you within 24 business hours.</div>
+      </div>
+      <div class="RaiseTicketContactusFormWp">
+        <div class="ContactPageIntializeWp">
+          {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="GIFDecorateRaised"><img data-src="//cdn.shopify.com/s/files/1/0306/6262/3364/files/check-gif3.gif?v=1681389523" class="lazyload"></div>
+              <div class="SuceesfullymessageAppear"><div class="TicketRiasedhd">Ticket raised</div>
+              <div class="MessageBusinessHour">We will get back to you within next 24 business hours.</div>
+              <div class="ButtonClosedView" js-crossraisedpopup><span>Close</span></div></div>
+            {%- elsif form.errors -%}
+              <div class="form__message">
+                <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+              </div>
+              <ul class="form-status-list caption-large" role="list">
+                <li>
+                  <a href="#ContactForm-email" class="link">
+                    {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                  </a>
+                </li>
+              </ul>
+            {%- endif -%}
+            <div class="field {% if form.posted_successfully? %} hidden {% endif %}">
+              <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+            </div>
+            <div class="field field--with-error {% if form.posted_successfully? %} hidden {% endif %}">
+              <input
+                autocomplete="email"
+                type="email"
+                id="ContactForm-email"
+                class="field__input"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+              >
+              <label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }}</label>
+              {%- if form.errors contains 'email' -%}
+                <small class="contact__field-error" id="ContactForm-email-error">
+                  <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                  <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+                </small>
+              {%- endif -%}
+            </div>
+            <div class="field {% if form.posted_successfully? %} hidden {% endif %}">
+              <select class="SelectedConcerndView" name="contact[Concern]" id="ContactForm-concern">
+                <option value="">Concern</option>
+                <option value="Product Information">Product Information</option>
+                <option value="Order Tracking">Order Tracking</option>
+                <option value="Online Payment Information">Online Payment Information</option>
+                <option value="Cancel My Order">Cancel My Order</option>
+                <option value="Request POD">Request POD</option>                
+              </select>
+              <label class="field__label" for="ContactForm-concern">Concern</label>
+            </div>           
+            <div class="field {% if form.posted_successfully? %} hidden {% endif %}">
+              <textarea
+                rows="10"
+                id="ContactForm-body"
+                class="text-area field__input"
+                name="contact[{{ 'templates.contact.form.comment' | t }}]"
+              >
+                {{- form.body -}}
+              </textarea>
+              <label class="field__label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+            </div>
+            <div class="contact__button {% if form.posted_successfully? %} hidden {% endif %}">
+              <button type="submit" class="button">raise ticket</button>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{%- endcapture -%}{{ RQSupportPagePopupContent | strip_newlines }}

@@ -1,0 +1,64 @@
+{% if settings.newYearPop == true %}
+  {% if section.settings.popp_image != blank or section.settings.heading != blank %}
+    <div class="cv_custom-popup_main">
+      <div class="cv_popup_inner">
+        <div class="cross_icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="pop-close_icon">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8329 3.201C20.9581 3.07591 21.0575 2.92737 21.1253 2.76387C21.1932 2.60036 21.2282 2.4251 21.2283 2.24808C21.2284 2.07106 21.1936 1.89575 21.126 1.73216C21.0583 1.56858 20.9591 1.41992 20.834 1.29467C20.7089 1.16942 20.5604 1.07004 20.3969 1.00219C20.2334 0.934349 20.0581 0.899375 19.8811 0.899266C19.7041 0.899157 19.5288 0.933916 19.3652 1.00156C19.2016 1.0692 19.0529 1.1684 18.9277 1.29349L10.7985 9.42266L2.67171 1.29349C2.41875 1.04054 2.07568 0.898437 1.71795 0.898438C1.36022 0.898438 1.01715 1.04054 0.764198 1.29349C0.511247 1.54645 0.369141 1.88952 0.369141 2.24725C0.369141 2.60498 0.511247 2.94805 0.764198 3.201L8.89337 11.3278L0.764198 19.4547C0.638949 19.5799 0.539597 19.7286 0.471813 19.8922C0.404028 20.0559 0.369141 20.2313 0.369141 20.4084C0.369141 20.5855 0.404028 20.7609 0.471813 20.9246C0.539597 21.0882 0.638949 21.2369 0.764198 21.3622C1.01715 21.6151 1.36022 21.7572 1.71795 21.7572C1.89508 21.7572 2.07047 21.7223 2.23412 21.6545C2.39776 21.5868 2.54646 21.4874 2.67171 21.3622L10.7985 13.233L18.9277 21.3622C19.1806 21.6148 19.5236 21.7566 19.8811 21.7564C20.2386 21.7562 20.5814 21.6139 20.834 21.361C21.0867 21.108 21.2285 20.7651 21.2283 20.4076C21.228 20.0501 21.0858 19.7073 20.8329 19.4547L12.7037 11.3278L20.8329 3.201Z" fill="black"/>
+          </svg>
+        </div>
+        {% if section.settings.heading != blank %}
+          <div class="popup_imae_wrapper">
+            <div class="cv_poup_image">{{ section.settings.heading }}</div>
+          </div>  
+        {% endif %}
+        {% if section.settings.popp_image != blank %}
+          <div class="animationMNInit">
+            {% for i in (1..20) %}
+              <div class="AnimateMediaMN">{{ section.settings.popp_image | image_url : width : section.settings.popp_image.width | image_tag }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  
+  <script>
+    $(document).ready(function(){
+      if(typeof $.cookie('newYearPop') == 'undefined'){
+        setTimeout(function () {
+          $('.cv_custom-popup_main').addClass('active_newYEar');
+          $('body').addClass('newYearPop')
+          if($('.cv_custom-popup_main').hasClass('active_newYEar')){
+            $.cookie('newYearPop', 'true');
+          }
+        }, 3000);
+      }
+      $(document).on('click','svg.pop-close_icon',function(){
+        $('.cv_custom-popup_main').removeClass('active_newYEar');
+        $('body').removeClass('newYearPop')
+      });
+    });
+  </script>
+{% endif %}
+{% schema %}
+{
+  "name": "RQ-Popup-page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type":"image_picker",
+      "id":"popp_image",
+      "label":"Popup_Image"
+    },
+    {
+      "type":"textarea",
+      "id":"heading",
+      "label":"Popup_Heading"
+    }
+    
+  ],
+  "presets":[{"name":"RQ-Popup-page"}]
+}
+{% endschema %}

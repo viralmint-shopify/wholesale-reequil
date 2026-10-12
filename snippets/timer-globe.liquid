@@ -1,0 +1,43 @@
+{% comment %} <a href="https://www.dotandkey.com/collections/shop-all"> {% endcomment %}
+  <div class="timerGlobe" id="timeGlobe" snippet="timer-globe"{% if settings.time_stamp != blank %} time="{{ settings.time_stamp }}"{% endif %}>
+    {% if settings.timer_txt !=blank %}<div class="timer-head desk-desk"><span>{{ settings.timer_txt }}</span></div>{% endif %}
+    <div class="timer-wrap">
+      <div class="outer-block">
+        <div class="block-timer" id="days"></div>
+        <div class="block-timer" id="hours"></div>
+        <div class="block-timer" id="minutes"></div>
+        <div class="block-timer" id="seconds"></div>
+      </div>
+    </div>
+  </div>
+{% comment %} </a> {% endcomment %}
+
+<script>
+  // Set the date we're counting down to
+  var timeStamp = document.getElementById('timeGlobe').getAttribute('time')
+  if(timeStamp){ var countDownDate = new Date(timeStamp).getTime(); }
+
+  // Update the count down every 1 second
+  var x = setInterval(function () {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    if(days != 0 || days < 0){document.getElementById("days").style.display = 'block', document.getElementById("days").innerHTML = days+'D'}else{document.getElementById("days").style.display = 'none'};
+    if(hours != 0 || hours < 0){document.getElementById("hours").style.display = 'block', document.getElementById("hours").innerHTML = hours+'H'}else{document.getElementById("hours").style.display = 'none'};
+    if(minutes != 0 || minutes < 0){document.getElementById("minutes").style.display = 'block', document.getElementById("minutes").innerHTML = minutes+'M'}else{document.getElementById("minutes").style.display = 'none'};
+    if(seconds != 0 || seconds < 0){document.getElementById("seconds").style.display = 'block', document.getElementById("seconds").innerHTML = seconds+'S'}else{document.getElementById("seconds").style.display = 'none'};
+    // If the count down is finished, write some text
+
+  }, 1000);
+</script>

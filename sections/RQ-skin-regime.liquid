@@ -1,0 +1,122 @@
+{% schema %}
+  {
+    "name": "RQ-skin-regime",
+    "settings": [
+      {"type":"text","id":"heading","label":"Heading"},
+      {"type":"text","id":"tab_1","label":"Tab 1"},
+      {"type":"text","id":"tab_2","label":"Tab 2"},
+      {"type":"text","id":"tab_3","label":"Tab 3"},
+      {"type":"text","id":"tab_4","label":"Tab 4"},
+      {"type":"text","id":"tab_5","label":"Tab 5"},
+      {"type":"text","id":"tab_6","label":"Tab 6"}
+    ],
+    "blocks":[
+      {"name":"Item","type":"Item","limit":6,
+        "settings":[
+          {"type":"select","id":"products_list","label":"List Type",
+            "options":[
+              {"value":"collection","label":"Collection"},
+              {"value":"productList","label":"Product List"}
+            ]
+          },
+          {"type":"checkbox","id":"show_AtcPrice","label":"Show ATC Price"},
+          {"type":"collection","id":"collection","label":"Collection"},
+          {"type":"product_list","id":"products","label":"Products"}
+        ]
+      }
+    ],
+    "presets":[{"name": "RQ-skin-regime"}]
+  }
+{% endschema %}
+
+<div class="RQ_SkinRegimeMN" section="RQ-skin-regime">
+  <div class="RQ_SkinRegimeWrpr">
+    {% if section.settings.heading != blank %}
+      <div class="RQ_SkinRegimeHeader">
+        <div class="RQ_SkinRegimeHeading">{{ section.settings.heading }}</div>
+        {% comment %}<span class="RQ_SkinRegimeHeadImg show_mb"><img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/Group_144668e1-5e94-4443-b0fd-80534d9ead09.png?v=1705325525"></span>{% endcomment %}
+      </div>
+    {% endif %}
+    {% if section.settings.tab_1 != blank or section.settings.tab_2 != blank or section.settings.tab_3 != blank or section.settings.tab_4 != blank or section.settings.tab_5 != blank or section.settings.tab_6 != blank %}
+      <div class="RQ_SkinRegimeTabsMN">
+        <div class="RQ_SkinRegimeTabsWrpr">
+          {% if section.settings.tab_1 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_1 != blank %} {{ section.settings.tab_1 | handle }}{% endif %} activeTab">
+              <a href="#{{ section.settings.tab_1 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_1 }}</a>
+            </div>
+          {% endif %}
+          {% if section.settings.tab_2 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_2 != blank %} {{ section.settings.tab_2 | handle }}{% endif %}">
+              <a href="#{{ section.settings.tab_2 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_2 }}</a>
+            </div>
+          {% endif %}
+          {% if section.settings.tab_3 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_3 != blank %} {{ section.settings.tab_3 | handle }}{% endif %}">
+              <a href="#{{ section.settings.tab_3 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_3 }}</a>
+            </div>
+          {% endif %}
+          {% if section.settings.tab_4 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_4 != blank %} {{ section.settings.tab_4 | handle }}{% endif %}">
+              <a href="#{{ section.settings.tab_4 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_4 }}</a>
+            </div>
+          {% endif %}
+          {% if section.settings.tab_5 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_5 != blank %} {{ section.settings.tab_5 | handle }}{% endif %}">
+              <a href="#{{ section.settings.tab_5 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_5 }}</a>
+            </div>
+          {% endif %}
+          {% if section.settings.tab_6 != blank %}
+            <div class="RQ_SkinRegimeTab{% if section.settings.tab_6 != blank %} {{ section.settings.tab_6 | handle }}{% endif %}">
+              <a href="#{{ section.settings.tab_6 | handle }}" JSTabTargetHmInit>{{ section.settings.tab_6 }}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    {% if section.blocks.size %}
+      <div class="RQ_SkinRgmTabCntMN">
+        <div class="RQ_SkinRgmTabCntWrpr">
+          {% for block in section.blocks %}
+            {% liquid
+              assign collection = block.settings.collection
+              assign products = block.settings.products
+              assign show_AtcPrice = false
+              if block.settings.show_AtcPrice == true
+                assign show_AtcPrice = true
+              endif
+            %}
+            {% if block.settings.products_list == 'collection' %}
+              {% if collection.size > 0 %}
+                <div class="RQ_SkinRgmTabCntItemMN swiper mySwiper{% if forloop.first %} activeProducts{% endif %}"
+                  id="{% if forloop.index == 1 %}#{{ section.settings.tab_1 | handle }}{% elsif forloop.index == 2 %}#{{ section.settings.tab_2 | handle }}{% elsif forloop.index == 3 %}#{{ section.settings.tab_3 | handle }}{% elsif forloop.index == 4 %}#{{ section.settings.tab_4 | handle }}{% elsif forloop.index == 5 %}#{{ section.settings.tab_5 | handle }}{% elsif forloop.index == 6 %}#{{ section.settings.tab_6 | handle }}{% endif %}"
+                >
+                  <div class="RQ_SkinRgmTabCntItemWrpr swiper-wrapper">
+                    {% for product in collection.products %}
+                      {% render 'tab_cardPd', product : product, show_AtcPrice : show_AtcPrice %}
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            {% elsif block.settings.products_list == 'productList' %}
+              {% if products != blank %}
+                <div class="RQ_SkinRgmTabCntItemMN swiper mySwiper{% if forloop.first %} activeProducts{% endif %}"
+                  id="{% if forloop.index == 1 %}#{{ section.settings.tab_1 | handle }}{% elsif forloop.index == 2 %}#{{ section.settings.tab_2 | handle }}{% elsif forloop.index == 3 %}#{{ section.settings.tab_3 | handle }}{% elsif forloop.index == 4 %}#{{ section.settings.tab_4 | handle }}{% elsif forloop.index == 5 %}#{{ section.settings.tab_5 | handle }}{% elsif forloop.index == 6 %}#{{ section.settings.tab_6 | handle }}{% endif %}"
+                >
+                  <div class="RQ_SkinRgmTabCntItemWrpr swiper-wrapper">
+                    {% for product in products %}
+                      {% render 'tab_cardPd', product : product, show_AtcPrice : show_AtcPrice %}
+                    {% endfor %}
+                  </div>
+                  <div class="RQ_SkinRgmNavigate">
+                    <div class="swiper-button-prev show_des RQSwiperRgmNav">{% render 'icon_RQCarouselPrev' %}</div>
+                    <div class="swiper-button-next show_des RQSwiperRgmNav">{% render 'icon_RQCarouselNext' %}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

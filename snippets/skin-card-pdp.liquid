@@ -1,0 +1,441 @@
+{% if cleanse != blank or treat != blank or condition != blank %}
+  <div class="custom_step-tabs_wrapp">
+   {% if section.settings.skin_heading != blank %}
+   <div class="custom-heading"><h2 >{{ section.settings.skin_heading }}</h2></div>
+     {% endif %}
+        <div class="steps_dsktop_tabs">
+
+   {% if cleanse != blank %}
+              <div class="innner_tabs_rpeater" data-handle="cleanse" style="border:1px solid; border-color:#4379BB; background-color:#4379BB;">
+             
+                       <h2 data-color="#fff" data-background="#4379BB" style="color:#fff">Step 1:  Cleanse</h2>
+             
+                      </div>
+             {% endif %}
+             {% if  tone != blank %}
+                <div class="innner_tabs_rpeater" data-handle="tone"  style="border:1px solid; border-color:#82BF41;">
+                      <h2 data-color="#fff" data-background="#82BF41">Step 2:  Tone</h2>
+                </div>
+                {% endif %}
+    {% if  treat != blank %}
+                <div class="innner_tabs_rpeater" data-handle="treat" style="border:1px solid; border-color:#FBF032;">
+                      <h2 data-color="#000" data-background="#FBF032">Step 3:  Treat</h2>
+                </div>
+                {% endif %}
+
+
+
+             {% if moisturise != blank %}
+                  <div class="innner_tabs_rpeater" data-handle="moisturise" style="border:1px solid; border-color:#E61D7F;">
+                    <h2 data-color="#fff" data-background="#E61D7F">Step 4:  Moisturise</h2>
+                  </div>
+                {% endif %}
+               {% if protect != blank %}
+                  <div class="innner_tabs_rpeater" data-handle="protect" style="border:1px solid; border-color:#F9B72F;">
+                    <h2 data-color="#fff" data-background="#F9B72F">Step 5:  Protect</h2>
+                  </div>
+                {% endif %}
+</div>
+  </div>
+
+
+
+
+  <div class="accordion_pdp_wrapper RQ-productBestPairedMnWp">
+     <div class="RQ-featcollWidthWrapper">
+   <div class="accordion_pdp_inner">
+<!-- First---------- -->
+
+{% if cleanse != blank %}
+              <div  class="product__accordion_custom accordion quick-add-hidden customCollapsTab-1"  data-handle="cleanse">
+                <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                  <summary class="for-mobile for-desktop">
+                    <div class="summary__title" style="border:1px solid; border-color:#4379BB; background-color:#4379BB;">
+                      <h2 class="h4 accordion__title" style="color:#fff">
+                       Step 1:  Cleanse   
+                      </h2>
+             <div class="already_selected_message" style="display:none;">Already Selected</div>
+                    </div>
+                  </summary>
+             {%- liquid
+    assign loadMode = "jsViewport"
+    %}
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+             <div class="swiper mySwiper custom_accordian_product_slider"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+                {% for recommendation in cleanse.value %}
+                  {%- liquid
+            assign title = recommendation.title
+            assign image = recommendation.featured_image
+            assign url = recommendation.url
+          -%}     
+          <div class="RQ-fdcBlockEach swiper-slide" data-pro-id="{{ recommendation.selected_or_first_available_variant.id }}">
+            <div class="RQ-fdcBlockEachInner">
+            <a href="{{ url | split:'?pr' | first }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "800" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              </div>
+              {% comment %}
+                   <div class="products_rating  {% if recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">{% unless recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}{{ recommendation.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">{{ recommendation.metafields.stamped.reviews_count }}</span>{% endunless %}{% if recommendation.tags contains 'Badge_New' or recommendation.tags contains 'badge_new' or recommendation.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+</div>
+                  {% endcomment %}
+            </spd-img></a>
+                
+            <div class="CmbbtRqDt">{%- if title != blank -%}<a href="{{ url | split:'?pr' | first }}"><div class="RQ-fdc-bk-title">{{ title }}</div></a>{%- endif -%}
+                 {% if recommendation.metafields.custom.product_highlights_updated != blank %}
+            <div class="sub_title"><p> {% for highlights in recommendation.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+              {% endif %}
+                {% render 'new-quick-add', card_product : recommendation %}
+             
+              </div>
+            </div>
+          </div>
+                  {% endfor %}
+</div>
+             <div class="PaginationWithFractionRecomm">
+<div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div>
+<div class="swiper-pagination paginationFractionWp"></div>
+<div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div>
+</div>
+</div>
+             
+                  </div>
+                </details>
+              </div>
+
+{% endif %}
+
+ 
+
+
+
+
+
+  
+
+<!-- Seecond---------- -->
+
+
+ {% if tone != blank %}
+              <div  class="product__accordion_custom accordion quick-add-hidden customCollapsTab-1"  data-handle="tone"  style="display:none">
+                <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                  <summary class="for-mobile for-desktop">
+                    <div class="summary__title" style="border:1px solid; border-color:#82BF41; background-color:#82BF41;">
+                      <h2 class="h4 accordion__title" style="color:#fff;">
+                       Step 2:  Tone   
+                      </h2>
+             <div class="already_selected_message" style="display:none;">Already Selected</div>
+                    </div>
+                  </summary>
+             {%- liquid
+    assign loadMode = "jsViewport"
+    %}
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+             <div class="swiper mySwiper custom_accordian_product_slider"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+                {% for recommendation in tone.value %}
+                  {%- liquid
+            assign title = recommendation.title
+            assign image = recommendation.featured_image
+            assign url = recommendation.url
+          -%}     
+          <div class="RQ-fdcBlockEach swiper-slide" data-pro-id="{{ recommendation.selected_or_first_available_variant.id }}">
+            <div class="RQ-fdcBlockEachInner">
+            <a href="{{ url | split:'?pr' | first }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "800" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              </div>
+              {% comment %}
+                   <div class="products_rating  {% if recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">{% unless recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}{{ recommendation.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">{{ recommendation.metafields.stamped.reviews_count }}</span>{% endunless %}{% if recommendation.tags contains 'Badge_New' or recommendation.tags contains 'badge_new' or recommendation.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+</div>
+                  {% endcomment %}
+            </spd-img></a>
+                
+            <div class="CmbbtRqDt">{%- if title != blank -%}<a href="{{ url | split:'?pr' | first }}"><div class="RQ-fdc-bk-title">{{ title }}</div></a>{%- endif -%}
+                 {% if recommendation.metafields.custom.product_highlights_updated != blank %}
+            <div class="sub_title"><p> {% for highlights in recommendation.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+              {% endif %}
+                {% render 'new-quick-add', card_product : recommendation %}
+             
+              </div>
+            </div>
+          </div>
+                  {% endfor %}
+</div>
+             <div class="PaginationWithFractionRecomm">
+<div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div>
+<div class="swiper-pagination paginationFractionWp"></div>
+<div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div>
+</div>
+</div>
+             
+                  </div>
+                </details>
+              </div>
+
+{% endif %}
+
+       
+
+  
+     
+<!-- Third----- -->
+
+
+  {% if  treat != blank %}
+<div  class="product__accordion_custom accordion quick-add-hidden customCollapsTab-1"  data-handle="treat" style="display:none">
+                <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                  <summary class="for-mobile for-desktop">
+                    <div class="summary__title" style="border:1px solid; border-color:#FBF032;background-color:#FBF032">
+                      <h2 class="h4 accordion__title"  style="color:#000">
+                       Step 3:  Treat 
+                      </h2>
+             <div class="already_selected_message" style="display:none;">Already Selected</div>
+                    </div>
+                  </summary>
+             {%- liquid
+    assign loadMode = "jsViewport"
+    %}
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+             <div class="swiper mySwiper custom_accordian_product_slider"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+                {% for recommendation in treat.value %}
+                  {%- liquid
+            assign title = recommendation.title
+            assign image = recommendation.featured_image
+            assign url = recommendation.url
+          -%}     
+          <div class="RQ-fdcBlockEach swiper-slide" data-pro-id="{{ recommendation.selected_or_first_available_variant.id }}">
+            <div class="RQ-fdcBlockEachInner">
+            <a href="{{ url | split:'?pr' | first }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "800" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              </div>
+              {% comment %}
+                   <div class="products_rating  {% if recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">{% unless recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}{{ recommendation.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">{{ recommendation.metafields.stamped.reviews_count }}</span>{% endunless %}{% if recommendation.tags contains 'Badge_New' or recommendation.tags contains 'badge_new' or recommendation.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+</div>
+                  {% endcomment %}
+            </spd-img></a>
+                
+            <div class="CmbbtRqDt">{%- if title != blank -%}<a href="{{ url | split:'?pr' | first }}"><div class="RQ-fdc-bk-title">{{ title }}</div></a>{%- endif -%}
+                 {% if recommendation.metafields.custom.product_highlights_updated != blank %}
+            <div class="sub_title"><p> {% for highlights in recommendation.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+              {% endif %}
+                {% render 'new-quick-add', card_product : recommendation %}
+             
+              </div>
+            </div>
+          </div>
+                  {% endfor %}
+</div>
+             <div class="PaginationWithFractionRecomm">
+<div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div>
+<div class="swiper-pagination paginationFractionWp"></div>
+<div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div>
+</div>
+</div>
+             
+                  </div>
+                </details>
+              </div>
+  {% endif %}
+
+    <!-- Fourth------- -->
+  {% if  moisturise != blank %}
+<div  class="product__accordion_custom accordion quick-add-hidden customCollapsTab-1"  data-handle="moisturise" style="display:none">
+                <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                  <summary class="for-mobile for-desktop">
+                    <div class="summary__title" style="border:1px solid; border-color:#E61D7F; background-color:#E61D7F;">
+                      <h2 class="h4 accordion__title" style="color:#fff;" >
+                       Step 4:  Moisturise 
+                      </h2>
+             <div class="already_selected_message" style="display:none;">Already Selected</div>
+                    </div>
+                  </summary>
+             {%- liquid
+    assign loadMode = "jsViewport"
+    %}
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+             <div class="swiper mySwiper custom_accordian_product_slider"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+                {% for recommendation in moisturise.value %}
+                  {%- liquid
+            assign title = recommendation.title
+            assign image = recommendation.featured_image
+            assign url = recommendation.url
+          -%}     
+          <div class="RQ-fdcBlockEach swiper-slide" data-pro-id="{{ recommendation.selected_or_first_available_variant.id }}">
+            <div class="RQ-fdcBlockEachInner">
+            <a href="{{ url | split:'?pr' | first }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "800" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              </div>
+              {% comment %}
+                  <div class="products_rating  {% if recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">{% unless recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}{{ recommendation.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">{{ recommendation.metafields.stamped.reviews_count }}</span>{% endunless %}{% if recommendation.tags contains 'Badge_New' or recommendation.tags contains 'badge_new' or recommendation.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+</div>
+                  {% endcomment %}
+            </spd-img></a>
+                
+            <div class="CmbbtRqDt">{%- if title != blank -%}<a href="{{ url | split:'?pr' | first }}"><div class="RQ-fdc-bk-title">{{ title }}</div></a>{%- endif -%}
+                 {% if recommendation.metafields.custom.product_highlights_updated != blank %}
+            <div class="sub_title"><p> {% for highlights in recommendation.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+              {% endif %}
+                {% render 'new-quick-add', card_product : recommendation %}
+             
+              </div>
+            </div>
+          </div>
+                  {% endfor %}
+</div>
+             <div class="PaginationWithFractionRecomm">
+<div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div>
+<div class="swiper-pagination paginationFractionWp"></div>
+<div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div>
+</div>
+</div>
+             
+                  </div>
+                </details>
+              </div>
+  {% endif %}
+  <!-- Fifth------- -->
+  {% if  protect != blank %}
+<div  class="product__accordion_custom accordion quick-add-hidden customCollapsTab-1"  data-handle="protect" style="display:none">
+                <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                  <summary class="for-mobile for-desktop">
+                    <div class="summary__title" style="border:1px solid; border-color:#F9B72F;background-color:#F9B72F">
+                      <h2 class="h4 accordion__title" style="color:#fff">
+                       Step 5:  Protect 
+                      </h2>
+             <div class="already_selected_message" style="display:none;">Already Selected</div>
+                    </div>
+                  </summary>
+             {%- liquid
+    assign loadMode = "jsViewport"
+    %}
+                  <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+             <div class="swiper mySwiper custom_accordian_product_slider"><div class="RQ-fdc-mg-bkMn swiper-wrapper">
+                {% for recommendation in protect.value %}
+                  {%- liquid
+            assign title = recommendation.title
+            assign image = recommendation.featured_image
+            assign url = recommendation.url
+          -%}     
+          <div class="RQ-fdcBlockEach swiper-slide" data-pro-id="{{ recommendation.selected_or_first_available_variant.id }}">
+            <div class="RQ-fdcBlockEachInner">
+            <a href="{{ url | split:'?pr' | first }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "800" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              </div>
+              {% comment %}
+                  <div class="products_rating  {% if recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">{% unless recommendation.handle == 'retinol-night-cream-0-5' or recommendation.handle == 'retinol-night-cream-0-3' %}{{ recommendation.metafields.stamped.reviews_average | round:2 }}<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.05177 8.04194L2.82326 9.16867C2.45533 9.35469 2.03304 9.04055 2.10542 8.63467L2.52589 6.27706L0.762973 4.62445C0.456406 4.33707 0.619568 3.82264 1.03573 3.76448L3.49069 3.42142L4.60693 1.24629C4.79285 0.884001 5.31069 0.884002 5.49661 1.24629L6.61285 3.42142L9.06781 3.76448C9.48397 3.82264 9.64713 4.33707 9.34057 4.62445L7.57766 6.27706L7.99812 8.63467C8.07051 9.04055 7.64821 9.35469 7.28029 9.16867L5.05177 8.04194Z" fill="#FFBA49" stroke="#FFBA49"/>
+</svg> <span class="total_viewers">{{ recommendation.metafields.stamped.reviews_count }}</span>{% endunless %}{% if recommendation.tags contains 'Badge_New' or recommendation.tags contains 'badge_new' or recommendation.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+</div>
+                  {% endcomment %}
+            </spd-img></a>
+                
+            <div class="CmbbtRqDt">{%- if title != blank -%}<a href="{{ url | split:'?pr' | first }}"><div class="RQ-fdc-bk-title">{{ title }}</div></a>{%- endif -%}
+                 {% if recommendation.metafields.custom.product_highlights_updated != blank %}
+            <div class="sub_title"><p> {% for highlights in recommendation.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+              {% endif %}
+                {% render 'new-quick-add', card_product : recommendation %}
+             
+              </div>
+            </div>
+          </div>
+                  {% endfor %}
+</div>
+             <div class="PaginationWithFractionRecomm">
+<div class="swiper-button-prev arrsdprev PrevButtonSlideShowfd"></div>
+<div class="swiper-pagination paginationFractionWp"></div>
+<div class="swiper-button-next arrsdnxt NextButtonSlideshowfd"></div>
+</div>
+</div>
+             
+                  </div>
+                </details>
+              </div>
+  {% endif %}
+  
+</div>
+                    </div>
+                      </div>
+
+
+  
+  {% endif %}

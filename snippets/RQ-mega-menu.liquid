@@ -1,0 +1,51 @@
+{%- capture MegaMenuSubHolding -%}
+<div class="RQMegaMenuExecutionWt">
+  <div class="RQDropDownMain">
+  <div class="LeftMenuWp">
+    <div class="LabelHdMenu"><a href="{{ block.settings.sub_menu_name_link | default:'#' }}">{{ block.settings.sub_menu_name }}</a></div>
+      <div class="MenuLayoutExtHp">
+        <ul class="MenuKistMg">
+         {%- for link in block.settings.menuwithsub.links -%}
+          <li>  
+            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+              <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+            </a>
+              <ul class="list-unstyled" role="list">
+                {%- for childlink in link.links -%}
+                  <li>
+                    <a href="{{ childlink.url }}" class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                      {{ childlink.title | escape }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+          </li>
+         {%- endfor -%}
+        </ul>
+      </div>
+  </div>
+  <div class="RightMenuWp">
+    <div class="LabelHdMenu"><a href="{{ block.settings.sub_menu_name_link_two | default:'#' }}">{{ block.settings.sub_menu_name_two }}</a></div>
+      <div class="MenuLayoutExtHp">
+        <ul class="MenuKistMg">
+         {%- for link in block.settings.menuwithsub_two.links -%}
+          <li>  
+            <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
+              <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
+            </a>
+              <ul class="list-unstyled" role="list">
+                {%- for childlink in link.links -%}
+                  <li>
+                    <a href="{{ childlink.url }}" class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                      {{ childlink.title | escape }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+          </li>
+         {%- endfor -%}
+        </ul>
+      </div>
+  </div>
+  </div>
+</div>{%- endcapture -%}{{ MegaMenuSubHolding | strip_newlines }}

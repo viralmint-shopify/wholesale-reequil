@@ -1,0 +1,99 @@
+{% schema %}
+{"name": "RQ Product Slideshow","tag":"div","class":"RQ-product-slideshow","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"description","label":"Description","default":"Description"}
+],"blocks":[{"type":"product","name":"Product Brief","settings":[
+    {"type":"header","content":"Product"}, 
+        {"type":"product","id":"product","label":"Product"},
+        {"type":"image_picker","id":"image","label":"Custom image"},
+        {"type":"text","id":"title","label":"Custom title"},
+        {"type":"text","id":"description","label":"Custom description"},
+    {"type":"header","content":"CTA Button"},
+        {"type":"text","id":"cta_text","label":"CTA text","default":"Button"}
+]}],"presets":[{"name":"RQ Product Slideshow"}],"templates":["index"]}
+{% endschema %}
+{% capture RQProductsSlideshow %}{%- liquid
+    assign sps = section.settings
+    assign spdbk = section.blocks
+    assign loadMode = "jsLazy"
+    %}
+<div class="RQ-productsMnWrapper" section="RQ-products-slideshow">
+  <div class="RQ-productsWidthWrapper">
+    {%- if sps.heading != blank or sps.description != blank -%}<div class="RQ-sd-hd-dsQ">
+      {%- if sps.heading != blank -%}<div class="RQ-pds-hd">{{ sps.heading }}</div>{%- endif -%}
+      {%- if sps.description != blank -%}<div class="RQ-pds-ds">{{ sps.description }}</div>{%- endif -%}
+    </div>{%- endif -%} 
+    <div class="swiper mySwiper Rqproductsslideshow">
+      <div class="RQ-pds-mg-bkMn swiper-wrapper">
+        {%- for bk in spdbk -%}
+          {%- liquid
+              assign bKs = bk.settings
+              assign pdk = all_products[bKs.product]
+              if bKs.image != blank
+              assign image = bKs.image
+              else
+              assign image = pdk.featured_image
+              endif
+              if bKs.title != blank
+              assign title = bKs.title
+              else
+              assign title = pdk.title
+              endif
+              assign description = bKs.description
+              assign button = bKs.cta_text
+              assign link = pdk.url
+            -%}     
+          <div class="RQ-sdBlockEachQ swiper-slide">
+            <a href="{{ link }}"><spd-img class="cdv-element show_all" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+              <div class="spd-img-wrapper">
+              {%- liquid 
+                if image != blank
+                assign imgWidth = "400" | abs
+                assign image = image
+                assign classes = 'img-primary img-all'
+                assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+                if imgWidth == blank
+                assign imgWidth = image.width
+                endif
+                assign imgUrl = image | image_url: width: imgWidth
+                assign imgFit = "contain" | prepend: 'fit-'
+                assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+                endif
+            -%}
+              <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+              <!-- <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{pdk.id}}" data-swaction="addToWishlist" data-product-id="{{pdk.id | json}}" data-variant-id="{{pdk.variants[0].id}}" data-product-url="{{ shop.url }}{{ pdk.url }}"></button> -->
+              </div>
+            </spd-img></a>
+            <div class="RQ-pds-MnAll">
+              {%- capture discount -%}
+              {%- assign DiscountComparePrice = pdk.selected_or_first_available_variant.compare_at_price | money_without_currency | remove:',' | round -%}
+              {%- assign DiscountComparePrice = DiscountComparePrice | times: 1.0 -%}
+              {%- assign DiscountPrice = pdk.selected_or_first_available_variant.price | money_without_currency | remove:',' | round -%}  
+              {{ DiscountComparePrice | minus:DiscountPrice | times:100 | divided_by:DiscountComparePrice | round }}%
+              {%- endcapture -%}            
+              {%- if title != blank -%}<a href="{{ link }}"><div class="RQ-pds-bk-title">{{ title }}</div></a>{%- endif -%}
+              <div class="RQ-pds-ds-button">
+                {%- if description != blank -%}<a href="{{ link }}"><div class="RQ-pds-bk-dsc">{{ description }}</div></a>{%- endif -%}
+                <div class="cmbpriceCb">{% if pdk.compare_at_price > pdk.price %}<span class="cmbcpprc">{{ pdk.compare_at_price | money }}</span>{% endif %}<span class="cmbprc">{{ pdk.price | money }}</span> {% if pdk.selected_or_first_available_variant.compare_at_price > pdk.selected_or_first_available_variant.price %}<span class="PriceWithpercentage">| {{discount | strip}} off</span>{% endif %}</div>
+                <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ pdk.id }}"
+                  data-product-sku="{{ pdk.handle }}" data-product-title="{{pdk.title}}"
+                  data-product-type="{{pdk.type}}" style="display: block;">
+                </span>            
+                {%- if button != blank -%}<div class="RQ-pds-bk-btn"><a href="{{ link }}">{{ button }}</a></div>{%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {% if settings.catch_the_santa == true %}
+        <div class="SantaMediaMn" snippet="santa_media">
+          <div class="SantaMediaWrpr">
+            <div class="SantaMediaInit"><img src="https://cdn.shopify.com/s/files/1/0306/6262/3364/files/43834-_Converted_1.png?v=1703070877"></div>
+          </div>
+        </div>
+      {% endif %}
+      <div class="swiper-button-next arrsdnxt NextButtonSlideshowp"></div><div class="swiper-button-prev arrsdprev PrevButtonSlideShowp"></div> <div class="swiper-pagination paginationSlideshowbannerp"></div>
+    </div>    
+  </div>
+</div>{% endcapture %}{{ RQProductsSlideshow | strip_newlines }}

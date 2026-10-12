@@ -1,0 +1,98 @@
+{% schema %}
+  {
+    "name": "RQ-awardWiningProducts",
+    "settings": [
+      {"type":"select","id":"list_options","label":"List Options",
+        "options":[
+          {"value":"collection","label":"Collection"},
+          {"value":"productList","label":"Product List"}
+        ],
+        "default":"productList"
+      },
+      {"type":"text","id":"customClass","label":"Custom Class"},
+      {"type":"text","id":"heading","label":"Heading"},
+      {"type":"checkbox","id":"show_variants","label":"Show Variants","default":false},
+      {"type":"checkbox","id":"show_atc_price","label":"Show ATC Price","default":false},
+      {"type":"header","content":"Swiper Controls"},
+      {"type":"checkbox","id":"show_swiper_button","label":"Show Swiper Button","default":false},
+      {"type":"textarea","id":"prev_button","label":"Swiper Prev Button"},
+      {"type":"textarea","id":"next_button","label":"Swiper Next Button"},
+      {"type":"checkbox","id":"show_swiper_dots","label":"Show Swiper Dots","default":false},
+      {"type":"collection","id":"collection","label":"Collection","info":"If Collection option selected above"},
+      {"type":"product_list","id":"proudcts","label":"Products","info":"If Product List option selected above"}
+    ],
+    "presets":[{"name": "RQ-awardWiningProducts"}]
+  }
+{% endschema %}
+
+{% if section.settings.heading != blank or section.settings.collection != blank or section.settings.proudcts != blank %}
+  <div class="RQ_AwrdWinPdsMN{% if section.settings.customClass != blank %} {{ section.settings.customClass }}{% endif %}" section="RQ-awardWiningProducts">
+    <div class="RQ_AwrdWinPdsWrpr">
+      {% if section.settings.heading != blank %}<div class="RQ_AwrdWinPdsHeading">{{ section.settings.heading }}</div>{% endif %}
+      {% if section.settings.collection != blank or section.settings.proudcts != blank %}
+        {% liquid
+          assign collection = section.settings.collection
+          assign products = section.settings.proudcts
+          assign show_AtcPrice = false
+          assign show_variants = false
+          if section.settings.show_atc_price == true
+            assign show_AtcPrice = true
+          endif
+          if section.settings.show_variants == true
+            assign show_variants = true
+          endif
+        %}
+        <div class="RQ_AwrdWinPdsCntnr">
+          {% if section.settings.list_options == 'collection' and collection != blank %}
+            <div class="RQ_AwrdWinPdsListMN{% if collection.products.size > 4 %} swiper mySwiper{% endif %}">
+              <div class="RQ_AwrdWinPdsListWrpr{% if collection.products.size > 4 %} swiper-wrapper{% endif %}">
+                {% for product in collection.products %}
+                  {% assign lazy_load = false %}
+                  {%- if forloop.index > 4 -%}
+                    {%- assign lazy_load = true -%}
+                  {%- endif -%}
+                  <div class="RQ_AwrdWinPdsInit{% if forloop.index > 4 %} swiper-slide{% endif %}">
+                    {% render 'index-product-card', card_product: product, section_id: section.id, lazy_load: lazy_load, show_quick_add : true, show_AtcPrice : show_AtcPrice, show_variants : show_variants %}
+                  </div>
+                {% endfor %}
+              </div>
+              {% if collection.products.size > 4 %}
+                {% if section.settings.show_swiper_button == true %}
+                  <div class="swiper-button-next show_des"></div>
+                  <div class="swiper-button-prev show_des"></div>
+                {% endif %}
+                {% if section.settings.show_swiper_dots == true %}
+                  <div class="swiper-pagination show_mb"></div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% elsif section.settings.list_options == 'productList' and products != blank %}
+            {% assign pdSize = products | map : product | size %}
+            <div class="RQ_AwrdWinPdsListMN{% if pdSize > 4 %} swiper mySwiper{% endif %}">
+              <div class="RQ_AwrdWinPdsListWrpr{% if pdSize > 4 %} swiper-wrapper{% endif %}">
+                {% for product in products %}
+                  {% assign lazy_load = false %}
+                  {%- if forloop.index > 4 -%}
+                    {%- assign lazy_load = true -%}
+                  {%- endif -%}
+                  <div class="RQ_AwrdWinPdsInit{% if pdSize > 4 %} swiper-slide{% endif %}">
+                    {% render 'index-product-card', card_product: product, section_id: section.id, lazy_load: lazy_load, show_quick_add : true, show_AtcPrice : show_AtcPrice, show_variants : show_variants %}
+                  </div>
+                {% endfor %}
+              </div>
+              {% if pdSize > 4 %}
+                {% if section.settings.show_swiper_button == true %}
+                  <div class="swiper-button-next show_des">{% if section.settings.prev_button != blank %}{{ section.settings.prev_button }}{% endif %}</div>
+                  <div class="swiper-button-prev show_des">{% if section.settings.next_button != blank %}{{ section.settings.next_button }}{% endif %}</div>
+                {% endif %}
+                {% if section.settings.show_swiper_dots == true %}
+                  <div class="swiper-pagination show_mb"></div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

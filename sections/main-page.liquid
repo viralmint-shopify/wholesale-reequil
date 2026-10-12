@@ -1,0 +1,18 @@
+<div class="WrapperPageDefaultLayout">
+  <h1 class="HeadingMainPageContent">
+    {{ page.title | escape }}
+  </h1>
+  <div class="ContentPageDefault">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+  ]
+}
+{% endschema %}

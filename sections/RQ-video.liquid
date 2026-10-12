@@ -1,0 +1,105 @@
+{% schema %}
+{"name": "RQ Video","tag":"div","class":"RQ-video","settings": [
+    {"type":"header","content":"Heading"},
+        {"type":"text","id":"customClass","label":"Custom Class"},
+        {"type":"text","id":"heading","label":"Heading","default":"Heading"},
+        {"type":"textarea","id":"description","label":"Description","default":"Description"},
+        {"type":"image_picker","id":"cover_image","label":"Cover image"},
+        {"type":"image_picker","id":"cover_image_mb","label":"Cover image (Mobile)"},
+        {"type":"image_picker","id":"cover_image_icon","label":"Play icon"},
+        {"type":"textarea","id":"video_url","label":"Video url (Desktop)"},
+        {"type":"textarea","id":"video_url_mb","label":"Video url (Mobile)"}
+],"presets":[{"name":"RQ Video"}]}
+{% endschema %}
+{% capture RQVideo %}{%- liquid
+    assign svds = section.settings
+    assign loadMode = "jsLazy"
+    assign heading = svds.heading
+    assign description = svds.description
+    assign coverImage = svds.cover_image
+    assign coverImagemb = svds.cover_image_mb
+    assign coverImageIcon = svds.cover_image_icon
+    assign video = svds.video_url
+    assign mb_video = svds.video_url_mb
+    assign customClass = svds.customClass
+    %}
+<div class="RQ-videoMnWrapper{% if customClass != blank %} {{ customClass }}{% endif %}" section="RQ-video">
+  <div class="RQ-videoWidthWrapper">
+    {%- if heading != blank or description != blank -%}
+      <div class="RQ-vd-hdMN">
+        {%- if heading != blank -%}<div class="RQ-vd-hd">{{ heading }}</div>{% endif %}
+        {%- if description != blank -%}<div class="RQ-vd-dsMN show_des"><div class="RQ-vd-ds">{{ description }}</div></div>{%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if coverImage != blank -%}
+      <div class="VideoPLayExecutionWp"><spd-img class="cdv-element show_des coverimaeRqwp" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+        <div class="spd-img-wrapper">
+        {%- liquid 
+          if coverImage != blank
+          assign imgWidth = "1064" | abs
+          assign image = coverImage
+          assign classes = 'img-primary img-all'
+          assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+          if imgWidth == blank
+          assign imgWidth = image.width
+          endif
+          assign imgUrl = image | image_url: width: imgWidth
+          assign imgFit = "contain" | prepend: 'fit-'
+          assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+          endif
+      -%}
+        <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+        </div>
+      </spd-img>   
+      <spd-img class="cdv-element show_mb coverimaeRqwp" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}">
+        <div class="spd-img-wrapper">
+        {%- liquid 
+          if coverImagemb != blank
+          assign imgWidth = "1064" | abs
+          assign image = coverImagemb
+          assign classes = 'img-primary img-all'
+          assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+          if imgWidth == blank
+          assign imgWidth = image.width
+          endif
+          assign imgUrl = image | image_url: width: imgWidth
+          assign imgFit = "contain" | prepend: 'fit-'
+          assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+          endif
+      -%}
+        <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+        </div>
+      </spd-img>         
+      <spd-img class="cdv-element show_all playiconVideo" data-imglink="{{ imgLink | default: 0 }}" data-load-mode="{{ loadMode }}" videosrc="{{ video }}" mbvidoesrc="{{ mb_video }}" jsplayvideo>
+        <div class="spd-img-wrapper">
+        {%- liquid 
+          if coverImageIcon != blank
+          assign imgWidth = "200" | abs
+          assign image = coverImageIcon
+          assign classes = 'img-primary img-all'
+          assign baseSrc = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" 
+          if imgWidth == blank
+          assign imgWidth = image.width
+          endif
+          assign imgUrl = image | image_url: width: imgWidth
+          assign imgFit = "contain" | prepend: 'fit-'
+          assign imgFitM = bSt.imgFitM | default: 'contain' | prepend: 'fitM-' 
+          endif
+      -%}
+        <img {% if loadMode == 'speedLoad' -%}src="{{ imgUrl }}" {%- else %} src="{{ baseSrc }}" data-src="{{ imgUrl }}" {% endif -%}height="{{ image.height }}" width="{{ image.width }}" class="spd-img-{{ secId }}{{ loopId }}-{% increment imageId %} {{ classes }} {{ loadMode }} {{ imgFit }} {{ imgFitM | default: 'fitM-contain' }}" {{ attributes }} alt=""> 
+        </div>
+      </spd-img></div>  
+     <div class="LoadVideoSuccessfully" jsvideoloadcontainer></div>
+    {%- else -%}
+      <div class="LoadVideoSuccessfully">
+        <div class="VideoInt show_des" videosrc='{{ video }}'>
+          {{ video }}
+        </div>  
+        <div class="VideoInt show_mb" videosrc='{{ mb_video }}'>
+          {{ video }}
+        </div>         
+      </div>
+    {%- endif -%}
+    {%- if description != blank -%}<div class="RQ-vd-dsMN show_mb"><div class="RQ-vd-ds">{{ description }}</div></div>{%- endif -%}
+  </div>
+</div>{% endcapture %}{{ RQVideo | strip_newlines }}

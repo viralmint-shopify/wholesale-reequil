@@ -1,0 +1,77 @@
+ {% if section.settings.image != blank or section.settings.content != blank %}
+<div class="about-doctor-wraper">
+  <div class="doctore_contemnt_inner">
+     <div class="doc-heading">
+       {% if section.settings.doc-heading != blank %}
+        <h2>{{ section.settings.doc-heading }}</h2>
+         {% endif %}
+      </div>
+    <div class="image_content_wrapp">
+      {% if section.settings.image != blank %}
+      <div class="doc-image">
+        <img src="{{ section.settings.image | img_url:'master' }}" class="show_des">
+          <img src="{{ section.settings.mobile-image | img_url:'master' }}" class="show_mb">
+      </div>
+      {% endif %}
+      {% if section.settings.content != blank %}
+      <div class="content_wrapper">
+        {{ section.settings.content }}
+      </div>
+      {% endif %}
+    </div>
+   {% if  section.settings.btn_text  != blank %}
+    <div class="webinar_bottom_btn">
+      <a class="button button--primary" {% if section.settings.btn_url != blank %}href="{{ section.settings.btn_url }}"{% endif %}>{{ section.settings.btn_text }}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+   {% endif %}
+{% schema %}
+  {
+    "name": "About Doctor",
+    "settings": [
+        {
+          "type": "text",
+          "id": "doc-heading",
+          "label": "heading"
+        },
+              {
+          "type": "image_picker",
+          "id": "image",
+          "label": "image"
+        },
+       {
+          "type": "image_picker",
+          "id": "mobile-image",
+          "label": "image"
+        },
+                {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+                      {
+          "type": "text",
+          "id": "btn_text",
+          "label": "CTA Text"
+        },
+                      {
+          "type": "url",
+          "id": "btn_url",
+          "label": "CTA URL"
+        }
+    ],
+      "presets": [
+    {
+      "name": "About Doctor"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

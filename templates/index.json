@@ -1,0 +1,637 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "new_simple_video_xHeLXJ": {
+      "type": "new-simple-video",
+      "disabled": true,
+      "settings": {
+        "text": "",
+        "video_link": "shopify://collections/premature-skin-ageing",
+        "para": "",
+        "desk_video": "https://player.vimeo.com/video/925780608?h=d0f069b4e4&title=0&byline=0&portrait=0",
+        "mob_video": "https://player.vimeo.com/video/925780608?h=d0f069b4e4&title=0&byline=0&portrait=0"
+      }
+    },
+    "a73adce6-be8f-47d1-8943-49774f29ae29": {
+      "type": "RQ-newyear-banner",
+      "settings": {
+        "heading": "",
+        "desk_media": "shopify://shop_images/Sale_Banner_14_17fe8a45-c997-4a03-ac43-14eed4d2ddce.png",
+        "desk_video": "",
+        "mob_media": "shopify://shop_images/Sale_Banner_14_17fe8a45-c997-4a03-ac43-14eed4d2ddce.png",
+        "mob_video": "",
+        "cta_link": "https://wholesale.reequil.com/products/ultra-matte-dry-touch-sunscreen-gel-spf-50-pa"
+      }
+    },
+    "dbfd9920-db2b-4c57-856f-a17cd4d6490e": {
+      "type": "RQ-why-reequil",
+      "blocks": {
+        "features_9gPHnY": {
+          "type": "features",
+          "settings": {
+            "icon": false,
+            "point": ""
+          }
+        },
+        "features_gFgDKi": {
+          "type": "features",
+          "settings": {
+            "icon": false,
+            "point": ""
+          }
+        },
+        "features_ijqt3N": {
+          "type": "features",
+          "settings": {
+            "icon": false,
+            "point": ""
+          }
+        },
+        "f284ba39-ff74-4669-8aed-f734a5410b99": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "10 Lakh+ customers served"
+          }
+        },
+        "features_FMYcFr": {
+          "type": "features",
+          "settings": {
+            "icon": false,
+            "point": ""
+          }
+        },
+        "features_KK4Mxm": {
+          "type": "features",
+          "settings": {
+            "icon": false,
+            "point": ""
+          }
+        },
+        "d85907c1-5704-47b3-9792-021997687349": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "Rated 4+ Stars By 87% Customers"
+          }
+        },
+        "ad8e5a38-c2cf-4e01-9936-b1bdb90d16c0": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "Clinically proven & safety tested"
+          }
+        }
+      },
+      "block_order": [
+        "features_9gPHnY",
+        "features_gFgDKi",
+        "features_ijqt3N",
+        "f284ba39-ff74-4669-8aed-f734a5410b99",
+        "features_FMYcFr",
+        "features_KK4Mxm",
+        "d85907c1-5704-47b3-9792-021997687349",
+        "ad8e5a38-c2cf-4e01-9936-b1bdb90d16c0"
+      ],
+      "settings": {
+        "customClass": "show_mb",
+        "heading": "Why",
+        "logo": "shopify://shop_images/logo_7fd268c2-98db-44c0-a7d8-51aa7cdd01dd.png",
+        "para": "We help you make progress in your life by simply offering efficacy-driven formulations that you know what to expect from."
+      }
+    },
+    "a586c7b1-38c8-4429-8830-32e296af19e7": {
+      "type": "RQ-logos",
+      "blocks": {
+        "5c1fd034-bfcf-49c2-ad3f-27ea938d5680": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/image_2d298f2f-7d28-4c61-8ad1-7ac252d1f5ea.png"
+          }
+        },
+        "ecd09568-e50c-4273-befe-1d7289a0786c": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/image_2.png"
+          }
+        },
+        "ba0cc0cf-7d9a-484f-898c-5cc885173dd6": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/image_3_02f17bb1-505f-49c2-ad34-de04a52e8b53.png"
+          }
+        },
+        "b606f4ca-f9ed-449c-8583-7d7ab6a07e76": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/image_1.png"
+          }
+        },
+        "f8a9338d-7257-43ea-951a-a9ef7be3ea0d": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/image_4_720c50d9-aaf2-4553-987c-536e147efd7e.png"
+          }
+        },
+        "f2e2fd8c-eb3c-4714-b8a9-95dccd572ac7": {
+          "type": "logo",
+          "disabled": true,
+          "settings": {
+            "logo_image": "shopify://shop_images/The_times_of_india_1.png"
+          }
+        },
+        "0060a6c2-2f14-4d17-9b0c-061cff97cae3": {
+          "type": "logo",
+          "disabled": true,
+          "settings": {
+            "logo_image": "shopify://shop_images/news18_1_1.png"
+          }
+        },
+        "b24be25d-1c40-46b0-98a5-25fc1145cf38": {
+          "type": "logo",
+          "disabled": true,
+          "settings": {
+            "logo_image": "shopify://shop_images/DeccanChronicle_Logo_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "5c1fd034-bfcf-49c2-ad3f-27ea938d5680",
+        "ecd09568-e50c-4273-befe-1d7289a0786c",
+        "ba0cc0cf-7d9a-484f-898c-5cc885173dd6",
+        "b606f4ca-f9ed-449c-8583-7d7ab6a07e76",
+        "f8a9338d-7257-43ea-951a-a9ef7be3ea0d",
+        "f2e2fd8c-eb3c-4714-b8a9-95dccd572ac7",
+        "0060a6c2-2f14-4d17-9b0c-061cff97cae3",
+        "b24be25d-1c40-46b0-98a5-25fc1145cf38"
+      ],
+      "settings": {
+        "heading": "Featured in",
+        "description": ""
+      }
+    },
+    "cd19dea4-7094-4278-a8e0-a5d356407a92": {
+      "type": "RQ-latest-carousel",
+      "blocks": {
+        "item_WHwryQ": {
+          "type": "item",
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": ""
+          }
+        },
+        "item_LnGVgQ": {
+          "type": "item",
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": ""
+          }
+        },
+        "item_3wDGKN": {
+          "type": "item",
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": "https://www.reequil.com/blogs/care-tips/common-retinol-mistakes"
+          }
+        },
+        "item_jjzApB": {
+          "type": "item",
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": ""
+          }
+        },
+        "bb5a2c4d-37f3-4591-a5be-5b72b28b6eca": {
+          "type": "item",
+          "settings": {
+            "heading": "The Ultimate Summer Skin Care Routine For All Skin Types",
+            "para": "Want to keep that gorgeous glow, even in heat?\n\nThese tips will help.This blog has summer skincare tips for all skin types( oily, dry, and combination/normal).",
+            "badge": "LATEST BLOG",
+            "desk_media": "shopify://shop_images/neck_lines_1.png",
+            "mob_media": "shopify://shop_images/neck_lines_1.png",
+            "blog_url": "https://www.reequil.com/blogs/care-tips/summer-skincare-tips-for-all-skin-types"
+          }
+        },
+        "680af2e3-28cc-40b1-9045-02611e4b80ee": {
+          "type": "item",
+          "settings": {
+            "heading": "Cracking the Code: Your Ideal Retinol Percentage",
+            "para": "Confused about Retinol percentage? Read this descriptive guide to determine the perfect concentration for your skin. Reduce wrinkles, dark spots and acne!",
+            "badge": "LATEST BLOG",
+            "desk_media": "shopify://shop_images/code_b5b9a5b7-debd-4a22-8518-91cab5d1a9f4.png",
+            "mob_media": "shopify://shop_images/code_b5b9a5b7-debd-4a22-8518-91cab5d1a9f4.png",
+            "blog_url": "https://www.reequil.com/blogs/care-tips/right-percentage-of-retinol"
+          }
+        },
+        "item_FmEHB6": {
+          "type": "item",
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": ""
+          }
+        },
+        "item_TPJAE3": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "heading": "",
+            "para": "",
+            "badge": "",
+            "blog_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_WHwryQ",
+        "item_LnGVgQ",
+        "item_3wDGKN",
+        "item_jjzApB",
+        "bb5a2c4d-37f3-4591-a5be-5b72b28b6eca",
+        "680af2e3-28cc-40b1-9045-02611e4b80ee",
+        "item_FmEHB6",
+        "item_TPJAE3"
+      ],
+      "settings": {}
+    },
+    "rq_why_reequil_j4qR3V": {
+      "type": "RQ-why-reequil",
+      "blocks": {
+        "features_8Eq4GF": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "10 Lakh+ customers served"
+          }
+        },
+        "features_pzYydQ": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "Rated 4+ Stars By 87% Customers"
+          }
+        },
+        "features_hzJ4Ym": {
+          "type": "features",
+          "settings": {
+            "icon": true,
+            "point": "Clinically proven & safety tested"
+          }
+        }
+      },
+      "block_order": [
+        "features_8Eq4GF",
+        "features_pzYydQ",
+        "features_hzJ4Ym"
+      ],
+      "settings": {
+        "customClass": "show_des",
+        "heading": "Why",
+        "logo": "shopify://shop_images/logo_7fd268c2-98db-44c0-a7d8-51aa7cdd01dd.png",
+        "para": "We help you make progress in your life, by simply offering efficacy-driven formulations that you know what to expect from."
+      }
+    },
+    "537ecc94-d764-453a-8f6e-7d993c474687": {
+      "type": "RQ-awardWiningProducts",
+      "disabled": true,
+      "settings": {
+        "list_options": "productList",
+        "customClass": "awdWinSunscreenMN",
+        "heading": "Award Winning Sunscreens",
+        "show_variants": true,
+        "show_atc_price": false,
+        "show_swiper_button": true,
+        "prev_button": "<svg width=\"38\" height=\"32\" viewbox=\"0 0 38 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M14.4926 27.56C14.1966 27.56 13.9006 27.4667 13.667 27.2667C13.2152 26.88 13.2152 26.24 13.667 25.8534L23.824 17.16C24.5717 16.52 24.5717 15.48 23.824 14.84L13.667 6.14669C13.2152 5.76003 13.2152 5.12003 13.667 4.73336C14.1187 4.34669 14.8665 4.34669 15.3182 4.73336L25.4753 13.4267C26.2697 14.1067 26.7215 15.0267 26.7215 16C26.7215 16.9734 26.2853 17.8934 25.4753 18.5734L15.3182 27.2667C15.0846 27.4534 14.7886 27.56 14.4926 27.56Z\" fill=\"#292D32\"></path>\n</svg>",
+        "next_button": "<svg width=\"38\" height=\"32\" viewbox=\"0 0 38 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M14.4926 27.56C14.1966 27.56 13.9006 27.4667 13.667 27.2667C13.2152 26.88 13.2152 26.24 13.667 25.8534L23.824 17.16C24.5717 16.52 24.5717 15.48 23.824 14.84L13.667 6.14669C13.2152 5.76003 13.2152 5.12003 13.667 4.73336C14.1187 4.34669 14.8665 4.34669 15.3182 4.73336L25.4753 13.4267C26.2697 14.1067 26.7215 15.0267 26.7215 16C26.7215 16.9734 26.2853 17.8934 25.4753 18.5734L15.3182 27.2667C15.0846 27.4534 14.7886 27.56 14.4926 27.56Z\" fill=\"#292D32\"></path>\n</svg>",
+        "show_swiper_dots": true,
+        "collection": "",
+        "proudcts": [
+          "ultra-matte-dry-touch-sunscreen-gel-spf-50-pa",
+          "oxybenzone-free-sunscreen-spf-50-for-oily-acne-prone-skin",
+          "zinc-mineral-tinted-sunscreen"
+        ]
+      }
+    },
+    "8b5e4e1c-5b6a-4465-ae5b-d27d9f50b8dd": {
+      "type": "RQ-video",
+      "settings": {
+        "customClass": "",
+        "heading": "Skin care needs commitment, not miracles",
+        "description": "We help set your expectations right before you invest in your selfcare products.",
+        "cover_image_icon": "shopify://shop_images/play-icon.png",
+        "video_url": "<iframe src=\"https://player.vimeo.com/video/916688753?h=c3da97d45c&title=0&byline=0&portrait=0&muted=1&autoplay=1&background=1\" width=\"640\" height=\"297\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe>",
+        "video_url_mb": "<iframe src=\"https://player.vimeo.com/video/916688753?h=c3da97d45c&title=0&byline=0&portrait=0&muted=1&autoplay=1&background=1\" width=\"640\" height=\"297\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe>"
+      }
+    },
+    "b0789534-90a7-4816-806a-8ffc14d0597b": {
+      "type": "RQ-awardWiningProducts",
+      "settings": {
+        "list_options": "productList",
+        "customClass": "clincBestsellersMN",
+        "heading": "Most Restocked Formulations",
+        "show_variants": false,
+        "show_atc_price": true,
+        "show_swiper_button": true,
+        "prev_button": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M18 34.125C9.105 34.125 1.875 26.895 1.875 18C1.875 9.105 9.105 1.875 18 1.875C26.895 1.875 34.125 9.105 34.125 18C34.125 26.895 26.895 34.125 18 34.125ZM18 4.125C10.35 4.125 4.125 10.35 4.125 18C4.125 25.65 10.35 31.875 18 31.875C25.65 31.875 31.875 25.65 31.875 18C31.875 10.35 25.65 4.125 18 4.125Z\" fill=\"#27235E\"></path>\n<path d=\"M16.1095 24.4202C15.8245 24.4202 15.5395 24.3152 15.3145 24.0902C14.8795 23.6552 14.8795 22.9352 15.3145 22.5002L19.8145 18.0002L15.3145 13.5002C14.8795 13.0652 14.8795 12.3452 15.3145 11.9102C15.7495 11.4752 16.4695 11.4752 16.9045 11.9102L22.1995 17.2052C22.6345 17.6402 22.6345 18.3602 22.1995 18.7952L16.9045 24.0902C16.6795 24.3152 16.3945 24.4202 16.1095 24.4202Z\" fill=\"#27235E\"></path>\n</svg>",
+        "next_button": "<svg width=\"36\" height=\"36\" viewbox=\"0 0 36 36\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M18 34.125C9.105 34.125 1.875 26.895 1.875 18C1.875 9.105 9.105 1.875 18 1.875C26.895 1.875 34.125 9.105 34.125 18C34.125 26.895 26.895 34.125 18 34.125ZM18 4.125C10.35 4.125 4.125 10.35 4.125 18C4.125 25.65 10.35 31.875 18 31.875C25.65 31.875 31.875 25.65 31.875 18C31.875 10.35 25.65 4.125 18 4.125Z\" fill=\"#27235E\"></path>\n<path d=\"M19.8889 24.4202C19.6039 24.4202 19.3189 24.3152 19.0939 24.0902L13.7989 18.7952C13.3639 18.3602 13.3639 17.6402 13.7989 17.2052L19.0939 11.9102C19.5289 11.4752 20.2489 11.4752 20.6839 11.9102C21.1189 12.3452 21.1189 13.0652 20.6839 13.5002L16.1839 18.0002L20.6839 22.5002C21.1189 22.9352 21.1189 23.6552 20.6839 24.0902C20.4739 24.3152 20.1889 24.4202 19.8889 24.4202Z\" fill=\"#27235E\"></path>\n</svg>",
+        "show_swiper_dots": false,
+        "collection": "",
+        "proudcts": [
+          "retinol-night-cream",
+          "ceramide-hyaluronic-acid-moisturiser-for-normal-to-dry-skin",
+          "murumuru-damage-repair-hair-conditioner",
+          "skin-radiance-cream-for-hyperpigmentation-dark-spots",
+          "ultra-matte-dry-touch-sunscreen-gel-spf-50-pa",
+          "fruit-aha-face-wash-for-hyperpigmentation-skin-brightening"
+        ]
+      }
+    },
+    "813592fe-0d5e-44ae-9221-cb8295f4a92b": {
+      "type": "RQ-skin-regime",
+      "blocks": {
+        "f124f888-e8fb-42ad-91a1-c91f30ad3244": {
+          "type": "Item",
+          "settings": {
+            "products_list": "productList",
+            "show_AtcPrice": true,
+            "collection": "",
+            "products": [
+              "fruit-aha-face-wash-for-hyperpigmentation-skin-brightening",
+              "oil-control-anti-acne-face-wash"
+            ]
+          }
+        },
+        "item_7TFjJQ": {
+          "type": "Item",
+          "disabled": true,
+          "settings": {
+            "products_list": "collection",
+            "show_AtcPrice": false,
+            "collection": "",
+            "products": []
+          }
+        },
+        "ba803777-297e-46a4-92ff-fb9a90faf425": {
+          "type": "Item",
+          "settings": {
+            "products_list": "productList",
+            "show_AtcPrice": true,
+            "collection": "",
+            "products": [
+              "pore-refining-face-toner-for-reducing-open-pores",
+              "vitamin-c-face-toner-for-pigmentation-and-dark-spots-removal"
+            ]
+          }
+        },
+        "8c056361-eade-4e7f-826f-c7827e956cf3": {
+          "type": "Item",
+          "settings": {
+            "products_list": "productList",
+            "show_AtcPrice": true,
+            "collection": "",
+            "products": [
+              "retinol-night-cream-0-5",
+              "retinol-night-cream-0-3",
+              "retinol-night-cream",
+              "skin-radiance-cream-for-hyperpigmentation-dark-spots",
+              "pitstop-acne-scar-pits-removal-gel",
+              "niacinamide-serum-for-acne-scars-marks-pitstop-blue",
+              "acne-clarifying-gel-for-acne-pimple-treatment",
+              "niacinamide-serum-for-enlarged-pores",
+              "under-eye-cream-dark-circles-wrinkles-puffy-eyes",
+              "dark-neck-knee-elbow-cream"
+            ]
+          }
+        },
+        "44150c41-bb00-4d15-a2cd-46e41fb73a22": {
+          "type": "Item",
+          "settings": {
+            "products_list": "productList",
+            "show_AtcPrice": true,
+            "collection": "",
+            "products": [
+              "ceramide-hyaluronic-acid-moisturiser-for-normal-to-dry-skin",
+              "oil-free-moisturiser-for-normal-oily-combination-skin",
+              "oil-free-mattifying-moisturiser"
+            ]
+          }
+        },
+        "9318eb04-6392-4b9d-9650-2065dde4fd07": {
+          "type": "Item",
+          "settings": {
+            "products_list": "productList",
+            "show_AtcPrice": true,
+            "collection": "",
+            "products": [
+              "ultra-matte-dry-touch-sunscreen-gel-spf-50-pa",
+              "oxybenzone-free-sunscreen-spf-50-for-oily-acne-prone-skin",
+              "sun-cc-cream",
+              "o-free-sunscreen-for-dry-sensitive-skin",
+              "zinc-mineral-tinted-sunscreen"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "f124f888-e8fb-42ad-91a1-c91f30ad3244",
+        "item_7TFjJQ",
+        "ba803777-297e-46a4-92ff-fb9a90faf425",
+        "8c056361-eade-4e7f-826f-c7827e956cf3",
+        "44150c41-bb00-4d15-a2cd-46e41fb73a22",
+        "9318eb04-6392-4b9d-9650-2065dde4fd07"
+      ],
+      "settings": {
+        "heading": "Build your <br>skin care regime",
+        "tab_1": "Step 1: Cleanse",
+        "tab_2": "Step 2: Tone",
+        "tab_3": "Step 3: Treat",
+        "tab_4": "Step 4: Moisturise",
+        "tab_5": "Step 5: Protect",
+        "tab_6": ""
+      }
+    },
+    "24cb284e-fa2a-4bd6-aa91-6429a6353eb3": {
+      "type": "RQ-customersOpinion",
+      "blocks": {
+        "opinion_ma9Hki": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": false,
+            "customerName": "",
+            "customerType": "",
+            "para": ""
+          }
+        },
+        "opinion_wyjqHP": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Varsha Divate",
+            "customerType": "Repeat Customer",
+            "para": "<strong>Best customer service and top quality skin care brand</strong> i've tried in a very long time. All their products do what they say and an amazing job at that. Finally found a brand worth forever. Thanks for being such an amazing company"
+          }
+        },
+        "opinion_Taj7Rj": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Rajbeer Kaur",
+            "customerType": "Repeat Customer",
+            "para": "<strong>Best sunscreen ever! No white cast and no grease!</strong> Love other products as well. Have restocked every product I have used so far!"
+          }
+        },
+        "opinion_YM6GRp": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Mridula Tiwari",
+            "customerType": "Repeat Customer",
+            "para": "Oh my god! <strong>What a great experience</strong> I’ve with Re'equil. I am someone who was not confident to use moisturizer & sunscreen because they are way too sticky for my way too oily face. Also, I am someone who has used a lot of brands to see what works for me and I stopped here. I stopped here to never go back."
+          }
+        },
+        "ebb51333-5e4c-4dbd-8ca4-0e5b32aba63a": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Anuradha Lucky",
+            "customerType": "Repeat Customer",
+            "para": "<strong>The best skincare brand ever.</strong>Yes, without any doubts and after using every product I go gaga over the products and formulations. Specifically, the ceramide moisturiser, oil free moisturiser and sunscreens. All are just amazing. Tested, Tried and Trusted. Thats it!"
+          }
+        },
+        "ec44c09a-dde9-494a-80e8-b573969b11fc": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Sivakrishna Paluru",
+            "customerType": "Repeat Customer",
+            "para": "Very good product. I bought their hair conditioner, and it worked like a charm.I hope they can continue being the creator of such <strong>authentic and relevant products</strong>. Good work, team."
+          }
+        },
+        "opinion_tkEaJK": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Megha Agarwal",
+            "customerType": "Repeat Customer",
+            "para": "<strong>Great experience with the sunscreen and the dandruff control shampoo!</strong>\n<br>Their <strong>hair conditioners are one of the best </strong>that I have used till date!! Great product if you are looking for deeply conditioning your hair.\nMust try products!!"
+          }
+        },
+        "85cb5740-a72d-4883-8495-198a5bdbea0f": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Neemi Tiwari",
+            "customerType": "Repeat Customer",
+            "para": "<strong>Re'equil is the best brand for skin products.</strong> I have recently started using products from Re'equil and the results are just amazing. The <strong>AHA face wash and the moisturizer is fabulous.</strong> The best part of shopping from Re'equil is that they have products based on the issues and their recommendations are so right. For me it's the best brand currently in India!"
+          }
+        },
+        "fd2080ec-0eec-49be-bd72-9ad0dade8cb3": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Sonal Sharma",
+            "customerType": "Repeat Customer",
+            "para": "Thank you for creating something so comfortable that one cannot resist reapplying, the sunscreen is that good! I have used a product or two, but nothing, trust me, nothing beats the <strong>best texture of ultra matte sunscreen</strong>. I am so glad its a part of my skincare routine and I'll be too happy to tell my people how <strong>effective</strong> and skin friendly it is."
+          }
+        },
+        "opinion_rwxpwW": {
+          "type": "opinion",
+          "settings": {
+            "enableQuotesIcon": true,
+            "customerName": "Nive Dya",
+            "customerType": "Repeat Customer",
+            "para": "<strong>I love their moisturisers.</strong>\n\n<br>I have oily skin, and i tried both reequil <strong>oil free moisturiser and ceramide moisturiser.</strong> First one suited my oily skin well. Its very light weight, yet very hydrating. I used it with RETINOL and it went well.\n\n <strong>SUPER AFFORDABLE.</strong> only cons some people may find is, it contains mild fragrance.\nSo far im in love with the product. 😍😍😍😍"
+          }
+        }
+      },
+      "block_order": [
+        "opinion_ma9Hki",
+        "opinion_wyjqHP",
+        "opinion_Taj7Rj",
+        "opinion_YM6GRp",
+        "ebb51333-5e4c-4dbd-8ca4-0e5b32aba63a",
+        "ec44c09a-dde9-494a-80e8-b573969b11fc",
+        "opinion_tkEaJK",
+        "85cb5740-a72d-4883-8495-198a5bdbea0f",
+        "fd2080ec-0eec-49be-bd72-9ad0dade8cb3",
+        "opinion_rwxpwW"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "rq_video_T4EjjQ": {
+      "type": "RQ-video",
+      "disabled": true,
+      "settings": {
+        "customClass": "",
+        "heading": "Skin care needs <strong>commitment, not miracles</strong>",
+        "description": "We help set your expectations right before you invest in your selfcare products.",
+        "cover_image_icon": "shopify://shop_images/play-icon.png",
+        "video_url": "<div style=\"padding:46.41% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/916672388?badge=0&autopause=0&player_id=0&app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"brand video 26/2024\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>",
+        "video_url_mb": "<div style=\"padding:46.41% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/916672388?badge=0&autopause=0&player_id=0&app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"brand video 26/2024\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>"
+      }
+    },
+    "rq_video_iXYNP9": {
+      "type": "RQ-video",
+      "disabled": true,
+      "settings": {
+        "customClass": "",
+        "heading": "Heading",
+        "description": "Description",
+        "video_url": "",
+        "video_url_mb": ""
+      }
+    },
+    "rq_video_main_YHAR7y": {
+      "type": "RQ_video_main",
+      "disabled": true,
+      "settings": {
+        "text": "",
+        "para": "",
+        "autoplay": false,
+        "video_url": ""
+      }
+    },
+    "home_bottom_simple_text_g6cpBT": {
+      "type": "home-bottom-simple-text",
+      "settings": {
+        "simple_text": "Be alert! We never offer prizes via calls/SMS or ask for payments through links."
+      }
+    }
+  },
+  "order": [
+    "new_simple_video_xHeLXJ",
+    "a73adce6-be8f-47d1-8943-49774f29ae29",
+    "dbfd9920-db2b-4c57-856f-a17cd4d6490e",
+    "a586c7b1-38c8-4429-8830-32e296af19e7",
+    "cd19dea4-7094-4278-a8e0-a5d356407a92",
+    "rq_why_reequil_j4qR3V",
+    "537ecc94-d764-453a-8f6e-7d993c474687",
+    "8b5e4e1c-5b6a-4465-ae5b-d27d9f50b8dd",
+    "b0789534-90a7-4816-806a-8ffc14d0597b",
+    "813592fe-0d5e-44ae-9221-cb8295f4a92b",
+    "24cb284e-fa2a-4bd6-aa91-6429a6353eb3",
+    "rq_video_T4EjjQ",
+    "rq_video_iXYNP9",
+    "rq_video_main_YHAR7y",
+    "home_bottom_simple_text_g6cpBT"
+  ]
+}

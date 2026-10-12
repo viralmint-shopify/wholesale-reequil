@@ -1,0 +1,75 @@
+{% capture WhatsAppCode %}{%- style -%}
+  /* @media only screen and (max-width: 768px){.whatsapp-icon {bottom: 60px;right:1%;}} */
+{%- endstyle -%}
+  <script>
+    $(document).on("click",".custom_chat_icon",function() {
+       $(".call_now_button_data").hide();
+    $(".chat_box_content-wrapp").toggle();
+    if($(".chat_box_content-wrapp").is(":visible")){
+       $('body').addClass("chat-box-open");
+    } else{
+      $('body').removeClass("chat-box-open");
+    }
+     
+});
+        $(document).on("click",".chat_box_content-wrapp .cross_popup-btn",function() {
+    $(".chat_box_content-wrapp").hide();
+      $('body').removeClass("chat-box-open");
+          
+});
+    $(document).on("click",".bot_popup-btn",function() {
+    $(this).parents(".chat_bot-icon-wrapp").hide();
+      $(".chat_box_content-wrapp").hide();
+       $('body').removeClass("chat-box-open");
+});
+    setInterval(function () { $(".chat_bot-icon-wrapp").show();}, 15000);
+$(document).on("click","a.get_call_here",function(e) {
+    if ($(window).width() > 749){
+    e.preventDefault();
+    var mobile_number = $(this).attr("href");
+    $(".call_now_button_data").show();
+    $(".chat_box_content-wrapp").hide();
+       $('body').addClass("chat-box-open");
+    $(".call_now_button_data a.button").attr("href",mobile_number);
+    }
+});
+    $(document).on("click",".call_now_button_data .call_cross_popup-btn svg",function(e) {
+   $(".call_now_button_data").hide();
+        $('body').removeClass("chat-box-open");
+});
+    
+  </script>
+<div class= "whatsapp-icon">
+  <!-- <a class="custom_chat_icon" href="https://wa.me/+919915535248">  -->
+      <!-- <div class="bot_popup-btn">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.85297 2.68802C7.8886 2.65243 7.91688 2.61017 7.93618 2.56365C7.95548 2.51714 7.96543 2.46728 7.96546 2.41692C7.96549 2.36656 7.9556 2.31668 7.93636 2.27015C7.91712 2.22361 7.8889 2.18131 7.85331 2.14568C7.81772 2.11005 7.77546 2.08178 7.72895 2.06248C7.68243 2.04318 7.63257 2.03323 7.58221 2.03319C7.53185 2.03316 7.48198 2.04305 7.43544 2.0623C7.3889 2.08154 7.34661 2.10976 7.31097 2.14535L4.99831 4.45802L2.68631 2.14535C2.61434 2.07339 2.51674 2.03296 2.41497 2.03296C2.3132 2.03296 2.2156 2.07339 2.14364 2.14535C2.07168 2.21731 2.03125 2.31491 2.03125 2.41668C2.03125 2.51845 2.07168 2.61605 2.14364 2.68802L4.45631 5.00002L2.14364 7.31202C2.10801 7.34765 2.07974 7.38995 2.06046 7.4365C2.04118 7.48306 2.03125 7.53296 2.03125 7.58335C2.03125 7.63374 2.04118 7.68364 2.06046 7.73019C2.07974 7.77675 2.10801 7.81905 2.14364 7.85468C2.2156 7.92664 2.3132 7.96707 2.41497 7.96707C2.46536 7.96707 2.51526 7.95715 2.56182 7.93786C2.60837 7.91858 2.65067 7.89031 2.68631 7.85468L4.99831 5.54202L7.31097 7.85468C7.38294 7.92656 7.4805 7.9669 7.58221 7.96684C7.68392 7.96677 7.78143 7.92631 7.85331 7.85435C7.92518 7.78239 7.96552 7.68482 7.96546 7.58311C7.9654 7.48141 7.92493 7.38389 7.85297 7.31202L5.54031 5.00002L7.85297 2.68802Z" fill="#27235E"/>
+</svg>
+
+  </div> -->
+   <svg class="custom_chat_icon"  width="99" height="83" viewBox="0 0 99 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_7067_1225)">
+<path d="M78.5727 19.2074V47.7478V50.3091L86.274 55.0659C92.1413 58.2858 89.9408 57.9931 87.3741 57.9931H81.873H51.0698C25.2538 57.9931 21 45.5404 21 35.673C21 20.1587 41.4727 16.768 51.496 17.012L76.3725 17.012C78.1326 17.012 78.5727 18.4756 78.5727 19.2074Z" fill="#27235E"/>
+<path d="M78.5727 19.2074V47.7478V50.3091L86.274 55.0659C92.1413 58.2858 89.9408 57.9931 87.3741 57.9931H81.873H51.0698C25.2538 57.9931 21 45.5404 21 35.673C21 20.1587 41.4727 16.768 51.496 17.012L76.3725 17.012C78.1326 17.012 78.5727 18.4756 78.5727 19.2074Z" stroke="#27235E" stroke-width="1.2" stroke-linecap="round"/>
+</g>
+<path d="M36.3753 37.8942C36.3753 28.0579 44.0078 21.375 52.5003 21.375C60.9032 21.375 68.6253 27.9146 68.6253 38.0017C69.7003 38.6108 69.5011 40.1742 69.5011 41.5L69.5009 44.5C69.5009 46.4708 68.8045 48.25 66.8336 48.25H65.042V37.3208C65.042 30.3871 59.434 24.7792 52.5003 24.7792C45.5665 24.7792 39.9586 30.3871 39.9586 37.3208V50.0417H54.292V51.8333V53.625H39.9586C37.9878 53.625 36.3753 52.0125 36.3753 50.0417V47.8558C35.3182 47.3004 34 46.29 34 45V40.5C34 39.2458 35.3182 38.4496 36.3753 37.8942Z" fill="white"/>
+<path d="M57.8743 41.0833C56.8848 41.0833 56.0827 40.2812 56.0827 39.2917C56.0827 38.3022 56.8848 37.5 57.8743 37.5C58.8639 37.5 59.666 38.3022 59.666 39.2917C59.666 40.2812 58.8639 41.0833 57.8743 41.0833Z" fill="white"/>
+<path d="M47.1243 41.0833C46.1348 41.0833 45.3327 40.2812 45.3327 39.2917C45.3327 38.3022 46.1348 37.5 47.1243 37.5C48.1139 37.5 48.916 38.3022 48.916 39.2917C48.916 40.2812 48.1139 41.0833 47.1243 41.0833Z" fill="white"/>
+<path d="M41.75 35.7621C42.1772 33.2432 43.4818 30.9568 45.4328 29.3074C47.3839 27.658 49.8556 26.7521 52.4104 26.75C57.8391 26.75 63.68 31.2471 63.2141 38.3062C61.0048 37.4022 59.0535 35.9654 57.5341 34.1241C56.0148 32.2828 54.9748 30.0942 54.5066 27.7533C52.1596 32.4654 47.34 35.7083 41.75 35.7621Z" fill="white"/>
+<defs>
+<filter id="filter0_d_7067_1225" x="0.400024" y="0.399994" width="110.201" height="82.2" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="10"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.137255 0 0 0 0 0.368627 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_7067_1225"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_7067_1225" result="shape"/>
+</filter>
+</defs>
+</svg>
+
+
+    <!-- </a> -->
+</div>{% endcapture %}{{ WhatsAppCode | strip_newlines }}

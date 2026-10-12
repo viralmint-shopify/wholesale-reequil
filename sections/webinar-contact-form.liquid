@@ -1,0 +1,133 @@
+<div class="webinar_contact_form-wrapp">
+  <div class="webinar_form_wrapp">
+    <div class="inner_all_fields">
+      {% comment %}
+       {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+      {%- if form.posted_successfully? -%}
+        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} Thanku for registration + smiley animation</h2>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+        </div>
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#ContactForm-email" class="link">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+      <div class="contact__fields">
+        <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Full Name">
+        </div>
+        <div class="field field--with-error">
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="Email Address"
+          >
+          {%- if form.errors contains 'email' -%}
+            <small class="contact__field-error" id="ContactForm-email-error">
+              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+              <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+            </small>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="field">
+        <input type="tel" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}">
+      </div>
+      <div class="field custom_webinar_select_dropdowm">
+        <input type="hidden" name="contact[Age]" value="" class="custom_hiden_field">
+       <div class="Age-field custom_webinar_select">
+    <div class="selected_value">Age</div>
+         <div class="custom_icon">
+                    <svg width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="down_arrow">
+<path d="M0.91518 1.00097L11.7251 9.12403L20.7153 0.898222" stroke="#4F4F4F" stroke-width="1.49853" stroke-linecap="round"/>
+</svg>
+         </div>
+
+</div>
+  <div class="custom_dropdown_wrapper hidden_select_box" style="display:none;">
+        <ul>
+           <li data-value="18 - 24">18 - 24</li>
+    <li data-value="25 - 34">25 - 34</li>
+    <li data-value="35 - 44">35 - 44</li>
+     <li data-value="45 - 54">45 - 54</li>
+   <li data-value="55 +">55 +</li>
+        </ul>
+  </div>
+      </div>
+            <div class="field custom_webinar_select_dropdowm">
+        <input type="hidden" name="contact[How did you hear about the webinar?]" value="" class="custom_hiden_field">
+       <div class="about-webinar-field custom_webinar_select">
+    <div class="selected_value">How did you hear about the webinar?</div>
+         <div class="custom_icon">
+                    <svg width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="down_arrow">
+<path d="M0.91518 1.00097L11.7251 9.12403L20.7153 0.898222" stroke="#4F4F4F" stroke-width="1.49853" stroke-linecap="round"/>
+</svg>
+         </div>
+
+</div>
+  <div class="custom_dropdown_wrapper hidden_select_box" style="display:none;">
+              <ul>
+                <li data-value="Social Media">Social Media</li>
+    <li data-value="E-mail">E-mail</li>
+    <li data-value="Website">Website</li>
+     <li data-value="Advertisement">Advertisement</li>
+   <li data-value="Other">Other</li>
+              </ul>
+  </div>
+</div>
+  <div class="custom_checkbox_agree">
+  <input required type="checkbox" name="contact[Term And Conditions]" name="privacy-policy" id="privacy-policy"><label for="privacy-policy">I agree to receive webinar related communications and understand that my information will be handled according to privacy policy.</label><br>
+  </div>
+      <div class="contact__button">
+        <button type="submit" class="button">
+        Register Now
+        </button>
+      </div>
+    {%- endform -%}
+    {% endcomment %}
+{% comment %}<iframe src="https://hrm615nj.fwfmsites.com?redirectParent=true" frameborder="0" scrolling="yes" width="100%" height="100%" marginheight="0" marginwidth="0" name="landing-page-embed-frame" wmode="transparent" style="height: 100vh"></iframe>
+<script type="text/javascript">window.addEventListener("message",function(e){if(e.data&&e.data.redirect){window.location.href=e.data.url}})</script>{% endcomment %}
+      
+      {{ section.settings.contact_form }}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Webinar Contact Form",
+    "settings": [
+      {
+        "type": "liquid",
+        "id": "contact_form",
+        "label": "form"
+      }
+    ],
+  "presets": [
+    {
+      "name": "Webinar Contact Form"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,158 @@
+{%- assign Skin_concerns = linklists['codevibez-skin'].links | where: "title", "Goals" | map:'links' | map:'url' | join:', ' -%}
+{%- assign Skin_products = linklists['codevibez-skin'].links | where: "title", "Products" | map:'links' | map:'url' | join:', ' -%}
+{%- assign Hair_concerns = linklists['codevibez-hair'].links | where: "title", "Goals" | map:'links' | map:'url' | join:', ' -%}
+{%- assign Hair_products = linklists['codevibez-hair'].links | where: "title", "Products" | map:'links' | map:'url' | join:', ' -%}
+{%- assign Skin_concerns_size = Skin_concerns | split:', ' -%}
+{%- assign Skin_products_size = Skin_products | split:', ' -%}
+{%- assign Hair_concerns_size = Hair_concerns | split:', ' -%}
+{%- assign Hair_products_size = Hair_products | split:', ' -%}
+
+{%- assign All_Skin_Navigation = linklists['codevibez-skin'].links | map:'links' | map:'title' | join:', ' -%}
+{%- assign All_Hair_Navigation = linklists['codevibez-hair'].links | map:'links' | map:'title' | join:', ' -%}
+
+{%- assign All_Skin_Navigation_size = All_Skin_Navigation | split:', ' -%}
+{%- assign All_Hair_Navigation_size = All_Hair_Navigation | split:', ' -%}
+
+<div class="TagMainWrapperRqExecution">
+
+{%- if collection.handle == 'all' or collection.handle == 'all-products' -%}
+  <ul class="Rq-tagCollection-filters">
+    {%- for link in linklists['collection-all-tab'].links -%}
+      {% if collection.url contains link.url %}
+        <li class="Rqtag-filters__item active"><a href="{{ link.url }}">{{ link.title | capitalize }}</a></li>
+      {% else %}
+        <li class="Rqtag-filters__item"><a href="{{ link.url }}">{{ link.title | capitalize }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  <div class="IconsWpTagft">
+    <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+    <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+  </div>
+{%- endif -%}
+
+{%- if Skin_concerns contains collection.url -%}
+  <ul class="Rq-tagCollection-filters">
+    {%- for link in linklists['codevibez-skin'].links -%}
+      {% if link.title == 'Goals' %}
+        {%- for childlink in link.links -%}
+          {% if collection.url contains childlink.url %}
+            <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% else %}
+            <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {%- if Skin_concerns_size.size > 6 -%}
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>
+  {%- endif -%}      
+
+{%- elsif Skin_products contains collection.url -%}          
+    <ul class="Rq-tagCollection-filters">
+      {%- for link in linklists['codevibez-skin'].links -%}
+        {% if link.title == 'Products' %}
+          {%- for childlink in link.links -%}
+            {% if collection.url contains childlink.url %}
+              <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% else %}
+              <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {%- if Skin_products_size.size > 6 -%}            
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>
+  {%- endif -%}          
+
+{%- elsif Hair_concerns contains collection.url -%}      
+    <ul class="Rq-tagCollection-filters">
+      {%- for link in linklists['codevibez-hair'].links -%}
+        {% if link.title == 'Goals' %}
+          {%- for childlink in link.links -%}
+            {% if collection.url contains childlink.url %}
+              <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% else %}
+              <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {%- if Hair_concerns_size.size > 6 -%}          
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>   
+  {%- endif -%}        
+
+{%- elsif Hair_products contains collection.url -%}      
+    <ul class="Rq-tagCollection-filters">
+      {%- for link in linklists['codevibez-hair'].links -%}
+        {% if link.title == 'Products' %}
+          {%- for childlink in link.links -%}
+            {% if collection.url contains childlink.url %}
+              <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% else %}
+              <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {%- if Hair_products_size.size > 6 -%}          
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>  
+    {%- endif -%}        
+{%- endif -%}         
+
+{%- if collection.handle contains 'skin-care' -%}      
+    <ul class="Rq-tagCollection-filters">
+      {%- for link in linklists['codevibez-skin'].links -%}
+        {%- for childlink in link.links -%}
+          {% if collection.url contains childlink.url %}
+            <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% else %}
+            <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+    {%- if All_Skin_Navigation_size.size > 6 -%}          
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>  
+    {%- endif -%}        
+{%- endif -%} 
+
+{%- if collection.handle contains 'hair-care' -%}      
+    <ul class="Rq-tagCollection-filters">
+      {%- for link in linklists['codevibez-hair'].links -%}
+        {%- for childlink in link.links -%}
+          {% if collection.url contains childlink.url %}
+            <li class="Rqtag-filters__item active"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% else %}
+            <li class="Rqtag-filters__item"><a href="{{ childlink.url }}">{{ childlink.title | capitalize }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+    {%- if All_Hair_Navigation_size.size > 6 -%}          
+    <div class="IconsWpTagft">
+      <svg class="iconltl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#BDBDBD"/><path d="M15.47 18.9933C15.2484 18.9933 15.0267 18.9117 14.8517 18.7367L10.7334 14.6183C10.395 14.28 10.395 13.72 10.7334 13.3817L14.8517 9.26333C15.19 8.925 15.75 8.925 16.0884 9.26333C16.4267 9.60167 16.4267 10.1617 16.0884 10.5L12.5884 14L16.0884 17.5C16.4267 17.8383 16.4267 18.3983 16.0884 18.7367C15.925 18.9117 15.7034 18.9933 15.47 18.9933Z" fill="#BDBDBD"/></svg>
+      <svg class="iconrtl" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26.5416C7.08171 26.5416 1.45837 20.9183 1.45837 14C1.45837 7.08165 7.08171 1.45831 14 1.45831C20.9184 1.45831 26.5417 7.08165 26.5417 14C26.5417 20.9183 20.9184 26.5416 14 26.5416ZM14 3.20831C8.05004 3.20831 3.20837 8.04998 3.20837 14C3.20837 19.95 8.05004 24.7916 14 24.7916C19.95 24.7916 24.7917 19.95 24.7917 14C24.7917 8.04998 19.95 3.20831 14 3.20831Z" fill="#27235E"/><path d="M12.53 18.9933C12.3084 18.9933 12.0867 18.9117 11.9117 18.7367C11.5734 18.3983 11.5734 17.8383 11.9117 17.5L15.4117 14L11.9117 10.5C11.5734 10.1617 11.5734 9.60167 11.9117 9.26333C12.25 8.925 12.81 8.925 13.1484 9.26333L17.2667 13.3817C17.605 13.72 17.605 14.28 17.2667 14.6183L13.1484 18.7367C12.9734 18.9117 12.7517 18.9933 12.53 18.9933Z" fill="#27235E"/></svg>
+    </div>  
+    {%- endif -%}        
+{%- endif -%}         
+</div>

@@ -1,0 +1,24 @@
+{% if section.settings.simple_text != blank %}
+<div class="custom_main-bottom-wrapper">
+  <div class="bittom_text_inner_wrapp">
+    {{ section.settings.simple_text }}
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Custom Bottom Text",
+    "settings": [
+              {
+          "type": "text",
+          "id": "simple_text",
+          "label": "Simple Bottom Text"
+        }
+    ],
+      "presets": [
+    {
+      "name": "Custom Bottom Text"
+    }
+  ]
+  }
+{% endschema %}

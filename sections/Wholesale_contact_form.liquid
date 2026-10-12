@@ -1,0 +1,401 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .having_trouble{
+    margin-top: 25px;
+  }
+  .having_trouble,
+  .having_trouble a {
+    color: #333;
+    font-weight:500;
+}
+  textarea#ContactForm-shipping {
+    min-height: unset;
+}
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="WholeSale_Form contact page-width page-width--narrow section-{{ section.id }}-padding">
+    {% unless customer.tags contains 'doctor' or customer.tags contains 'Doctor' %}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="title title-wrapper--no-top-margin {{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+    {%- else -%}
+      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+    {%- endif -%}
+      {% else %}
+          {%- if section.settings.doctor_heading != blank -%}
+      <h2 class="title title-wrapper--no-top-margin {{ section.settings.heading_size }}">{{ section.settings.doctor_heading | escape }}</h2>
+    {%- else -%}
+      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+    {%- endif -%}
+    {% endunless %}
+    {% unless customer.tags contains 'doctor' or customer.tags contains 'Doctor' %}
+    {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+      {%- if form.posted_successfully? -%}
+        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</h2>
+        <script>
+         window.location.href = "https://wholesale.reequil.com/";
+        </script>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+        </div>
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#ContactForm-email" class="link">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+      <div class="contact__fields">
+        <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.name' | t }}" required>
+          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+        </div>
+         <div class="field">
+          <input class="field__input" autocomplete="business name" type="text" id="ContactForm-business_name" name="contact[Business Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Business Name" required>
+          <label class="field__label" for="ContactForm-business_name">Business name</label>
+        </div>
+       
+      </div>
+      <div class="GstNumber_fields ">
+       
+        <div class="field">
+        <input type="number" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}" required>
+        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }} <span aria-hidden="true">*</span></label>
+      </div>
+      </div>
+      <div class="MailShipping_fields ">
+         <div class="field field--with-error">
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="{{ 'templates.contact.form.email' | t }}"
+            required
+          >
+          <label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+          {%- if form.errors contains 'email' -%}
+            <small class="contact__field-error" id="ContactForm-email-error">
+              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+              <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+            </small>
+          {%- endif -%}
+        </div>
+
+        <div class="field">
+        <textarea
+          rows="1"
+          id="ContactForm-shipping"
+          class="text-area field__input"
+          name="contact[Shipping Address]"
+          placeholder="Shipping Address"
+          required
+        >
+          {{- form.body -}}
+        </textarea>
+        <label class="form__label field__label" for="ContactForm-shipping">Shipping Address</label>
+      </div>
+        
+      </div>
+      <div class="FormCheckGST">      
+          <div class="field MainGST">
+        <input type="text" id="ContactForm-GST" class="field__input" autocomplete="text" name="contact[GST]" placeholder="GST" required minlength="15" maxlength="15">
+        <label class="field__label" for="ContactForm-GST">GST</label>
+      </div>
+         {% comment %} 
+        <div class="CustomCheckbox">        
+          <input type="checkbox" id="ContactForm-notGst" name="contact[I do not have GST]">
+          <label for="ContactForm-notGst"> I do not have GST</label>
+        </div>
+        {% endcomment %}
+      </div>
+      
+      <div class="contact__button">
+        <button type="submit" class="button">
+          {{ 'templates.contact.form.send' | t }}
+        </button>
+      <p class="having_trouble">Having trouble signing in? Call us at <a href="tel:+918699998714">+918699998714</a>
+       <div>9:30 AM–6:00 PM | Monday–Friday</div></p>
+      </div>
+    {%- endform -%}
+    {% else %}
+    {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+      {%- if form.posted_successfully? -%}
+        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</h2>
+        <script>
+         window.location.href = "https://wholesale.reequil.com/";
+        </script>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+        </div>
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#ContactForm-email" class="link">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+      <div class="contact__fields">
+        <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[Full Name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Full Name" required>
+          <label class="field__label" for="ContactForm-name">Full Name</label>
+        </div>
+
+         <div class="field field--with-error">
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="{{ 'templates.contact.form.email' | t }}"
+            required
+          >
+          <label class="field__label" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+          {%- if form.errors contains 'email' -%}
+            <small class="contact__field-error" id="ContactForm-email-error">
+              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+              <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+            </small>
+          {%- endif -%}
+        </div>       
+      </div>
+      <div class="GstNumber_fields ">
+       
+        <div class="field">
+        <input type="number" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}" required>
+        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+      </div>
+                <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-Dermatology" name="contact[Dermatology Clinic Name]" value="" placeholder="Dermatology Clinic Name (Optional)" required>
+          <label class="field__label" for="ContactForm-Dermatology">Dermatology Clinic Name (Optional)</label>
+      </div>
+      </div>
+      <div class="MailShipping_fields ">
+ <div class="field">
+        <textarea
+          rows="4"
+          id="ContactForm-Websiteaddress"
+          class="text-area field__input"
+          name="contact[Website Address]"
+          placeholder="Website Address (Optional)"
+        >
+          {{- form.body -}}
+      </textarea>
+ <label class="form__label field__label" for="ContactForm-Websiteaddress">Website Address (Optional)</label>
+ </div>
+ <div class="field">
+              <textarea
+          rows="1"
+          id="ContactForm-ClinicAddress"
+          class="text-area field__input"
+          name="contact[Clinic Address]"
+          placeholder="Clinic Address"
+                required
+        >
+          {{- form.body -}}
+      </textarea>
+ <label class="form__label field__label" for="ContactForm-ClinicAddress">Clinic Address</label>
+ </div>
+      </div>
+      <div class="custom_specialization-wrapper">
+        <div class="field">
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-Specialization" name="contact[Area of Specialization]" value="" placeholder="Area of Specialization (Optional)">
+          <label class="field__label" for="ContactForm-Specialization">Area of Specialization (Optional)</label>
+        </div>
+      </div>
+      <div class="FormCheckGST">      
+          <div class="field MainGST">
+        <input type="text" id="ContactForm-GST" class="field__input" autocomplete="text" name="contact[GST]" placeholder="GST" required minlength="15" maxlength="15">
+        <label class="field__label" for="ContactForm-GST">GST</label>
+      </div>
+          
+       {% comment %}
+          <div class="CustomCheckbox">        
+          <input type="checkbox" id="ContactForm-notGst" name="contact[I do not have GST]">
+          <label for="ContactForm-notGst"> I do not have GST</label>
+        </div>
+       {% endcomment %}
+      </div>
+      
+      <div class="contact__button">
+        <button type="submit" class="button">
+          {{ 'templates.contact.form.send' | t }}
+        </button>
+      <p class="having_trouble">Having trouble signing in? Call us at <a href="tel:+918699998714">+918699998714</a>
+       <div>9:30 AM–6:00 PM | Monday–Friday</div></p>
+      </div>
+    {%- endform -%}
+      
+    {% endunless %}
+  </div>
+</div>
+<script>
+// $(document).on('click', '.CustomCheckbox input', function() {
+//     if ($(this).is(':checked')) {
+//         $('#ContactForm-GST').removeAttr('required');
+//         $('.MainGST').css('display',"none");
+//     } else {
+//         $('#ContactForm-GST').attr('required', 'required');
+//     $('.MainGST').css('display',"block");
+//     }
+// });
+
+  // $(document).ready(function () {
+  //   $('form[action$="/contact"]').on('submit', function (e) {
+  //     var gstField = $('#ContactForm-GST');
+  //     var gstValue = gstField.val().trim();
+
+  //     // Remove previous error if any
+  //     $('.gst-error').remove();
+
+  //     if (gstValue.length < 15) {
+  //       e.preventDefault(); // Stop form submission
+
+  //       // Show error message
+  //       gstField.after(
+  //         '<span class="form__message gst-error" style="color:red;margin-top:5px;display:block;">GST number must be at least 15 characters long.</span>'
+  //       );
+
+  //       gstField.focus();
+  //     }
+  //   });
+
+  //   // Remove error as soon as valid input is entered
+  //   $('#ContactForm-GST').on('input', function () {
+  //     if ($(this).val().trim().length >= 15) {
+  //       $('.gst-error').remove();
+  //     }
+  //   });
+  // });
+</script>
+
+{% schema %}
+{
+  "name": "Wholesale Form",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    },
+        {
+      "type": "text",
+      "id": "doctor_heading",
+      "default": "Elevate Your Practice: Unlock Dermatologist-Exclusive Benefits!",
+      "label": "Doctor Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wholesale Form"
+    }
+  ]
+}
+{% endschema %}

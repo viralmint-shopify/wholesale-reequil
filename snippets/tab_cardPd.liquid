@@ -1,0 +1,40 @@
+<div class="tabCardPdMN swiper-slide" snippet="tab_cardPd">
+  <div class="tabCardPdWrpr">
+    {% if product.featured_image != blank or product.metafields.stamped.reviews_count != blank or product.metafields.stamped.reviews_average != blank %}
+       <a href="{{ product.url }}">
+      <div class="tabCardPdMediaMN">
+        {% if product.featured_image != blank %}
+          <div class="tabCardPdMediaInit">
+            {{ product.featured_image | image_url : width : product.featured_image.width | image_tag }}
+          </div>
+        {% endif %}
+     {% comment %}
+          <div class="products_rating {% if product.handle == 'retinol-night-cream-0-5' or product.handle == 'retinol-night-cream-0-3' %}remove_stripe{% endif %}">
+               {% if product.metafields.stamped.reviews_average != blank or product.metafields.stamped.reviews_count != blank %}{{ product.metafields.stamped.reviews_average | round:2 }}
+            {% render 'review_icon' %}
+            <span>{{ product.metafields.stamped.reviews_count }}</span>
+                 {% endif %}
+            {% if product.tags contains 'Badge_New' or product.tags contains 'badge_new' or product.tags contains 'BADGE_NEW' %}<span class="custom-new-product-badge">New</span>{% endif %}
+          </div>
+      {% endcomment %}
+        
+      </div>
+       </a>
+    {% endif %}
+    <div class="tabCardPdCntMN">
+      <a href="{{ product.url }}">
+              <div class="tabCardPdCntWrpr">
+        <div class="tabCardPdTitle">{{ product.title }}</div>
+        {% if product.metafields.custom.product_highlights_updated != blank %}
+          <div class="sub_title"><p>{% for highlights in product.metafields.custom.product_highlights_updated.value %}{{ highlights }} {% unless forloop.last %}| {% endunless %}{% endfor %} </p></div>
+        {% endif %}
+      </div>
+      </a>
+
+      {%- liquid 
+         assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
+      -%}
+      {% render 'tab_cardPdATC', product : product, section_id : section.id, product_form_id : product_form_id, show_AtcPrice : show_AtcPrice %}
+    </div>
+  </div>
+</div>
